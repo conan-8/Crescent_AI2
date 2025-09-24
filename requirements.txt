@@ -1,0 +1,12 @@
+# Core AI and data handling
+langchain
+langchain-google-genai
+chromadb
+tiktoken
+
+# Web scraping
+requests
+beautifulsoup4
+
+# Environment variable management
+python-dotenv
