@@ -1,0 +1,17 @@
+{
+  "total_pages_crawled": 5,
+  "total_chunks_indexed": 0,
+  "crawled_urls": [
+    "https://www.crescentschool.org/why-crescent/whats-for-lunch",
+    "https://www.crescentschool.org/app",
+    "https://www.crescentschool.org/page/why-crescent/whats-for-lunch",
+    "http://www.crescentschool.org/podium/feed/rss.rss?z=EwbS0P9NQIGRy6XJ1W1Rcbxt%2fyZQImHO75WGOM5eUGi%2fq3N7NeXZ%2f5iFsMTxHUEx%2fweXQWU%2fBF3m9fK%2bD6Ta7wW5g7SNbol%2b9KsafonbeIaOo0FOaICjuiTtELYs4ReL",
+    "http://www.crescentschool.org/podium/feed/rss.rss?z=EwbS0P9NQIGRy6XJ1W1Rcbxt%2fyZQImHO75WGOM5eUGiL4QmpSMaeXpRTg304FL9%2bpQhRhMGAnLJx30kNSVLcxNcxtqXk0rvXovqaRI4BMRKjEqlg%2f9oMSsdZu7aQ3%2f2I"
+  ],
+  "processing_timestamp": "2025-09-28T21:33:35.961685",
+  "stats": {
+    "avg_chunks_per_page": 0.0,
+    "avg_words_per_chunk": 0,
+    "total_words_crawled": 0
+  }
+}

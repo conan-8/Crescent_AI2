@@ -1,0 +1,965 @@
+2025-09-28 21:17:31,167 - INFO - Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+2025-09-28 21:17:31,577 - INFO - Created new collection: crescent_school_kb
+2025-09-28 21:17:31,577 - INFO - --- Starting Crescent School Knowledge Base Build ---
+2025-09-28 21:17:31,578 - INFO - Starting crawl of https://www.crescentschool.org/
+2025-09-28 21:17:31,578 - INFO - Crawling: https://www.crescentschool.org/
+2025-09-28 21:17:32,838 - ERROR - Error processing https://www.crescentschool.org/: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:34,191 - INFO - Crawling: https://www.crescentschool.org/careers
+2025-09-28 21:17:34,830 - ERROR - Error processing https://www.crescentschool.org/careers: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:36,109 - INFO - Crawling: https://www.crescentschool.org/how-to-apply/tuition-and-fees
+2025-09-28 21:17:36,469 - ERROR - Error processing https://www.crescentschool.org/how-to-apply/tuition-and-fees: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:37,737 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646502&fromId=279136
+2025-09-28 21:17:38,117 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646502&fromId=279136: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:39,317 - INFO - Crawling: https://www.crescentschool.org/why-crescent/faculty-and-staff
+2025-09-28 21:17:39,568 - ERROR - Error processing https://www.crescentschool.org/why-crescent/faculty-and-staff: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:40,804 - INFO - Crawling: https://www.crescentschool.org/about/at-a-glance
+2025-09-28 21:17:41,378 - ERROR - Error processing https://www.crescentschool.org/about/at-a-glance: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:42,597 - INFO - Crawling: https://www.crescentschool.org/more-programs/crescent-camps
+2025-09-28 21:17:42,941 - ERROR - Error processing https://www.crescentschool.org/more-programs/crescent-camps: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:44,120 - INFO - Crawling: https://www.crescentschool.org/page/calendar
+2025-09-28 21:17:44,520 - ERROR - Error processing https://www.crescentschool.org/page/calendar: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:45,772 - INFO - Crawling: https://www.crescentschool.org/how-to-apply/financial-assistance
+2025-09-28 21:17:46,098 - ERROR - Error processing https://www.crescentschool.org/how-to-apply/financial-assistance: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:47,349 - INFO - Crawling: https://www.crescentschool.org/more-programs/employment-and-volunteering
+2025-09-28 21:17:47,645 - ERROR - Error processing https://www.crescentschool.org/more-programs/employment-and-volunteering: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:48,818 - INFO - Crawling: https://www.crescentschool.org/academics/student-services/physical-well-being
+2025-09-28 21:17:49,103 - ERROR - Error processing https://www.crescentschool.org/academics/student-services/physical-well-being: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:50,273 - INFO - Crawling: https://www.crescentschool.org/about/missionvaluesvision
+2025-09-28 21:17:50,512 - ERROR - Error processing https://www.crescentschool.org/about/missionvaluesvision: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:51,700 - INFO - Crawling: https://www.crescentschool.org/character-in-action/outreach/40-in-9-program
+2025-09-28 21:17:52,113 - ERROR - Error processing https://www.crescentschool.org/character-in-action/outreach/40-in-9-program: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:53,403 - INFO - Crawling: https://www.crescentschool.org/more-programs/successful-start
+2025-09-28 21:17:53,760 - ERROR - Error processing https://www.crescentschool.org/more-programs/successful-start: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:55,047 - INFO - Crawling: https://www.crescentschool.org/page/academics/student-services/guidance-and-university-counselling
+2025-09-28 21:17:55,468 - ERROR - Error processing https://www.crescentschool.org/page/academics/student-services/guidance-and-university-counselling: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:56,840 - INFO - Crawling: https://www.crescentschool.org/support-crescent
+2025-09-28 21:17:57,252 - ERROR - Error processing https://www.crescentschool.org/support-crescent: 'NoneType' object has no attribute 'get'
+2025-09-28 21:17:58,854 - INFO - Crawling: https://www.crescentschool.org/support-crescent/legacy-giving
+2025-09-28 21:17:59,137 - ERROR - Error processing https://www.crescentschool.org/support-crescent/legacy-giving: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:00,339 - INFO - Crawling: https://www.crescentschool.org/academics/student-services/guidance-and-university-counselling
+2025-09-28 21:18:00,595 - ERROR - Error processing https://www.crescentschool.org/academics/student-services/guidance-and-university-counselling: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:01,802 - INFO - Crawling: https://www.crescentschool.org/character-in-action/arts
+2025-09-28 21:18:02,104 - ERROR - Error processing https://www.crescentschool.org/character-in-action/arts: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:03,341 - INFO - Crawling: https://www.crescentschool.org/academics/how-we-teach
+2025-09-28 21:18:03,580 - ERROR - Error processing https://www.crescentschool.org/academics/how-we-teach: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:04,872 - INFO - Crawling: https://www.crescentschool.org/about/history
+2025-09-28 21:18:05,222 - ERROR - Error processing https://www.crescentschool.org/about/history: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:06,505 - INFO - Crawling: https://www.crescentschool.org/why-crescent/why-a-school-for-boys
+2025-09-28 21:18:06,868 - ERROR - Error processing https://www.crescentschool.org/why-crescent/why-a-school-for-boys: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:08,151 - INFO - Crawling: https://www.crescentschool.org/character-in-action/robotics
+2025-09-28 21:18:08,391 - ERROR - Error processing https://www.crescentschool.org/character-in-action/robotics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:09,566 - INFO - Crawling: https://www.crescentschool.org/page/how-to-apply/visit-crescent
+2025-09-28 21:18:10,061 - ERROR - Error processing https://www.crescentschool.org/page/how-to-apply/visit-crescent: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:11,376 - INFO - Crawling: https://www.crescentschool.org/support-crescent/ways-to-give
+2025-09-28 21:18:11,642 - ERROR - Error processing https://www.crescentschool.org/support-crescent/ways-to-give: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:12,873 - INFO - Crawling: https://www.crescentschool.org/more-programs/more-programs
+2025-09-28 21:18:13,210 - ERROR - Error processing https://www.crescentschool.org/more-programs/more-programs: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:14,487 - INFO - Crawling: https://www.crescentschool.org/page/academics/middle-school
+2025-09-28 21:18:15,276 - ERROR - Error processing https://www.crescentschool.org/page/academics/middle-school: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:16,750 - INFO - Crawling: https://www.crescentschool.org/about/meet-our-headmaster
+2025-09-28 21:18:17,127 - ERROR - Error processing https://www.crescentschool.org/about/meet-our-headmaster: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:18,399 - INFO - Crawling: https://www.crescentschool.org/about/governance
+2025-09-28 21:18:18,737 - ERROR - Error processing https://www.crescentschool.org/about/governance: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:19,930 - INFO - Crawling: https://www.crescentschool.org/how-to-apply/faqs
+2025-09-28 21:18:20,179 - ERROR - Error processing https://www.crescentschool.org/how-to-apply/faqs: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:21,491 - INFO - Crawling: https://www.crescentschool.org/News-Detail?pk=1300167
+2025-09-28 21:18:21,809 - ERROR - Error processing https://www.crescentschool.org/News-Detail?pk=1300167: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:23,190 - INFO - Crawling: https://www.crescentschool.org/support-crescent/parent-annual-giving
+2025-09-28 21:18:23,483 - ERROR - Error processing https://www.crescentschool.org/support-crescent/parent-annual-giving: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:24,710 - INFO - Crawling: https://www.crescentschool.org/why-crescent/our-graduates/where-our-graduates-go
+2025-09-28 21:18:25,043 - ERROR - Error processing https://www.crescentschool.org/why-crescent/our-graduates/where-our-graduates-go: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:26,280 - INFO - Crawling: https://www.crescentschool.org/why-crescent/diversity-inclusion-belonging
+2025-09-28 21:18:26,640 - ERROR - Error processing https://www.crescentschool.org/why-crescent/diversity-inclusion-belonging: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:27,920 - INFO - Crawling: https://www.crescentschool.org/academics/upper-school/us-character-education
+2025-09-28 21:18:28,179 - ERROR - Error processing https://www.crescentschool.org/academics/upper-school/us-character-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:29,355 - INFO - Crawling: https://www.crescentschool.org/why-crescent
+2025-09-28 21:18:29,723 - ERROR - Error processing https://www.crescentschool.org/why-crescent: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:30,917 - INFO - Crawling: https://www.crescentschool.org/about/coyotes-den
+2025-09-28 21:18:31,564 - ERROR - Error processing https://www.crescentschool.org/about/coyotes-den: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:32,808 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent/our-graduates/portrait-of-a-graduate
+2025-09-28 21:18:33,328 - ERROR - Error processing https://www.crescentschool.org/page/why-crescent/our-graduates/portrait-of-a-graduate: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:34,613 - INFO - Crawling: https://www.crescentschool.org/more-programs
+2025-09-28 21:18:34,973 - ERROR - Error processing https://www.crescentschool.org/more-programs: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:36,192 - INFO - Crawling: https://www.crescentschool.org/page/about/contact-us
+2025-09-28 21:18:36,740 - ERROR - Error processing https://www.crescentschool.org/page/about/contact-us: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:38,128 - INFO - Crawling: https://www.crescentschool.org/about/contact-us
+2025-09-28 21:18:38,407 - ERROR - Error processing https://www.crescentschool.org/about/contact-us: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:39,680 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646343&fromId=279136
+2025-09-28 21:18:40,159 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646343&fromId=279136: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:41,490 - INFO - Crawling: https://www.crescentschool.org/why-crescent/faculty-and-staff/school-leadership
+2025-09-28 21:18:41,804 - ERROR - Error processing https://www.crescentschool.org/why-crescent/faculty-and-staff/school-leadership: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:43,019 - INFO - Crawling: https://www.crescentschool.org/academics/upper-school
+2025-09-28 21:18:43,355 - ERROR - Error processing https://www.crescentschool.org/academics/upper-school: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:44,618 - INFO - Crawling: https://www.crescentschool.org/support-crescent/ways-to-give/international-gifts
+2025-09-28 21:18:44,875 - ERROR - Error processing https://www.crescentschool.org/support-crescent/ways-to-give/international-gifts: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:46,045 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646340&fromId=279136
+2025-09-28 21:18:46,364 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646340&fromId=279136: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:47,591 - INFO - Crawling: https://www.crescentschool.org/why-crescent/our-graduates/portrait-of-a-graduate
+2025-09-28 21:18:47,948 - ERROR - Error processing https://www.crescentschool.org/why-crescent/our-graduates/portrait-of-a-graduate: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:49,565 - INFO - Crawling: https://www.crescentschool.org/how-to-apply/admission-dates-and-events
+2025-09-28 21:18:49,929 - ERROR - Error processing https://www.crescentschool.org/how-to-apply/admission-dates-and-events: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:51,188 - INFO - Crawling: https://www.crescentschool.org/page/tour-request
+2025-09-28 21:18:51,608 - ERROR - Error processing https://www.crescentschool.org/page/tour-request: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:52,907 - INFO - Crawling: https://www.crescentschool.org/academics/lower-school
+2025-09-28 21:18:53,161 - ERROR - Error processing https://www.crescentschool.org/academics/lower-school: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:54,451 - INFO - Crawling: https://www.crescentschool.org/character-in-action/student-leadership
+2025-09-28 21:18:54,695 - ERROR - Error processing https://www.crescentschool.org/character-in-action/student-leadership: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:55,877 - INFO - Crawling: https://www.crescentschool.org/support-crescent/why-give
+2025-09-28 21:18:56,163 - ERROR - Error processing https://www.crescentschool.org/support-crescent/why-give: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:57,421 - INFO - Crawling: https://www.crescentschool.org/how-to-apply/answers-from-the-enrolment-office
+2025-09-28 21:18:57,781 - ERROR - Error processing https://www.crescentschool.org/how-to-apply/answers-from-the-enrolment-office: 'NoneType' object has no attribute 'get'
+2025-09-28 21:18:59,091 - INFO - Crawling: https://www.crescentschool.org/character-in-action/athletics
+2025-09-28 21:18:59,485 - ERROR - Error processing https://www.crescentschool.org/character-in-action/athletics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:00,755 - INFO - Crawling: https://www.crescentschool.org/character-in-action
+2025-09-28 21:19:01,040 - ERROR - Error processing https://www.crescentschool.org/character-in-action: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:02,331 - INFO - Crawling: https://www.crescentschool.org/support-crescent/funding-priorities
+2025-09-28 21:19:02,685 - ERROR - Error processing https://www.crescentschool.org/support-crescent/funding-priorities: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:03,956 - INFO - Crawling: https://www.crescentschool.org/careers/job-postings
+2025-09-28 21:19:04,380 - ERROR - Error processing https://www.crescentschool.org/careers/job-postings: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:05,538 - INFO - Crawling: https://www.crescentschool.org/academics/health-and-well-being
+2025-09-28 21:19:06,145 - ERROR - Error processing https://www.crescentschool.org/academics/health-and-well-being: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:07,553 - INFO - Crawling: https://www.crescentschool.org/how-to-apply/visit-crescent
+2025-09-28 21:19:07,881 - ERROR - Error processing https://www.crescentschool.org/how-to-apply/visit-crescent: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:09,186 - INFO - Crawling: https://www.crescentschool.org/academics/crescent-diploma
+2025-09-28 21:19:09,500 - ERROR - Error processing https://www.crescentschool.org/academics/crescent-diploma: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:10,725 - INFO - Crawling: https://www.crescentschool.org/how-to-apply
+2025-09-28 21:19:11,107 - ERROR - Error processing https://www.crescentschool.org/how-to-apply: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:12,382 - INFO - Crawling: https://www.crescentschool.org/academics/middle-school/ms-character-education
+2025-09-28 21:19:12,729 - ERROR - Error processing https://www.crescentschool.org/academics/middle-school/ms-character-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:14,019 - INFO - Crawling: https://www.crescentschool.org/academics/lower-school/ls-character-education
+2025-09-28 21:19:14,371 - ERROR - Error processing https://www.crescentschool.org/academics/lower-school/ls-character-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:15,665 - INFO - Crawling: https://www.crescentschool.org/why-crescent/whats-for-lunch
+2025-09-28 21:19:17,690 - INFO - Successfully crawled https://www.crescentschool.org/why-crescent/whats-for-lunch - 0 chunks created
+2025-09-28 21:19:19,382 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent/top-12-reasons
+2025-09-28 21:19:19,848 - ERROR - Error processing https://www.crescentschool.org/page/why-crescent/top-12-reasons: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:21,270 - INFO - Crawling: https://www.crescentschool.org/academics/middle-school
+2025-09-28 21:19:21,580 - ERROR - Error processing https://www.crescentschool.org/academics/middle-school: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:22,796 - INFO - Crawling: https://www.crescentschool.org/app
+2025-09-28 21:19:23,022 - INFO - Successfully crawled https://www.crescentschool.org/app - 0 chunks created
+2025-09-28 21:19:24,318 - INFO - Crawling: https://www.crescentschool.org/academics/upper-school/us-curriculum-highlights
+2025-09-28 21:19:25,224 - ERROR - Error processing https://www.crescentschool.org/academics/upper-school/us-curriculum-highlights: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:26,808 - INFO - Crawling: https://www.crescentschool.org/page/how-to-apply/apply-now
+2025-09-28 21:19:27,176 - ERROR - Error processing https://www.crescentschool.org/page/how-to-apply/apply-now: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:28,558 - INFO - Crawling: https://www.crescentschool.org/character-in-action/outreach
+2025-09-28 21:19:28,855 - ERROR - Error processing https://www.crescentschool.org/character-in-action/outreach: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:30,044 - INFO - Crawling: https://www.crescentschool.org/academics/middle-school/ms-curriculum-highlights
+2025-09-28 21:19:31,289 - ERROR - Error processing https://www.crescentschool.org/academics/middle-school/ms-curriculum-highlights: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:32,604 - INFO - Crawling: https://www.crescentschool.org/character-in-action/other-teams-and-clubs
+2025-09-28 21:19:32,952 - ERROR - Error processing https://www.crescentschool.org/character-in-action/other-teams-and-clubs: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:34,409 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646345&fromId=279136
+2025-09-28 21:19:34,941 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646345&fromId=279136: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:36,296 - INFO - Crawling: https://www.crescentschool.org/ccbe
+2025-09-28 21:19:36,483 - ERROR - Error processing https://www.crescentschool.org/ccbe: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:37,609 - INFO - Crawling: https://www.crescentschool.org/academics/crescent-diploma/intersession-week
+2025-09-28 21:19:37,862 - ERROR - Error processing https://www.crescentschool.org/academics/crescent-diploma/intersession-week: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:39,189 - INFO - Crawling: https://www.crescentschool.org/about/our-campus
+2025-09-28 21:19:39,703 - ERROR - Error processing https://www.crescentschool.org/about/our-campus: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:40,925 - INFO - Crawling: https://www.crescentschool.org/character-in-action/outreach/global-learning-and-adventure-trips
+2025-09-28 21:19:41,225 - ERROR - Error processing https://www.crescentschool.org/character-in-action/outreach/global-learning-and-adventure-trips: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:42,422 - INFO - Crawling: https://www.crescentschool.org/how-to-apply/application-process
+2025-09-28 21:19:42,648 - ERROR - Error processing https://www.crescentschool.org/how-to-apply/application-process: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:44,019 - INFO - Crawling: https://www.crescentschool.org/how-to-apply/apply-now
+2025-09-28 21:19:44,377 - ERROR - Error processing https://www.crescentschool.org/how-to-apply/apply-now: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:45,955 - INFO - Crawling: https://www.crescentschool.org/academics
+2025-09-28 21:19:46,238 - ERROR - Error processing https://www.crescentschool.org/academics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:47,504 - INFO - Crawling: https://www.crescentschool.org/academics/student-services
+2025-09-28 21:19:47,841 - ERROR - Error processing https://www.crescentschool.org/academics/student-services: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:49,196 - INFO - Crawling: https://www.crescentschool.org/support-crescent/meet-the-team
+2025-09-28 21:19:49,431 - ERROR - Error processing https://www.crescentschool.org/support-crescent/meet-the-team: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:50,762 - INFO - Crawling: https://www.crescentschool.org/why-crescent/crescent-blogs
+2025-09-28 21:19:51,111 - ERROR - Error processing https://www.crescentschool.org/why-crescent/crescent-blogs: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:52,359 - INFO - Crawling: https://www.crescentschool.org/about
+2025-09-28 21:19:52,786 - ERROR - Error processing https://www.crescentschool.org/about: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:54,130 - INFO - Crawling: https://www.crescentschool.org/academics/student-services/academic-well-being
+2025-09-28 21:19:54,433 - ERROR - Error processing https://www.crescentschool.org/academics/student-services/academic-well-being: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:55,625 - INFO - Crawling: https://www.crescentschool.org/why-crescent/top-12-reasons
+2025-09-28 21:19:55,946 - ERROR - Error processing https://www.crescentschool.org/why-crescent/top-12-reasons: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:57,237 - INFO - Crawling: https://www.crescentschool.org/page/academics/upper-school
+2025-09-28 21:19:57,598 - ERROR - Error processing https://www.crescentschool.org/page/academics/upper-school: 'NoneType' object has no attribute 'get'
+2025-09-28 21:19:58,820 - INFO - Crawling: https://www.crescentschool.org/page/News-Detail?pk=1300169
+2025-09-28 21:19:59,131 - ERROR - Error processing https://www.crescentschool.org/page/News-Detail?pk=1300169: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:00,396 - INFO - Crawling: https://www.crescentschool.org/careers/working-at-crescent
+2025-09-28 21:20:00,758 - ERROR - Error processing https://www.crescentschool.org/careers/working-at-crescent: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:01,945 - INFO - Crawling: https://www.crescentschool.org/page/academics/lower-school
+2025-09-28 21:20:02,730 - ERROR - Error processing https://www.crescentschool.org/page/academics/lower-school: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:04,072 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646341&fromId=279136
+2025-09-28 21:20:04,455 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646341&fromId=279136: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:05,717 - INFO - Crawling: https://www.crescentschool.org/academics/lower-school/ls-curriculum-highlights
+2025-09-28 21:20:05,972 - ERROR - Error processing https://www.crescentschool.org/academics/lower-school/ls-curriculum-highlights: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:07,245 - INFO - Crawling: https://www.crescentschool.org/about/publications
+2025-09-28 21:20:07,560 - ERROR - Error processing https://www.crescentschool.org/about/publications: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:08,738 - INFO - Crawling: https://www.crescentschool.org/how-to-apply/enrolment-team
+2025-09-28 21:20:09,089 - ERROR - Error processing https://www.crescentschool.org/how-to-apply/enrolment-team: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:10,257 - INFO - Crawling: https://www.crescentschool.org/why-crescent/alumni-brotherhood
+2025-09-28 21:20:10,619 - ERROR - Error processing https://www.crescentschool.org/why-crescent/alumni-brotherhood: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:12,077 - INFO - Crawling: https://www.crescentschool.org/more-programs/summer-academics
+2025-09-28 21:20:12,603 - ERROR - Error processing https://www.crescentschool.org/more-programs/summer-academics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:13,908 - INFO - Crawling: https://www.crescentschool.org/character-in-action/business
+2025-09-28 21:20:14,299 - ERROR - Error processing https://www.crescentschool.org/character-in-action/business: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:15,654 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1634988&fromId=242111
+2025-09-28 21:20:16,239 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1634988&fromId=242111: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:17,854 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623220&fromId=242111
+2025-09-28 21:20:18,388 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623220&fromId=242111: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:19,869 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637180&fromId=242111
+2025-09-28 21:20:20,682 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637180&fromId=242111: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:21,911 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1624955&fromId=242111
+2025-09-28 21:20:22,499 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1624955&fromId=242111: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:24,052 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1638440&fromId=242111
+2025-09-28 21:20:24,554 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1638440&fromId=242111: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:25,755 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1628528&fromId=242111
+2025-09-28 21:20:26,390 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1628528&fromId=242111: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:27,599 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1620406&fromId=242111
+2025-09-28 21:20:27,864 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1620406&fromId=242111: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:29,443 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646469&fromId=242111
+2025-09-28 21:20:30,104 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646469&fromId=242111: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:31,324 - INFO - Crawling: https://www.crescentschool.org/page
+2025-09-28 21:20:31,764 - ERROR - Error processing https://www.crescentschool.org/page: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:32,986 - INFO - Crawling: https://www.crescentschool.org/page/how-to-apply/financial-assistance
+2025-09-28 21:20:33,796 - ERROR - Error processing https://www.crescentschool.org/page/how-to-apply/financial-assistance: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:35,001 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1184097&fromId=241761
+2025-09-28 21:20:35,285 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1184097&fromId=241761: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:36,500 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1075599&fromId=241761
+2025-09-28 21:20:36,784 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1075599&fromId=241761: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:38,023 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1046562&fromId=241761
+2025-09-28 21:20:38,473 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1046562&fromId=241761: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:39,716 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1046563&fromId=241761
+2025-09-28 21:20:40,322 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1046563&fromId=241761: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:41,769 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1075181&fromId=241761
+2025-09-28 21:20:42,113 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1075181&fromId=241761: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:43,445 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1258818&fromId=241761
+2025-09-28 21:20:43,906 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1258818&fromId=241761: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:45,232 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1224401&fromId=241761
+2025-09-28 21:20:45,726 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1224401&fromId=241761: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:47,020 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent/crescent-blogs
+2025-09-28 21:20:47,398 - ERROR - Error processing https://www.crescentschool.org/page/why-crescent/crescent-blogs: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:48,600 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1148386&fromId=241761
+2025-09-28 21:20:49,062 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1148386&fromId=241761: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:50,376 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16014237&fromId=233923
+2025-09-28 21:20:51,038 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16014237&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:52,398 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16014238&fromId=233923
+2025-09-28 21:20:53,124 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16014238&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:54,751 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16014234&fromId=233923
+2025-09-28 21:20:55,451 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16014234&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:56,801 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16197064&fromId=233923
+2025-09-28 21:20:57,395 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16197064&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:20:58,632 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16239157&fromId=233923
+2025-09-28 21:20:59,022 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16239157&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:00,303 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16014233&fromId=233923
+2025-09-28 21:21:01,101 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16014233&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:02,702 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16014235&fromId=233923
+2025-09-28 21:21:03,306 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16014235&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:04,685 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16146412&fromId=233923
+2025-09-28 21:21:05,367 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16146412&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:06,955 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16196591&fromId=233923
+2025-09-28 21:21:07,662 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16196591&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:08,965 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16014236&fromId=233923
+2025-09-28 21:21:09,678 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16014236&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:11,081 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16185689&fromId=233923
+2025-09-28 21:21:11,662 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16185689&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:12,951 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16014276&fromId=233923
+2025-09-28 21:21:13,625 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16014276&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:15,118 - INFO - Crawling: https://www.crescentschool.org/News-Detail?pk=1129769
+2025-09-28 21:21:15,449 - ERROR - Error processing https://www.crescentschool.org/News-Detail?pk=1129769: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:16,695 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16014284&fromId=233923
+2025-09-28 21:21:17,514 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16014284&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:18,931 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16093128&fromId=233923
+2025-09-28 21:21:19,549 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16093128&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:20,873 - INFO - Crawling: https://www.crescentschool.org/News-Detail?pk=1129766
+2025-09-28 21:21:21,158 - ERROR - Error processing https://www.crescentschool.org/News-Detail?pk=1129766: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:22,430 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16119797&fromId=233923
+2025-09-28 21:21:23,100 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16119797&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:24,808 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16199451&fromId=233923
+2025-09-28 21:21:25,327 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16199451&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:27,124 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16180584&fromId=233923
+2025-09-28 21:21:27,805 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16180584&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:29,118 - INFO - Crawling: https://www.crescentschool.org/page/event-detail?pk=16093122&fromId=233923
+2025-09-28 21:21:29,940 - ERROR - Error processing https://www.crescentschool.org/page/event-detail?pk=16093122&fromId=233923: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:31,215 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide
+2025-09-28 21:21:31,682 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:33,076 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1037857&fromId=242094
+2025-09-28 21:21:33,853 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1037857&fromId=242094: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:35,227 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1554495&fromId=242094
+2025-09-28 21:21:35,976 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1554495&fromId=242094: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:37,594 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1037858&fromId=242094
+2025-09-28 21:21:38,254 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1037858&fromId=242094: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:39,604 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1037863&fromId=242094
+2025-09-28 21:21:40,238 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1037863&fromId=242094: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:41,557 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1511743&fromId=242094
+2025-09-28 21:21:42,171 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1511743&fromId=242094: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:43,568 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1037859&fromId=242094
+2025-09-28 21:21:44,175 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1037859&fromId=242094: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:45,574 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1113164&fromId=242094
+2025-09-28 21:21:46,666 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1113164&fromId=242094: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:48,134 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1037855&fromId=242094
+2025-09-28 21:21:48,747 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1037855&fromId=242094: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:49,990 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623963&fromId=242079
+2025-09-28 21:21:50,626 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623963&fromId=242079: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:52,077 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623391&fromId=242079
+2025-09-28 21:21:52,723 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623391&fromId=242079: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:54,047 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1614621&fromId=242079
+2025-09-28 21:21:54,756 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1614621&fromId=242079: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:56,211 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1589656&fromId=242079
+2025-09-28 21:21:56,886 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1589656&fromId=242079: 'NoneType' object has no attribute 'get'
+2025-09-28 21:21:58,248 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637839&fromId=242079
+2025-09-28 21:21:58,872 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637839&fromId=242079: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:00,452 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1243252&fromId=242082
+2025-09-28 21:22:01,141 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1243252&fromId=242082: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:02,712 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1461307&fromId=242082
+2025-09-28 21:22:03,358 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1461307&fromId=242082: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:04,593 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1532123&fromId=242082
+2025-09-28 21:22:05,113 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1532123&fromId=242082: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:06,703 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1483274&fromId=242082
+2025-09-28 21:22:07,308 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1483274&fromId=242082: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:08,519 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623965&fromId=242082
+2025-09-28 21:22:09,698 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623965&fromId=242082: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:10,917 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1574163&fromId=242029
+2025-09-28 21:22:11,181 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1574163&fromId=242029: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:12,707 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633916&fromId=242029
+2025-09-28 21:22:13,271 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633916&fromId=242029: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:14,758 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1569368&fromId=242029
+2025-09-28 21:22:15,283 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1569368&fromId=242029: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:16,479 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1374633&fromId=242029
+2025-09-28 21:22:16,997 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1374633&fromId=242029: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:18,521 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1537033&fromId=242029
+2025-09-28 21:22:18,808 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1537033&fromId=242029: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:20,287 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633917&fromId=242029
+2025-09-28 21:22:20,894 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633917&fromId=242029: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:22,660 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent/our-graduates/where-our-graduates-go
+2025-09-28 21:22:23,186 - ERROR - Error processing https://www.crescentschool.org/page/why-crescent/our-graduates/where-our-graduates-go: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:24,585 - INFO - Crawling: https://www.crescentschool.org/page/indigenous-education
+2025-09-28 21:22:24,953 - ERROR - Error processing https://www.crescentschool.org/page/indigenous-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:26,321 - INFO - Crawling: https://www.crescentschool.org/page/belongingcrescent
+2025-09-28 21:22:26,647 - ERROR - Error processing https://www.crescentschool.org/page/belongingcrescent: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:28,583 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent/diversity-inclusion-belonging
+2025-09-28 21:22:29,034 - ERROR - Error processing https://www.crescentschool.org/page/why-crescent/diversity-inclusion-belonging: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:30,360 - INFO - Crawling: https://www.crescentschool.org/page/curricular-and-community-integration
+2025-09-28 21:22:31,265 - ERROR - Error processing https://www.crescentschool.org/page/curricular-and-community-integration: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:32,709 - INFO - Crawling: https://www.crescentschool.org/page/professional-development
+2025-09-28 21:22:33,179 - ERROR - Error processing https://www.crescentschool.org/page/professional-development: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:34,417 - INFO - Crawling: https://www.crescentschool.org/page/crescent-pride
+2025-09-28 21:22:34,840 - ERROR - Error processing https://www.crescentschool.org/page/crescent-pride: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:36,167 - INFO - Crawling: https://www.crescentschool.org/page/crescent-celebrates
+2025-09-28 21:22:37,470 - ERROR - Error processing https://www.crescentschool.org/page/crescent-celebrates: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:38,926 - INFO - Crawling: https://www.crescentschool.org/page/holocaust-studies
+2025-09-28 21:22:39,313 - ERROR - Error processing https://www.crescentschool.org/page/holocaust-studies: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:40,666 - INFO - Crawling: https://www.crescentschool.org/page/black-heritage-and-bsa
+2025-09-28 21:22:41,582 - ERROR - Error processing https://www.crescentschool.org/page/black-heritage-and-bsa: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:42,851 - INFO - Crawling: https://www.crescentschool.org/page/be-the-one
+2025-09-28 21:22:43,228 - ERROR - Error processing https://www.crescentschool.org/page/be-the-one: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:44,547 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633915&fromId=242030
+2025-09-28 21:22:45,488 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633915&fromId=242030: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:46,776 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1614623&fromId=242030
+2025-09-28 21:22:47,481 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1614623&fromId=242030: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:48,768 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1584559&fromId=242030
+2025-09-28 21:22:49,337 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1584559&fromId=242030: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:50,902 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1589654&fromId=242030
+2025-09-28 21:22:51,960 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1589654&fromId=242030: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:53,501 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623391&fromId=242030
+2025-09-28 21:22:54,729 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623391&fromId=242030: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:56,511 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1589656&fromId=242028
+2025-09-28 21:22:57,142 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1589656&fromId=242028: 'NoneType' object has no attribute 'get'
+2025-09-28 21:22:58,458 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1301230&fromId=242028
+2025-09-28 21:22:58,993 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1301230&fromId=242028: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:00,714 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637839&fromId=242028
+2025-09-28 21:23:01,332 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637839&fromId=242028: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:02,665 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623963&fromId=242028
+2025-09-28 21:23:03,334 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623963&fromId=242028: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:05,017 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1509352&fromId=242028
+2025-09-28 21:23:06,930 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1509352&fromId=242028: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:08,486 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1619148&fromId=242028
+2025-09-28 21:23:09,387 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1619148&fromId=242028: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:10,747 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1591424&fromId=242064
+2025-09-28 21:23:11,465 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1591424&fromId=242064: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:13,062 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1639029&fromId=242064
+2025-09-28 21:23:13,716 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1639029&fromId=242064: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:15,145 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1548696&fromId=242064
+2025-09-28 21:23:15,792 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1548696&fromId=242064: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:18,020 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1599999&fromId=242064
+2025-09-28 21:23:18,652 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1599999&fromId=242064: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:20,831 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1497083&fromId=242064
+2025-09-28 21:23:21,774 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1497083&fromId=242064: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:23,349 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1288846&nc=25186&fromId=288197
+2025-09-28 21:23:23,948 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1288846&nc=25186&fromId=288197: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:25,261 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1288844&nc=25186&fromId=288197
+2025-09-28 21:23:26,008 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1288844&nc=25186&fromId=288197: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:27,590 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1287906&nc=25186&fromId=288197
+2025-09-28 21:23:28,400 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1287906&nc=25186&fromId=288197: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:30,151 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1445664&nc=25186&fromId=288197
+2025-09-28 21:23:30,765 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1445664&nc=25186&fromId=288197: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:32,119 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1287577&nc=25186&fromId=288197
+2025-09-28 21:23:33,854 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1287577&nc=25186&fromId=288197: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:35,495 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1497555&fromId=242078
+2025-09-28 21:23:36,308 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1497555&fromId=242078: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:38,079 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1639162&fromId=242078
+2025-09-28 21:23:38,757 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1639162&fromId=242078: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:40,208 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1566535&fromId=242078
+2025-09-28 21:23:41,004 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1566535&fromId=242078: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:42,622 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1486871&fromId=242078
+2025-09-28 21:23:43,276 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1486871&fromId=242078: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:44,576 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1454644&fromId=242078
+2025-09-28 21:23:45,239 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1454644&fromId=242078: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:46,662 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1591426&fromId=242078
+2025-09-28 21:23:47,787 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1591426&fromId=242078: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:49,495 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1548698&fromId=242031
+2025-09-28 21:23:50,463 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1548698&fromId=242031: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:52,115 - INFO - Crawling: https://www.crescentschool.org/wellbeing-initiative
+2025-09-28 21:23:52,440 - ERROR - Error processing https://www.crescentschool.org/wellbeing-initiative: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:53,658 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1469581&fromId=242031
+2025-09-28 21:23:54,314 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1469581&fromId=242031: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:55,811 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1569380&fromId=242031
+2025-09-28 21:23:56,520 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1569380&fromId=242031: 'NoneType' object has no attribute 'get'
+2025-09-28 21:23:58,107 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1518054&fromId=242031
+2025-09-28 21:23:59,470 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1518054&fromId=242031: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:00,918 - INFO - Crawling: https://www.crescentschool.org/page/more-programs/crescent-camps
+2025-09-28 21:24:01,407 - ERROR - Error processing https://www.crescentschool.org/page/more-programs/crescent-camps: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:02,671 - INFO - Crawling: https://www.crescentschool.org/page/careers/job-postings
+2025-09-28 21:24:03,095 - ERROR - Error processing https://www.crescentschool.org/page/careers/job-postings: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:04,518 - INFO - Crawling: https://www.crescentschool.org/page/character-in-action/athletics
+2025-09-28 21:24:05,898 - ERROR - Error processing https://www.crescentschool.org/page/character-in-action/athletics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:07,431 - INFO - Crawling: https://www.crescentschool.org/page/character-in-action/arts
+2025-09-28 21:24:07,977 - ERROR - Error processing https://www.crescentschool.org/page/character-in-action/arts: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:09,642 - INFO - Crawling: https://www.crescentschool.org/page/support-crescent/parent-annual-giving
+2025-09-28 21:24:10,133 - ERROR - Error processing https://www.crescentschool.org/page/support-crescent/parent-annual-giving: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:11,545 - INFO - Crawling: https://www.crescentschool.org/page/how-to-apply/application-process
+2025-09-28 21:24:12,399 - ERROR - Error processing https://www.crescentschool.org/page/how-to-apply/application-process: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:13,733 - INFO - Crawling: https://www.crescentschool.org/page/character-in-action/student-leadership
+2025-09-28 21:24:15,004 - ERROR - Error processing https://www.crescentschool.org/page/character-in-action/student-leadership: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:16,639 - INFO - Crawling: https://www.crescentschool.org/page/character-in-action/outreach/40-in-9-program
+2025-09-28 21:24:17,059 - ERROR - Error processing https://www.crescentschool.org/page/character-in-action/outreach/40-in-9-program: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:18,574 - INFO - Crawling: https://www.crescentschool.org/page/about/our-campus
+2025-09-28 21:24:19,023 - ERROR - Error processing https://www.crescentschool.org/page/about/our-campus: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:20,433 - INFO - Crawling: https://www.crescentschool.org/page/support-crescent/ways-to-give/international-gifts
+2025-09-28 21:24:20,837 - ERROR - Error processing https://www.crescentschool.org/page/support-crescent/ways-to-give/international-gifts: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:22,338 - INFO - Crawling: https://www.crescentschool.org/page/more-programs/more-programs
+2025-09-28 21:24:22,783 - ERROR - Error processing https://www.crescentschool.org/page/more-programs/more-programs: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:24,477 - INFO - Crawling: https://www.crescentschool.org/page/academics/upper-school/us-character-education
+2025-09-28 21:24:24,884 - ERROR - Error processing https://www.crescentschool.org/page/academics/upper-school/us-character-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:26,281 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent/why-a-school-for-boys
+2025-09-28 21:24:26,790 - ERROR - Error processing https://www.crescentschool.org/page/why-crescent/why-a-school-for-boys: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:28,282 - INFO - Crawling: https://www.crescentschool.org/page/careers
+2025-09-28 21:24:28,673 - ERROR - Error processing https://www.crescentschool.org/page/careers: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:30,139 - INFO - Crawling: https://www.crescentschool.org/page/character-in-action/other-teams-and-clubs
+2025-09-28 21:24:30,599 - ERROR - Error processing https://www.crescentschool.org/page/character-in-action/other-teams-and-clubs: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:32,057 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent/alumni-brotherhood
+2025-09-28 21:24:32,873 - ERROR - Error processing https://www.crescentschool.org/page/why-crescent/alumni-brotherhood: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:34,184 - INFO - Crawling: https://www.crescentschool.org/page/how-to-apply/enrolment-team
+2025-09-28 21:24:34,573 - ERROR - Error processing https://www.crescentschool.org/page/how-to-apply/enrolment-team: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:35,800 - INFO - Crawling: https://www.crescentschool.org/page/about/at-a-glance
+2025-09-28 21:24:36,326 - ERROR - Error processing https://www.crescentschool.org/page/about/at-a-glance: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:37,702 - INFO - Crawling: https://www.crescentschool.org/page/more-programs
+2025-09-28 21:24:38,157 - ERROR - Error processing https://www.crescentschool.org/page/more-programs: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:39,564 - INFO - Crawling: https://www.crescentschool.org/page/support-crescent/ways-to-give
+2025-09-28 21:24:39,969 - ERROR - Error processing https://www.crescentschool.org/page/support-crescent/ways-to-give: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:41,276 - INFO - Crawling: https://www.crescentschool.org/page/academics/lower-school/ls-character-education
+2025-09-28 21:24:41,613 - ERROR - Error processing https://www.crescentschool.org/page/academics/lower-school/ls-character-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:42,921 - INFO - Crawling: https://www.crescentschool.org/page/academics/student-services/physical-well-being
+2025-09-28 21:24:43,391 - ERROR - Error processing https://www.crescentschool.org/page/academics/student-services/physical-well-being: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:44,771 - INFO - Crawling: https://www.crescentschool.org/page/how-to-apply/tuition-and-fees
+2025-09-28 21:24:45,210 - ERROR - Error processing https://www.crescentschool.org/page/how-to-apply/tuition-and-fees: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:47,194 - INFO - Crawling: https://www.crescentschool.org/page/how-to-apply/faqs
+2025-09-28 21:24:47,575 - ERROR - Error processing https://www.crescentschool.org/page/how-to-apply/faqs: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:49,274 - INFO - Crawling: https://www.crescentschool.org/page/character-in-action/business
+2025-09-28 21:24:49,698 - ERROR - Error processing https://www.crescentschool.org/page/character-in-action/business: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:51,117 - INFO - Crawling: https://www.crescentschool.org/page/academics/student-services/academic-well-being
+2025-09-28 21:24:51,571 - ERROR - Error processing https://www.crescentschool.org/page/academics/student-services/academic-well-being: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:53,566 - INFO - Crawling: https://www.crescentschool.org/page/how-to-apply/admission-dates-and-events
+2025-09-28 21:24:53,981 - ERROR - Error processing https://www.crescentschool.org/page/how-to-apply/admission-dates-and-events: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:55,428 - INFO - Crawling: https://www.crescentschool.org/page/more-programs/employment-and-volunteering
+2025-09-28 21:24:55,764 - ERROR - Error processing https://www.crescentschool.org/page/more-programs/employment-and-volunteering: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:57,148 - INFO - Crawling: https://www.crescentschool.org/page/support-crescent/funding-priorities
+2025-09-28 21:24:57,539 - ERROR - Error processing https://www.crescentschool.org/page/support-crescent/funding-priorities: 'NoneType' object has no attribute 'get'
+2025-09-28 21:24:58,840 - INFO - Crawling: https://www.crescentschool.org/page/about/meet-our-headmaster
+2025-09-28 21:24:59,298 - ERROR - Error processing https://www.crescentschool.org/page/about/meet-our-headmaster: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:00,729 - INFO - Crawling: https://www.crescentschool.org/page/academics/middle-school/ms-character-education
+2025-09-28 21:25:01,214 - ERROR - Error processing https://www.crescentschool.org/page/academics/middle-school/ms-character-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:02,674 - INFO - Crawling: https://www.crescentschool.org/page/about/history
+2025-09-28 21:25:03,054 - ERROR - Error processing https://www.crescentschool.org/page/about/history: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:04,518 - INFO - Crawling: https://www.crescentschool.org/page/academics/crescent-diploma
+2025-09-28 21:25:04,950 - ERROR - Error processing https://www.crescentschool.org/page/academics/crescent-diploma: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:06,207 - INFO - Crawling: https://www.crescentschool.org/page/academics
+2025-09-28 21:25:06,646 - ERROR - Error processing https://www.crescentschool.org/page/academics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:08,105 - INFO - Crawling: https://www.crescentschool.org/page/about/publications
+2025-09-28 21:25:08,569 - ERROR - Error processing https://www.crescentschool.org/page/about/publications: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:09,951 - INFO - Crawling: https://www.crescentschool.org/page/academics/middle-school/ms-curriculum-highlights
+2025-09-28 21:25:10,418 - ERROR - Error processing https://www.crescentschool.org/page/academics/middle-school/ms-curriculum-highlights: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:11,806 - INFO - Crawling: https://www.crescentschool.org/page/how-to-apply/answers-from-the-enrolment-office
+2025-09-28 21:25:12,622 - ERROR - Error processing https://www.crescentschool.org/page/how-to-apply/answers-from-the-enrolment-office: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:14,481 - INFO - Crawling: https://www.crescentschool.org/page/character-in-action/outreach/global-learning-and-adventure-trips
+2025-09-28 21:25:14,847 - ERROR - Error processing https://www.crescentschool.org/page/character-in-action/outreach/global-learning-and-adventure-trips: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:16,171 - INFO - Crawling: https://www.crescentschool.org/page/support-crescent
+2025-09-28 21:25:16,552 - ERROR - Error processing https://www.crescentschool.org/page/support-crescent: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:17,967 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent/faculty-and-staff/school-leadership
+2025-09-28 21:25:18,418 - ERROR - Error processing https://www.crescentschool.org/page/why-crescent/faculty-and-staff/school-leadership: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:19,747 - INFO - Crawling: https://www.crescentschool.org/page/character-in-action/outreach
+2025-09-28 21:25:20,023 - ERROR - Error processing https://www.crescentschool.org/page/character-in-action/outreach: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:21,445 - INFO - Crawling: https://www.crescentschool.org/page/about/missionvaluesvision
+2025-09-28 21:25:21,961 - ERROR - Error processing https://www.crescentschool.org/page/about/missionvaluesvision: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:23,281 - INFO - Crawling: https://www.crescentschool.org/page/support-crescent/legacy-giving
+2025-09-28 21:25:23,733 - ERROR - Error processing https://www.crescentschool.org/page/support-crescent/legacy-giving: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:25,068 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent/faculty-and-staff
+2025-09-28 21:25:25,364 - ERROR - Error processing https://www.crescentschool.org/page/why-crescent/faculty-and-staff: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:26,717 - INFO - Crawling: https://www.crescentschool.org/page/academics/crescent-diploma/intersession-week
+2025-09-28 21:25:27,227 - ERROR - Error processing https://www.crescentschool.org/page/academics/crescent-diploma/intersession-week: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:28,698 - INFO - Crawling: https://www.crescentschool.org/page/academics/upper-school/us-curriculum-highlights
+2025-09-28 21:25:29,107 - ERROR - Error processing https://www.crescentschool.org/page/academics/upper-school/us-curriculum-highlights: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:30,439 - INFO - Crawling: https://www.crescentschool.org/page/support-crescent/meet-the-team
+2025-09-28 21:25:31,322 - ERROR - Error processing https://www.crescentschool.org/page/support-crescent/meet-the-team: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:32,620 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent
+2025-09-28 21:25:32,977 - ERROR - Error processing https://www.crescentschool.org/page/why-crescent: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:34,212 - INFO - Crawling: https://www.crescentschool.org/page/how-to-apply
+2025-09-28 21:25:35,251 - ERROR - Error processing https://www.crescentschool.org/page/how-to-apply: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:36,786 - INFO - Crawling: https://www.crescentschool.org/page/character-in-action/robotics
+2025-09-28 21:25:37,302 - ERROR - Error processing https://www.crescentschool.org/page/character-in-action/robotics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:38,738 - INFO - Crawling: https://www.crescentschool.org/page/more-programs/summer-academics
+2025-09-28 21:25:39,194 - ERROR - Error processing https://www.crescentschool.org/page/more-programs/summer-academics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:40,679 - INFO - Crawling: https://www.crescentschool.org/page/academics/student-services
+2025-09-28 21:25:41,144 - ERROR - Error processing https://www.crescentschool.org/page/academics/student-services: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:42,522 - INFO - Crawling: https://www.crescentschool.org/page/academics/lower-school/ls-curriculum-highlights
+2025-09-28 21:25:42,992 - ERROR - Error processing https://www.crescentschool.org/page/academics/lower-school/ls-curriculum-highlights: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:44,359 - INFO - Crawling: https://www.crescentschool.org/page/support-crescent/why-give
+2025-09-28 21:25:44,722 - ERROR - Error processing https://www.crescentschool.org/page/support-crescent/why-give: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:46,227 - INFO - Crawling: https://www.crescentschool.org/page/character-in-action
+2025-09-28 21:25:46,675 - ERROR - Error processing https://www.crescentschool.org/page/character-in-action: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:48,045 - INFO - Crawling: https://www.crescentschool.org/page/academics/how-we-teach
+2025-09-28 21:25:48,506 - ERROR - Error processing https://www.crescentschool.org/page/academics/how-we-teach: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:49,921 - INFO - Crawling: https://www.crescentschool.org/page/careers/working-at-crescent
+2025-09-28 21:25:50,884 - ERROR - Error processing https://www.crescentschool.org/page/careers/working-at-crescent: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:52,360 - INFO - Crawling: https://www.crescentschool.org/page/more-programs/successful-start
+2025-09-28 21:25:52,824 - ERROR - Error processing https://www.crescentschool.org/page/more-programs/successful-start: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:54,192 - INFO - Crawling: https://www.crescentschool.org/page/academics/health-and-well-being
+2025-09-28 21:25:54,502 - ERROR - Error processing https://www.crescentschool.org/page/academics/health-and-well-being: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:55,839 - INFO - Crawling: https://www.crescentschool.org/page/about/coyotes-den
+2025-09-28 21:25:56,309 - ERROR - Error processing https://www.crescentschool.org/page/about/coyotes-den: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:57,572 - INFO - Crawling: https://www.crescentschool.org/page/about
+2025-09-28 21:25:58,052 - ERROR - Error processing https://www.crescentschool.org/page/about: 'NoneType' object has no attribute 'get'
+2025-09-28 21:25:59,423 - INFO - Crawling: https://www.crescentschool.org/page/why-crescent/whats-for-lunch
+2025-09-28 21:26:01,158 - INFO - Successfully crawled https://www.crescentschool.org/page/why-crescent/whats-for-lunch - 0 chunks created
+2025-09-28 21:26:03,056 - INFO - Crawling: https://www.crescentschool.org/page/about/governance
+2025-09-28 21:26:03,572 - ERROR - Error processing https://www.crescentschool.org/page/about/governance: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:04,959 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1619146&fromId=242087
+2025-09-28 21:26:05,449 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1619146&fromId=242087: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:06,791 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633915&fromId=242087
+2025-09-28 21:26:07,446 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633915&fromId=242087: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:09,037 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1518055&fromId=242087
+2025-09-28 21:26:09,589 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1518055&fromId=242087: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:11,091 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1523108&fromId=242087
+2025-09-28 21:26:11,781 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1523108&fromId=242087: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:13,985 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1554498&fromId=242087
+2025-09-28 21:26:14,710 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1554498&fromId=242087: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:15,995 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1537010&fromId=242087
+2025-09-28 21:26:16,676 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1537010&fromId=242087: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:18,555 - INFO - Crawling: https://www.crescentschool.org/page/Character-in-Action/Robotics
+2025-09-28 21:26:18,969 - ERROR - Error processing https://www.crescentschool.org/page/Character-in-Action/Robotics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:20,316 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633917&fromId=242086
+2025-09-28 21:26:20,971 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633917&fromId=242086: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:22,457 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1589654&fromId=242086
+2025-09-28 21:26:23,210 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1589654&fromId=242086: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:24,616 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1614623&fromId=242086
+2025-09-28 21:26:25,490 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1614623&fromId=242086: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:27,024 - INFO - Crawling: https://www.crescentschool.org/page/Character-in-Action/Arts
+2025-09-28 21:26:27,420 - ERROR - Error processing https://www.crescentschool.org/page/Character-in-Action/Arts: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:28,714 - INFO - Crawling: https://www.crescentschool.org/page/Character-in-Action/Business
+2025-09-28 21:26:29,174 - ERROR - Error processing https://www.crescentschool.org/page/Character-in-Action/Business: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:30,550 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1619148&fromId=242086
+2025-09-28 21:26:31,212 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1619148&fromId=242086: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:32,890 - INFO - Crawling: https://www.crescentschool.org/page/Character-in-Action/Athletics
+2025-09-28 21:26:33,372 - ERROR - Error processing https://www.crescentschool.org/page/Character-in-Action/Athletics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:34,755 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1584545&fromId=242086
+2025-09-28 21:26:35,810 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1584545&fromId=242086: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:37,541 - INFO - Crawling: https://www.crescentschool.org/press-and-presentations
+2025-09-28 21:26:37,795 - ERROR - Error processing https://www.crescentschool.org/press-and-presentations: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:39,013 - INFO - Crawling: https://www.crescentschool.org/about-ccbe/our-team
+2025-09-28 21:26:39,314 - ERROR - Error processing https://www.crescentschool.org/about-ccbe/our-team: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:40,498 - INFO - Crawling: https://www.crescentschool.org/about-ccbe
+2025-09-28 21:26:40,779 - ERROR - Error processing https://www.crescentschool.org/about-ccbe: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:41,959 - INFO - Crawling: https://www.crescentschool.org/page/workshops-and-consulting
+2025-09-28 21:26:42,122 - ERROR - Error processing https://www.crescentschool.org/page/workshops-and-consulting: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:43,392 - INFO - Crawling: https://www.crescentschool.org/workshops-and-consulting
+2025-09-28 21:26:43,528 - ERROR - Error processing https://www.crescentschool.org/workshops-and-consulting: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:44,720 - INFO - Crawling: https://www.crescentschool.org/page/about-ccbe
+2025-09-28 21:26:45,060 - ERROR - Error processing https://www.crescentschool.org/page/about-ccbe: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:46,253 - INFO - Crawling: https://www.crescentschool.org/press-and-presentations/newsmedia-archived-conference-presentation
+2025-09-28 21:26:46,493 - ERROR - Error processing https://www.crescentschool.org/press-and-presentations/newsmedia-archived-conference-presentation: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:47,603 - INFO - Crawling: https://www.crescentschool.org/page/press-and-presentations
+2025-09-28 21:26:48,137 - ERROR - Error processing https://www.crescentschool.org/page/press-and-presentations: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:49,441 - INFO - Crawling: https://www.crescentschool.org/news-detail?pk=1422124&fromId=279136
+2025-09-28 21:26:50,065 - ERROR - Error processing https://www.crescentschool.org/news-detail?pk=1422124&fromId=279136: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:51,335 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646469&nc=27553&fromId=241935
+2025-09-28 21:26:51,742 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646469&nc=27553&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:52,982 - INFO - Crawling: https://www.crescentschool.org/page/archive-ccbe-blogs?nc=0_27553&fromId=241935
+2025-09-28 21:26:53,672 - ERROR - Error processing https://www.crescentschool.org/page/archive-ccbe-blogs?nc=0_27553&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:55,327 - INFO - Crawling: https://www.crescentschool.org/page/archive-open-mike-blog?nc=0_20722&fromId=241935
+2025-09-28 21:26:56,023 - ERROR - Error processing https://www.crescentschool.org/page/archive-open-mike-blog?nc=0_20722&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:26:57,667 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646346&nc=20631&fromId=241935
+2025-09-28 21:26:58,346 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646346&nc=20631&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:00,557 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646338&nc=20722&fromId=241935
+2025-09-28 21:27:01,006 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646338&nc=20722&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:02,798 - INFO - Crawling: https://www.crescentschool.org/page/archive-crescent-voices-blogs?nc=0_20631&fromId=241935
+2025-09-28 21:27:04,012 - ERROR - Error processing https://www.crescentschool.org/page/archive-crescent-voices-blogs?nc=0_20631&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:05,438 - INFO - Crawling: https://www.crescentschool.org/page/archive-template
+2025-09-28 21:27:05,965 - ERROR - Error processing https://www.crescentschool.org/page/archive-template: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:07,231 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1198496&fromId=241934
+2025-09-28 21:27:07,534 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1198496&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:08,788 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1264386&fromId=241934
+2025-09-28 21:27:09,494 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1264386&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:10,893 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1350626&fromId=241934
+2025-09-28 21:27:11,271 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1350626&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:12,627 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1044212&fromId=241934
+2025-09-28 21:27:13,080 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1044212&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:14,469 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1113288&fromId=241934
+2025-09-28 21:27:14,821 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1113288&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:16,207 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1413803&fromId=241934
+2025-09-28 21:27:16,591 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1413803&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:17,949 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1037283&fromId=241934
+2025-09-28 21:27:18,476 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1037283&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:19,867 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1264385&fromId=241934
+2025-09-28 21:27:20,410 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1264385&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:21,631 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1113285&fromId=241934
+2025-09-28 21:27:22,018 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1113285&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:23,840 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1350625&fromId=241934
+2025-09-28 21:27:24,457 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1350625&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:25,849 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1264387&fromId=241934
+2025-09-28 21:27:26,515 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1264387&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:27,888 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1198509&fromId=241934
+2025-09-28 21:27:28,301 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1198509&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:29,572 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1037281&fromId=241934
+2025-09-28 21:27:30,285 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1037281&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:31,794 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1413799&fromId=241934
+2025-09-28 21:27:32,233 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1413799&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:33,623 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1113287&fromId=241934
+2025-09-28 21:27:33,971 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1113287&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:35,310 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1350627&fromId=241934
+2025-09-28 21:27:35,835 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1350627&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:37,206 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1198502&fromId=241934
+2025-09-28 21:27:37,562 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1198502&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:39,733 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1113286&fromId=241934
+2025-09-28 21:27:40,117 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1113286&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:41,402 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1087724&fromId=241934
+2025-09-28 21:27:41,684 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1087724&fromId=241934: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:42,960 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1512677&fromId=242084
+2025-09-28 21:27:43,529 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1512677&fromId=242084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:44,897 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1077249&fromId=242084
+2025-09-28 21:27:46,076 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1077249&fromId=242084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:47,755 - INFO - Crawling: https://www.crescentschool.org/page/News-Detail?pk=1258822
+2025-09-28 21:27:48,129 - ERROR - Error processing https://www.crescentschool.org/page/News-Detail?pk=1258822: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:49,396 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/health-and-physical-education
+2025-09-28 21:27:49,868 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/health-and-physical-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:51,145 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/technological-education
+2025-09-28 21:27:51,553 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/technological-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:53,101 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/mathematics
+2025-09-28 21:27:53,767 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/mathematics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:55,049 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/business-studies
+2025-09-28 21:27:55,369 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/business-studies: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:56,750 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/the-arts
+2025-09-28 21:27:57,174 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/the-arts: 'NoneType' object has no attribute 'get'
+2025-09-28 21:27:58,542 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/evaluation-examination-and-reporting-policies
+2025-09-28 21:27:58,961 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/evaluation-examination-and-reporting-policies: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:00,180 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/online-learning
+2025-09-28 21:28:00,599 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/online-learning: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:01,973 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/english
+2025-09-28 21:28:02,479 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/english: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:03,747 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/guidance-and-career-education
+2025-09-28 21:28:04,617 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/guidance-and-career-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:06,086 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/modern-languages
+2025-09-28 21:28:06,577 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/modern-languages: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:07,940 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/ap-courses
+2025-09-28 21:28:08,630 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/ap-courses: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:09,887 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/sciences
+2025-09-28 21:28:10,295 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/sciences: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:11,643 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/community-service
+2025-09-28 21:28:11,990 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/community-service: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:13,262 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/crescent-summer-academic-program
+2025-09-28 21:28:13,701 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/crescent-summer-academic-program: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:15,096 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/upper-school-academic-policies
+2025-09-28 21:28:15,528 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/upper-school-academic-policies: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:16,841 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/ontario-university-prerequisite-course-guide
+2025-09-28 21:28:17,268 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/ontario-university-prerequisite-course-guide: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:18,695 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/types-of-courses-and-course-coding
+2025-09-28 21:28:19,098 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/types-of-courses-and-course-coding: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:20,426 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/ossd-requirements
+2025-09-28 21:28:20,902 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/ossd-requirements: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:22,386 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/interdisciplinary-studies
+2025-09-28 21:28:22,646 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-descriptions/interdisciplinary-studies: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:24,580 - INFO - Crawling: https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/ministry-of-education-academic-information
+2025-09-28 21:28:25,098 - ERROR - Error processing https://www.crescentschool.org/page/upper-school-course-guide/course-selection-resources/ministry-of-education-academic-information: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:26,436 - INFO - Crawling: https://www.crescentschool.org/news-detail?pk=1424353
+2025-09-28 21:28:26,818 - ERROR - Error processing https://www.crescentschool.org/news-detail?pk=1424353: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:28,110 - INFO - Crawling: https://www.crescentschool.org/News-Detail?pk=1497074
+2025-09-28 21:28:28,475 - ERROR - Error processing https://www.crescentschool.org/News-Detail?pk=1497074: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:29,790 - INFO - Crawling: https://www.crescentschool.org/News-Detail?pk=1569368
+2025-09-28 21:28:30,405 - ERROR - Error processing https://www.crescentschool.org/News-Detail?pk=1569368: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:31,686 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1584559&fromId=300396
+2025-09-28 21:28:32,289 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1584559&fromId=300396: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:33,635 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1499200&fromId=300396
+2025-09-28 21:28:34,389 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1499200&fromId=300396: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:35,788 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1548692&fromId=300396
+2025-09-28 21:28:36,365 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1548692&fromId=300396: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:37,762 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1454992&fromId=300396
+2025-09-28 21:28:38,440 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1454992&fromId=300396: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:39,813 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1438288&fromId=300396
+2025-09-28 21:28:40,652 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1438288&fromId=300396: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:42,329 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1548692&fromId=299908
+2025-09-28 21:28:43,021 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1548692&fromId=299908: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:44,278 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1537084&fromId=299908
+2025-09-28 21:28:44,939 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1537084&fromId=299908: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:46,789 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1509352&fromId=299908
+2025-09-28 21:28:47,504 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1509352&fromId=299908: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:48,893 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1584377&fromId=299908
+2025-09-28 21:28:49,551 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1584377&fromId=299908: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:50,935 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1574140&fromId=299908
+2025-09-28 21:28:51,631 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1574140&fromId=299908: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:52,915 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1560429&fromId=299911
+2025-09-28 21:28:53,587 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1560429&fromId=299911: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:54,946 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1234589&fromId=299909
+2025-09-28 21:28:55,567 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1234589&fromId=299909: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:57,149 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1083456&fromId=299909
+2025-09-28 21:28:57,833 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1083456&fromId=299909: 'NoneType' object has no attribute 'get'
+2025-09-28 21:28:59,595 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1531434&fromId=299909
+2025-09-28 21:29:00,412 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1531434&fromId=299909: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:02,207 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1088238&fromId=299909
+2025-09-28 21:29:02,869 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1088238&fromId=299909: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:04,487 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1537084&fromId=299909
+2025-09-28 21:29:05,309 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1537084&fromId=299909: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:07,013 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1574164&fromId=299912
+2025-09-28 21:29:07,482 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1574164&fromId=299912: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:09,165 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1556515&fromId=299914
+2025-09-28 21:29:10,138 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1556515&fromId=299914: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:11,950 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1461571&fromId=299914
+2025-09-28 21:29:12,754 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1461571&fromId=299914: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:14,305 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1509352&fromId=299914
+2025-09-28 21:29:14,803 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1509352&fromId=299914: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:16,136 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1523100&fromId=299914
+2025-09-28 21:29:16,692 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1523100&fromId=299914: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:18,337 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1285877&fromId=299914
+2025-09-28 21:29:18,904 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1285877&fromId=299914: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:20,635 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1349240&fromId=299910
+2025-09-28 21:29:21,294 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1349240&fromId=299910: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:22,760 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1574140&fromId=299910
+2025-09-28 21:29:23,442 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1574140&fromId=299910: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:24,834 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1523102&fromId=299910
+2025-09-28 21:29:25,586 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1523102&fromId=299910: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:27,092 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1523113&fromId=299910
+2025-09-28 21:29:27,868 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1523113&fromId=299910: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:29,650 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1447974&fromId=299913
+2025-09-28 21:29:30,300 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1447974&fromId=299913: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:32,008 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1312859&fromId=299913
+2025-09-28 21:29:32,789 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1312859&fromId=299913: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:34,584 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1349236&fromId=299913
+2025-09-28 21:29:35,249 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1349236&fromId=299913: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:37,507 - INFO - Crawling: https://www.crescentschool.org/News-Detail?pk=1611588
+2025-09-28 21:29:37,819 - ERROR - Error processing https://www.crescentschool.org/News-Detail?pk=1611588: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:39,030 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1638440&nc=27553&fromId=285084
+2025-09-28 21:29:39,605 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1638440&nc=27553&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:40,933 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646469&nc=27553&fromId=285084
+2025-09-28 21:29:41,203 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646469&nc=27553&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:42,507 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1497079&fromId=285084
+2025-09-28 21:29:43,221 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1497079&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:44,602 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1532209&fromId=285084
+2025-09-28 21:29:45,260 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1532209&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:46,519 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1479272&fromId=285084
+2025-09-28 21:29:46,995 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1479272&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:48,332 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1561731&fromId=285084
+2025-09-28 21:29:48,663 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1561731&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:50,031 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1534381&fromId=285084
+2025-09-28 21:29:50,491 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1534381&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:51,762 - INFO - Crawling: https://www.crescentschool.org/page/press-and-presentations/newsmedia-archived-conference-presentation
+2025-09-28 21:29:52,161 - ERROR - Error processing https://www.crescentschool.org/page/press-and-presentations/newsmedia-archived-conference-presentation: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:53,464 - INFO - Crawling: https://www.crescentschool.org/page/archive-ccbe-blogs?nc=0_27553&fromId=285084
+2025-09-28 21:29:54,402 - ERROR - Error processing https://www.crescentschool.org/page/archive-ccbe-blogs?nc=0_27553&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:55,805 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1574376&fromId=285084
+2025-09-28 21:29:56,341 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1574376&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:57,717 - INFO - Crawling: https://www.crescentschool.org/news-detail?pk=1037858
+2025-09-28 21:29:58,619 - ERROR - Error processing https://www.crescentschool.org/news-detail?pk=1037858: 'NoneType' object has no attribute 'get'
+2025-09-28 21:29:59,951 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1616765&fromId=241935
+2025-09-28 21:30:00,743 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1616765&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:02,371 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1620406&fromId=241935
+2025-09-28 21:30:03,212 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1620406&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:04,874 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1634988&fromId=241935
+2025-09-28 21:30:05,555 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1634988&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:07,445 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1617939&fromId=241935
+2025-09-28 21:30:08,062 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1617939&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:09,992 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1638440&fromId=241935
+2025-09-28 21:30:10,877 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1638440&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:12,775 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1624955&fromId=241935
+2025-09-28 21:30:13,434 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1624955&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:15,115 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623220&fromId=241935
+2025-09-28 21:30:16,049 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623220&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:17,568 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1628528&fromId=241935
+2025-09-28 21:30:18,272 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1628528&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:19,599 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637180&fromId=241935
+2025-09-28 21:30:20,321 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637180&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:21,536 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646469&fromId=241935
+2025-09-28 21:30:22,232 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646469&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:23,928 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646338&fromId=241935
+2025-09-28 21:30:24,930 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646338&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:26,477 - INFO - Crawling: http://www.crescentschool.org/podium/feed/rss.rss?z=EwbS0P9NQIGRy6XJ1W1Rcbxt%2fyZQImHO75WGOM5eUGi%2fq3N7NeXZ%2f5iFsMTxHUEx%2fweXQWU%2fBF3m9fK%2bD6Ta7wW5g7SNbol%2b9KsafonbeIaOo0FOaICjuiTtELYs4ReL
+2025-09-28 21:30:33,904 - INFO - Successfully crawled http://www.crescentschool.org/podium/feed/rss.rss?z=EwbS0P9NQIGRy6XJ1W1Rcbxt%2fyZQImHO75WGOM5eUGi%2fq3N7NeXZ%2f5iFsMTxHUEx%2fweXQWU%2fBF3m9fK%2bD6Ta7wW5g7SNbol%2b9KsafonbeIaOo0FOaICjuiTtELYs4ReL - 0 chunks created
+2025-09-28 21:30:35,139 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637843&fromId=241935
+2025-09-28 21:30:35,847 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637843&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:37,227 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1619230&fromId=241935
+2025-09-28 21:30:37,599 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1619230&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:38,922 - INFO - Crawling: http://www.crescentschool.org/podium/feed/rss.rss?z=EwbS0P9NQIGRy6XJ1W1Rcbxt%2fyZQImHO75WGOM5eUGiL4QmpSMaeXpRTg304FL9%2bpQhRhMGAnLJx30kNSVLcxNcxtqXk0rvXovqaRI4BMRKjEqlg%2f9oMSsdZu7aQ3%2f2I
+2025-09-28 21:30:43,820 - INFO - Successfully crawled http://www.crescentschool.org/podium/feed/rss.rss?z=EwbS0P9NQIGRy6XJ1W1Rcbxt%2fyZQImHO75WGOM5eUGiL4QmpSMaeXpRTg304FL9%2bpQhRhMGAnLJx30kNSVLcxNcxtqXk0rvXovqaRI4BMRKjEqlg%2f9oMSsdZu7aQ3%2f2I - 0 chunks created
+2025-09-28 21:30:45,069 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1639163&fromId=241935
+2025-09-28 21:30:45,808 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1639163&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:47,125 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633967&fromId=241935
+2025-09-28 21:30:48,041 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633967&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:49,570 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633937&fromId=241935
+2025-09-28 21:30:50,216 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633937&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:51,564 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633936&fromId=241935
+2025-09-28 21:30:52,353 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633936&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:54,128 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637849&fromId=241935
+2025-09-28 21:30:54,809 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637849&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:56,437 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637848&fromId=241935
+2025-09-28 21:30:57,093 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637848&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:30:58,938 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1618126&fromId=241935
+2025-09-28 21:30:59,609 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1618126&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:01,008 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1639029&fromId=241935
+2025-09-28 21:31:01,622 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1639029&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:02,944 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1624076&fromId=241935
+2025-09-28 21:31:03,609 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1624076&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:05,782 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646346&fromId=241935
+2025-09-28 21:31:07,207 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646346&fromId=241935: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:08,849 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623391&fromId=233924
+2025-09-28 21:31:09,475 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623391&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:10,800 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633917&fromId=233924
+2025-09-28 21:31:11,479 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633917&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:12,984 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637834&fromId=233924
+2025-09-28 21:31:13,636 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637834&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:15,231 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623963&fromId=233924
+2025-09-28 21:31:15,983 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623963&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:17,687 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633914&fromId=233924
+2025-09-28 21:31:18,441 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633914&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:20,036 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646345&fromId=233924
+2025-09-28 21:31:20,537 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646345&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:21,999 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1619146&fromId=233924
+2025-09-28 21:31:22,861 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1619146&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:24,780 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646343&fromId=233924
+2025-09-28 21:31:26,428 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646343&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:27,850 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633915&fromId=233924
+2025-09-28 21:31:28,783 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633915&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:30,431 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633916&fromId=233924
+2025-09-28 21:31:31,137 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633916&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:33,538 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646341&fromId=233924
+2025-09-28 21:31:34,321 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646341&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:36,125 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1619147&fromId=233924
+2025-09-28 21:31:36,882 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1619147&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:38,574 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637839&fromId=233924
+2025-09-28 21:31:39,261 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637839&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:40,654 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1636482&fromId=233924
+2025-09-28 21:31:41,431 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1636482&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:42,825 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1639178&fromId=233924
+2025-09-28 21:31:43,342 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1639178&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:44,715 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1639162&fromId=233924
+2025-09-28 21:31:45,371 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1639162&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:47,386 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637838&fromId=233924
+2025-09-28 21:31:47,935 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637838&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:49,365 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1633918&fromId=233924
+2025-09-28 21:31:50,201 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1633918&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:51,909 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1619359&fromId=233924
+2025-09-28 21:31:52,494 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1619359&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:53,770 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1619227&fromId=233924
+2025-09-28 21:31:54,488 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1619227&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:55,955 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623959&fromId=233924
+2025-09-28 21:31:56,534 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623959&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:31:58,782 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646340&fromId=233924
+2025-09-28 21:31:59,421 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646340&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:00,703 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1639177&fromId=233924
+2025-09-28 21:32:01,377 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1639177&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:03,269 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623965&fromId=233924
+2025-09-28 21:32:04,019 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623965&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:05,401 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1619148&fromId=233924
+2025-09-28 21:32:05,966 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1619148&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:07,634 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646502&fromId=233924
+2025-09-28 21:32:08,321 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646502&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:10,037 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623962&fromId=233924
+2025-09-28 21:32:10,716 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623962&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:12,049 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1619229&fromId=233924
+2025-09-28 21:32:12,643 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1619229&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:14,336 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1639179&fromId=233924
+2025-09-28 21:32:15,019 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1639179&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:16,657 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623388&fromId=233924
+2025-09-28 21:32:17,299 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623388&fromId=233924: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:18,842 - INFO - Crawling: https://www.crescentschool.org/page/News-Detail?pk=1258818
+2025-09-28 21:32:19,141 - ERROR - Error processing https://www.crescentschool.org/page/News-Detail?pk=1258818: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:20,373 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/ontario-university-prerequisite-course-guide
+2025-09-28 21:32:20,626 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/ontario-university-prerequisite-course-guide: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:22,270 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-selection-resources
+2025-09-28 21:32:22,698 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-selection-resources: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:24,008 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/health-and-physical-education
+2025-09-28 21:32:24,429 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions/health-and-physical-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:25,716 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/ministry-of-education-academic-information
+2025-09-28 21:32:26,083 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/ministry-of-education-academic-information: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:27,373 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions
+2025-09-28 21:32:27,644 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:28,878 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/ap-courses
+2025-09-28 21:32:29,489 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions/ap-courses: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:30,818 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/types-of-courses-and-course-coding
+2025-09-28 21:32:31,167 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/types-of-courses-and-course-coding: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:32,467 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/business-studies
+2025-09-28 21:32:32,748 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions/business-studies: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:33,932 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/ossd-requirements
+2025-09-28 21:32:34,360 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/ossd-requirements: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:35,619 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/the-arts
+2025-09-28 21:32:36,011 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions/the-arts: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:42,934 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/technological-education
+2025-09-28 21:32:43,148 - ERROR - Request error crawling https://www.crescentschool.org/upper-school-course-guide/course-descriptions/technological-education: HTTPSConnectionPool(host='www.crescentschool.org', port=443): Max retries exceeded with url: /upper-school-course-guide/course-descriptions/technological-education (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001C20C872900>: Failed to resolve 'www.crescentschool.org' ([Errno 11001] getaddrinfo failed)"))
+2025-09-28 21:32:46,060 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/guidance-and-career-education
+2025-09-28 21:32:47,199 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions/guidance-and-career-education: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:48,498 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/modern-languages
+2025-09-28 21:32:48,911 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions/modern-languages: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:50,318 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/online-learning
+2025-09-28 21:32:50,761 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/online-learning: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:51,970 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/evaluation-examination-and-reporting-policies
+2025-09-28 21:32:52,231 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/evaluation-examination-and-reporting-policies: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:53,441 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/upper-school-academic-policies
+2025-09-28 21:32:53,712 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/upper-school-academic-policies: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:55,018 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/crescent-summer-academic-program
+2025-09-28 21:32:55,362 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/crescent-summer-academic-program: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:56,564 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/english
+2025-09-28 21:32:57,035 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions/english: 'NoneType' object has no attribute 'get'
+2025-09-28 21:32:58,309 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/mathematics
+2025-09-28 21:32:58,771 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions/mathematics: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:00,040 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/community-service
+2025-09-28 21:33:00,265 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-selection-resources/community-service: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:01,443 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/sciences
+2025-09-28 21:33:01,796 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions/sciences: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:03,161 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide/course-descriptions/interdisciplinary-studies
+2025-09-28 21:33:03,460 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide/course-descriptions/interdisciplinary-studies: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:05,026 - INFO - Crawling: https://www.crescentschool.org/upper-school-course-guide
+2025-09-28 21:33:05,273 - ERROR - Error processing https://www.crescentschool.org/upper-school-course-guide: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:06,604 - INFO - Crawling: https://www.crescentschool.org/news-detail?pk=1349236
+2025-09-28 21:33:07,028 - ERROR - Error processing https://www.crescentschool.org/news-detail?pk=1349236: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:08,218 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1637180&fromId=285084
+2025-09-28 21:33:09,163 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1637180&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:10,431 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1646469&fromId=285084
+2025-09-28 21:33:11,085 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1646469&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:12,711 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1634988&fromId=285084
+2025-09-28 21:33:13,537 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1634988&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:15,069 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1628528&fromId=285084
+2025-09-28 21:33:15,743 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1628528&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:17,369 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1623220&fromId=285084
+2025-09-28 21:33:18,166 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1623220&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:20,370 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1638440&fromId=285084
+2025-09-28 21:33:21,153 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1638440&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:22,665 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1616765&fromId=285084
+2025-09-28 21:33:23,309 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1616765&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:24,582 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1620406&fromId=285084
+2025-09-28 21:33:25,291 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1620406&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:26,940 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1617939&fromId=285084
+2025-09-28 21:33:27,698 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1617939&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:29,730 - INFO - Crawling: https://www.crescentschool.org/page/news-detail?pk=1624955&fromId=285084
+2025-09-28 21:33:30,900 - ERROR - Error processing https://www.crescentschool.org/page/news-detail?pk=1624955&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:32,204 - INFO - Crawling: https://www.crescentschool.org/news-detail?pk=1617939&nc=27553&fromId=285084
+2025-09-28 21:33:32,873 - ERROR - Error processing https://www.crescentschool.org/news-detail?pk=1617939&nc=27553&fromId=285084: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:34,411 - INFO - Crawling: https://www.crescentschool.org/character-cards-main
+2025-09-28 21:33:34,749 - ERROR - Error processing https://www.crescentschool.org/character-cards-main: 'NoneType' object has no attribute 'get'
+2025-09-28 21:33:35,959 - INFO - Crawling completed. Total pages crawled: 5
+2025-09-28 21:33:35,959 - INFO - Prepared 0 chunks from 5 pages for vectorization.
+2025-09-28 21:33:35,960 - WARNING - No text chunks were prepared for vectorization.
+2025-09-28 21:33:35,960 - INFO - --- Knowledge Base Build Completed ---
+2025-09-28 21:33:35,961 - INFO - Indexed 0 chunks from 5 pages.
+2025-09-28 21:33:35,964 - INFO - Crawl report saved to crescent_crawl_report.json
+2025-09-28 21:33:35,966 - INFO - Knowledge Base Build Successful!
+2025-09-28 21:33:35,969 - INFO -  - Pages Crawled: 5
+2025-09-28 21:33:35,972 - INFO -  - Chunks Indexed: 0
