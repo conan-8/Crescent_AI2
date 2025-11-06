@@ -1,12 +1,13 @@
-import asyncio
-from crawl4ai import *
+import chromadb
+chroma_client = chromadb.PersistentClient(path="C:\crescent_ai_source")
 
-async def main():
-    async with AsyncWebCrawler() as crawler:
-        result = await crawler.arun(
-            url="https://www.crescentschool.org/",
-        )
-        print(result.markdown)
+collection = chroma_client.get_collection(name="family_handbook")
 
-if __name__ == "__main__":
-    asyncio.run(main())
+
+results = collection.query(
+    query_texts=["skibidi toielty"],
+    n_results=2 
+)
+print(results)
+
+
