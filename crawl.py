@@ -1,5 +1,9 @@
 import asyncio
 from crawl4ai import *
+import chromadb
+from google import genai
+
+client = genai.Client(api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI")
 
 async def main():
     async with AsyncWebCrawler() as crawler:
