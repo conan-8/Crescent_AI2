@@ -8,29 +8,43 @@ client = genai.Client(api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI")
 
 
 DOCUMENT1 = """
-Atomic Structure Overview:
-Atoms are composed of protons, neutrons, and electrons. A hydrogen atom has 1 proton and no neutrons, while oxygen has 8 protons and 8 neutrons.
-The atomic number represents the number of protons, and the mass number is the total of protons plus neutrons.
-For example:
-- Carbon-12 has 6 protons and 6 neutrons (mass number = 12).
-- Carbon-14 has 6 protons and 8 neutrons (mass number = 14).
-Electron configuration determines chemical reactivity. Oxygen’s configuration is 1s² 2s² 2p⁴, meaning it needs 2 more electrons to complete its outer shell.
+ Operating the Climate Control System  Your Googlecar has a climate control
+  system that allows you to adjust the temperature and airflow in the car.
+  To operate the climate control system, use the buttons and knobs located on
+  the center console.  Temperature: The temperature knob controls the
+  temperature inside the car. Turn the knob clockwise to increase the
+  temperature or counterclockwise to decrease the temperature.
+  Airflow: The airflow knob controls the amount of airflow inside the car.
+  Turn the knob clockwise to increase the airflow or counterclockwise to
+  decrease the airflow. Fan speed: The fan speed knob controls the speed
+  of the fan. Turn the knob clockwise to increase the fan speed or
+  counterclockwise to decrease the fan speed.
+  Mode: The mode button allows you to select the desired mode. The available
+  modes are: Auto: The car will automatically adjust the temperature and
+  airflow to maintain a comfortable level.
+  Cool: The car will blow cool air into the car.
+  Heat: The car will blow warm air into the car.
+  Defrost: The car will blow warm air onto the windshield to defrost it.
 """
 
 DOCUMENT2 = """
-Reaction Rates and Energy Changes:
-The rate of a chemical reaction doubles for approximately every 10°C increase in temperature (Rule of Thumb).
-For instance, if a reaction takes 60 seconds at 20°C, it would take roughly 30 seconds at 30°C.
-Catalysts lower activation energy (Eₐ) without being consumed. For example, platinum catalyzes hydrogenation reactions, reducing Eₐ from 125 kJ/mol to around 60 kJ/mol.
-In an exothermic reaction, energy is released to the surroundings, often shown as a negative ΔH (e.g., ΔH = -250 kJ/mol).
+Your Googlecar has a large touchscreen display that provides access to a
+  variety of features, including navigation, entertainment, and climate
+  control. To use the touchscreen display, simply touch the desired icon.
+  For example, you can touch the \"Navigation\" icon to get directions to
+  your destination or touch the \"Music\" icon to play your favorite songs.
 """
 
 DOCUMENT3 = """
-Ideal Gas Law and Real Gases:
-The ideal gas law is PV = nRT, where R = 8.314 J/(mol·K).
-For 1.0 mol of gas at 298 K and 1.0 atm, the volume V ≈ 24.5 L.
-Deviations occur at high pressure or low temperature. For example, at 100 atm and 250 K, real gases occupy 10–15% less volume than predicted by the ideal gas law.
-According to Boyle’s Law, if the pressure on a gas doubles, its volume halves, assuming constant temperature.
+ Shifting Gears Your Googlecar has an automatic transmission. To
+  shift gears, simply move the shift lever to the desired position.
+  Park: This position is used when you are parked. The wheels are locked
+  and the car cannot move.
+  Reverse: This position is used to back up.
+  Neutral: This position is used when you are stopped at a light or in traffic.
+  The car is not in gear and will not move unless you press the gas pedal.
+  Drive: This position is used to drive forward.
+  Low: This position is used for driving in snow or other slippery conditions.
 """
 
 documents = [DOCUMENT1, DOCUMENT2, DOCUMENT3]
