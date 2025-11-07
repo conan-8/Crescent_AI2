@@ -1,66 +1,53 @@
-import textwrap
 import chromadb
-import numpy as np
-import pandas as pd
-from crawl4ai import *
-
 from chromadb import EmbeddingFunction, Documents, Embeddings
 from google import genai
 from google.genai import types
+
+
 client = genai.Client(api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI")
+
+
 DOCUMENT1 = """
-  Operating the Climate Control System  Your Googlecar has a climate control
-  system that allows you to adjust the temperature and airflow in the car.
-  To operate the climate control system, use the buttons and knobs located on
-  the center console.  Temperature: The temperature knob controls the
-  temperature inside the car. Turn the knob clockwise to increase the
-  temperature or counterclockwise to decrease the temperature.
-  Airflow: The airflow knob controls the amount of airflow inside the car.
-  Turn the knob clockwise to increase the airflow or counterclockwise to
-  decrease the airflow. Fan speed: The fan speed knob controls the speed
-  of the fan. Turn the knob clockwise to increase the fan speed or
-  counterclockwise to decrease the fan speed.
-  Mode: The mode button allows you to select the desired mode. The available
-  modes are: Auto: The car will automatically adjust the temperature and
-  airflow to maintain a comfortable level.
-  Cool: The car will blow cool air into the car.
-  Heat: The car will blow warm air into the car.
-  Defrost: The car will blow warm air onto the windshield to defrost it.
+Atomic Structure Overview:
+Atoms are composed of protons, neutrons, and electrons. A hydrogen atom has 1 proton and no neutrons, while oxygen has 8 protons and 8 neutrons.
+The atomic number represents the number of protons, and the mass number is the total of protons plus neutrons.
+For example:
+- Carbon-12 has 6 protons and 6 neutrons (mass number = 12).
+- Carbon-14 has 6 protons and 8 neutrons (mass number = 14).
+Electron configuration determines chemical reactivity. Oxygen’s configuration is 1s² 2s² 2p⁴, meaning it needs 2 more electrons to complete its outer shell.
 """
+
 DOCUMENT2 = """
-  Your Googlecar has a large touchscreen display that provides access to a
-  variety of features, including navigation, entertainment, and climate
-  control. To use the touchscreen display, simply touch the desired icon.
-  For example, you can touch the \"Navigation\" icon to get directions to
-  your destination or touch the \"Music\" icon to play your favorite songs.
+Reaction Rates and Energy Changes:
+The rate of a chemical reaction doubles for approximately every 10°C increase in temperature (Rule of Thumb).
+For instance, if a reaction takes 60 seconds at 20°C, it would take roughly 30 seconds at 30°C.
+Catalysts lower activation energy (Eₐ) without being consumed. For example, platinum catalyzes hydrogenation reactions, reducing Eₐ from 125 kJ/mol to around 60 kJ/mol.
+In an exothermic reaction, energy is released to the surroundings, often shown as a negative ΔH (e.g., ΔH = -250 kJ/mol).
 """
+
 DOCUMENT3 = """
-  Shifting Gears Your Googlecar has an automatic transmission. To
-  shift gears, simply move the shift lever to the desired position.
-  Park: This position is used when you are parked. The wheels are locked
-  and the car cannot move.
-  Reverse: This position is used to back up.
-  Neutral: This position is used when you are stopped at a light or in traffic.
-  The car is not in gear and will not move unless you press the gas pedal.
-  Drive: This position is used to drive forward.
-  Low: This position is used for driving in snow or other slippery conditions.
+Ideal Gas Law and Real Gases:
+The ideal gas law is PV = nRT, where R = 8.314 J/(mol·K).
+For 1.0 mol of gas at 298 K and 1.0 atm, the volume V ≈ 24.5 L.
+Deviations occur at high pressure or low temperature. For example, at 100 atm and 250 K, real gases occupy 10–15% less volume than predicted by the ideal gas law.
+According to Boyle’s Law, if the pressure on a gas doubles, its volume halves, assuming constant temperature.
 """
 
 documents = [DOCUMENT1, DOCUMENT2, DOCUMENT3]
+
+
 class GeminiEmbeddingFunction(EmbeddingFunction):
-    def __call__(self, input : Documents) -> Embeddings:
+    def __call__(self, input: Documents) -> Embeddings:
         EMBEDDING_MODEL_ID = "gemini-embedding-001"
-        title = "Custom Query"
         response = client.models.embed_content(
             model=EMBEDDING_MODEL_ID,
             contents=input,
-            config=types.EmbedContentConfig(
-                task_type="RETRIEVAL_DOCUMENT",
-                title=title
-            )
+            config=types.EmbedContentConfig(task_type="RETRIEVAL_DOCUMENT")
         )
-        return response.embeddings[0].values
-    
+        
+        return [r.values for r in response.embeddings]
+
+
 def create_chroma_db(documents, name):
     chroma_client = chromadb.Client()
     collection = chroma_client.create_collection(
@@ -68,45 +55,46 @@ def create_chroma_db(documents, name):
         embedding_function=GeminiEmbeddingFunction()
     )
 
-    for i, d in enumerate(documents):
-        collection.add(
-            documents=d,
-            ids=str(i)
-        )
+    for i, doc in enumerate(documents):
+        collection.add(documents=[doc], ids=[str(i)])
     return collection
 
-db = create_chroma_db(documents, "Test")
 
 def get_relevant_passage(query, db):
-    passage = db.query(query_texts=[query], n_results = 1)['documents'][0][0]
-    return passage
+    result = db.query(query_texts=[query], n_results=1)
+    return result["documents"][0][0]
 
 def make_prompt(query, relevant_passage):
     escaped = relevant_passage.replace("'", "").replace('"', "").replace("\n", " ")
-    prompt = ("""
-    You are a helpful and informative bot that answers questions using
-    text from the reference passage included below.
-    Be sure to respond in a complete sentence, being comprehensive,
-    including all relevant background information.
-    However, you are talking to a non-technical audience, so be sure to
-    break down complicated concepts and strike a friendly
-    and converstional tone. If the passage is irrelevant to the answer,
-    you may ignore it.
-    QUESTION: '{query}'
-    PASSAGE: '{relevant_passage}'
+    return f"""
+You are a helpful assistant that answers questions using the reference passage below.
+Keep it friendly, simple, and complete.
 
-    ANSWER:
-  """).format(query=query, relevant_passage=escaped)
-    
-    return prompt
+QUESTION: {query}
+PASSAGE: {escaped}
 
-query = "how to use touchscreeen function"
-prompt = make_prompt(query, get_relevant_passage(query, db))
+ANSWER:
+"""
 
-MODEL_ID = "gemini-2.5-flash"
-answer = client.models.generate_content(
-    model = MODEL_ID,
-    contents=prompt
-)
+def main():
+    db = create_chroma_db(documents, "GoogleCarDocs")
+    print("Gemini Q&A Console (type 'exit' to quit)\n")
 
-print(answer.text)
+    while True:
+        query = input("Ask a question: ").strip()
+        if query.lower() in ["exit", "quit"]:
+            print("Cyaaaaa!")
+            break
+
+        passage = get_relevant_passage(query, db)
+        prompt = make_prompt(query, passage)
+
+        answer = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
+
+        print("\nAnswer:", answer.text.strip(), "\n")
+
+if __name__ == "__main__":
+    main()
