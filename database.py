@@ -11,7 +11,6 @@ from pydantic import BaseModel, Field
 import json
 
 
-client = genai.Client(api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI")
 
 urls = ["https://www.crescentschool.org/family-handbook",
         "https://www.crescentschool.org/family-handbook/general-information",
@@ -32,32 +31,64 @@ class ExtractedContent(BaseModel):
      relevant_text: str = Field(description="The clean text block containing only the content that is special to that specific URL.")
      
 EXTRACTION_INSTRUCTION = """
-You are an intelligent content extraction assistant. Your task is to analyze a webpage's URL and its corresponding raw text, find relevant chunks of text and return them
+You are a content extraction assistant for a school handbook website. Your job is to extract useful, substantive content from web pages while removing navigation clutter.
 
-## Your Goal
-Filter the raw text to keep *only* the descriptive content section that is specifically identified by the page's URL.
+## Context
+You're processing pages from a school's family handbook. Each page contains important information about policies, procedures, or general school information.
 
-## Instructions
-1.  **Analyze the URL:** Look at the last part of the URL's path (the "slug"). This tells you the page's specific topic.
-    * *Example:* For `https://www.crescentschool.org/family-handbook/general-information`, the key topic is "general-information".
-2.  **Scan the Raw Text:** Search the provided raw text for the heading and descriptive paragraph(s) that semantically match this key topic. The heading in the text (e.g., "General Information" or "Family Handbook: General Information") will be the one most closely related to the URL's key topic.
-3.  **Extract & Filter:**
-    * **KEEP:** The matching heading(s) and the descriptive paragraph(s) directly associated with them.
-    * **EXCLUDE:** You must aggressively filter out all other non-relevant information. This includes:
-        * All other content sections and their descriptions (e.g., "About Us," "Academics," "Careers," etc.).
-        * All navigation menus, sitemaps, and bulleted link lists.
-        * Headers, footers, and sidebars.
-        * Login links, social media icons, and search bars.
-4. If you can't find anything related to the end sequence of the provided url, return everything excluding any links or non-relevant info
+## What to KEEP (Extract)
+- Page titles and main headings
+- All descriptive paragraphs and explanatory text
+- Policy descriptions and guidelines
+- Important lists (rules, procedures, requirements)
+- Contact information relevant to the page topic
+- Any substantive content that helps answer questions about the school
 
-Your final output must be a clean text block containing the content that you returned
+## What to REMOVE (Filter Out)
+- Repetitive navigation menus (e.g., "Home | About | Contact | Admissions")
+- Footer content that appears on every page
+- Social media links and share buttons
+- Generic headers like "Quick Links" or "Main Menu"
+- Login/Sign-in links
+- Search boxes
+- Copyright notices and legal disclaimers
+- Breadcrumb navigation
+
+## Critical Rules
+1. **Err on the side of inclusion**: If you're unsure whether content is important, KEEP IT. Missing important information is worse than including a bit of extra content.
+
+2. **Minimum content threshold**: Your extracted text should be at least 100 characters long. If you find less than that, you're likely being too aggressive with filtering.
+
+3. **Check the URL**: The URL path often indicates the topic (e.g., "/dress-code" means extract dress code information). Make sure you're capturing content related to that topic.
+
+4. **Don't return empty results**: If you can't find specific content matching the URL, extract ALL substantive text from the page instead of returning nothing.
+
+## Output Format
+Return ONLY the cleaned, relevant text. Do not add any commentary, metadata, or explanations. Just return the useful content from the page.
+
+## Example
+URL: https://www.crescentschool.org/family-handbook/general-information/dress-code
+
+Good extraction:
+"Dress Code
+Students are expected to dress appropriately for a learning environment. The following guidelines apply:
+- Shirts must have sleeves
+- Closed-toe shoes are required
+- No offensive language or imagery on clothing
+For questions about dress code, contact the main office."
+
+Bad extraction (too aggressive):
+"Dress Code"
+
+Bad extraction (empty):
+""
 """
 
 def get_chroma_db(name):
-        google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI",
-                                                                            model_name="gemini-embedding-001",
-                                                                            task_type="RETRIEVAL_DOCUMENT"
-                                                                            )
+        google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
+            api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI",
+            model_name="gemini-embedding-001"
+        )
         chroma_client = chromadb.PersistentClient(path=r"C:\crescent_ai_source") # u will have to change this for ur local db or if u have never runned this script before
         collection = chroma_client.get_or_create_collection(name=name, embedding_function=google_ef)
         return collection
@@ -136,8 +167,8 @@ async def crawlinfo(db):
             # 6. WAIT! This is critical for the free-tier rate limit.
             # 10 requests/min = 1 request every 6 seconds.
             if i < len(urls) - 1: # Don't wait after the last one
-                print("Waiting 7 seconds for 'generate_content' rate limit...")
-                await asyncio.sleep(7)
+                print("Waiting 10 seconds for 'generate_content' rate limit...")
+                await asyncio.sleep(10)
 
     # 7. Add all chunks to ChromaDB in a single batch
     if doc_list:
@@ -154,6 +185,7 @@ async def crawlinfo(db):
 def main():
         db = get_chroma_db("family_handbook_1")
         asyncio.run(crawlinfo(db))
+        print(db.count())
 
 if __name__ == "__main__":
         main()
