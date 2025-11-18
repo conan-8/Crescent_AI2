@@ -33,7 +33,8 @@ def make_prompt(query, relevant_passage):
     escaped = relevant_passage.replace("'", "").replace('"', "").replace("\n", " ")
     return f"""
 You are a helpful assistant that answers questions using the reference passage below.
-Keep it friendly, simple, and complete. 
+Make sure to include all relevant details needed for answering the question. 
+If the provided passage does not contain a possible answer for the question, output "I don't know, the information is currently not in the family handbook"
 
 QUESTION: {query}
 PASSAGE: {escaped}
