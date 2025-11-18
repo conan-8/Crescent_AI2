@@ -33,7 +33,7 @@ def make_prompt(query, relevant_passage):
     escaped = relevant_passage.replace("'", "").replace('"', "").replace("\n", " ")
     return f"""
 You are a helpful assistant that answers questions using the reference passage below.
-Keep it friendly, simple, and complete.
+Keep it friendly, simple, and complete. 
 
 QUESTION: {query}
 PASSAGE: {escaped}
