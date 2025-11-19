@@ -1,0 +1,167 @@
+/* Position the chat button in the bottom right corner */
+.chatbot-toggler {
+    position: fixed;
+    bottom: 30px;
+    right: 35px;
+    outline: none;
+    border: none;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #00401A; /* Crescent School Green */
+    transition: all 0.2s ease;
+    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* The Chat Window */
+.chatbot {
+    position: fixed;
+    right: 35px;
+    bottom: 90px;
+    width: 350px;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.5);
+    transform-origin: bottom right;
+    box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
+                0 32px 64px -48px rgba(0,0,0,0.5);
+    transition: all 0.1s ease;
+    z-index: 9999;
+}
+
+body.show-chatbot .chatbot {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+/* Header Styles */
+.chatbot header {
+    padding: 16px 0;
+    position: relative;
+    text-align: center;
+    color: #fff;
+    background: #00401A;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.chatbot header h2 {
+    font-size: 1.4rem;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+/* Chatbox */
+.chatbot .chatbox {
+    overflow-y: auto;
+    height: 300px;
+    padding: 15px 10px 70px;
+}
+
+.chatbox .chat {
+    display: flex;
+    list-style: none;
+}
+
+/* UPDATED: Incoming Message (Bot) Styling */
+.chatbox .incoming {
+    display: flex;
+    align-items: flex-end; /* Align icon to the bottom of the message */
+}
+
+.chatbox .incoming span {
+    width: 32px;
+    height: 32px;
+    color: #fff;
+    background: #00401A;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 4px;
+    margin: 0 5px 7px 0; /* Spacing between icon and text */
+    align-self: flex-end; /* Ensure icon stays at the bottom */
+}
+
+.chatbox .incoming p {
+    background: #f2f2f2;
+    color: #000;
+    border-radius: 10px 10px 10px 0;
+    max-width: 75%;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+/* Outgoing Message (User) Styling */
+.chatbox .outgoing {
+    margin: 20px 0;
+    justify-content: flex-end;
+}
+
+.chatbox .outgoing p {
+    background: #00401A;
+    color: #fff;
+    border-radius: 10px 10px 0 10px;
+    max-width: 75%;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    font-family: sans-serif;
+    margin: 0;
+}
+
+/* Input Area */
+.chatbot .chat-input {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    background: #fff;
+    padding: 3px 20px;
+    border-top: 1px solid #ddd;
+}
+
+.chat-input textarea {
+    height: 55px;
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    max-height: 180px;
+    padding: 15px 15px 15px 0;
+    font-size: 0.95rem;
+    font-family: sans-serif;
+}
+
+/* Send Button */
+.chat-input span {
+    align-self: flex-end;
+    color: #00401A;
+    cursor: pointer;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    visibility: hidden; /* Hidden by default */
+    font-size: 1.35rem;
+    padding-right: 25px;
+}
+
+/* Show button when textarea has content OR is focused */
+.chat-input textarea:valid ~ span {
+    visibility: visible;
+}
+
+.chatbot-toggler span {
+    color: #fff;
+    font-size: 24px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
