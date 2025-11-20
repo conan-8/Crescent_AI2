@@ -5,6 +5,8 @@ const sendChatBtn = document.querySelector(".chat-input span");
 const chatbox = document.querySelector(".chatbox");
 
 let userMessage = null;
+// The address of your local Python server
+const API_URL = "http://127.0.0.1:5000/chat";
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
@@ -14,6 +16,37 @@ const createChatLi = (message, className) => {
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").textContent = message;
     return chatLi;
+}
+
+const generateResponse = async (incomingChatLi) => {
+    const messageElement = incomingChatLi.querySelector("p");
+
+    try {
+        // Send POST request to your Python Server
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: userMessage
+            })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Server Error");
+
+        // Update the "Thinking..." text with the real answer
+        messageElement.textContent = data.response;
+        
+    } catch (error) {
+        // Handle errors (like if the server isn't running)
+        messageElement.textContent = "Oops! I couldn't connect to the server. Make sure 'python server.py' is running.";
+        messageElement.style.color = "#cc0000";
+    } finally {
+        // Scroll to bottom to see the new message
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+    }
 }
 
 const handleChat = () => {
@@ -27,18 +60,13 @@ const handleChat = () => {
     // Clear the input area
     chatInput.value = "";
 
-    // Display "Thinking..." message after a short delay
-    setTimeout(() => {
-        const incomingChatLi = createChatLi("Thinking...", "incoming");
-        chatbox.appendChild(incomingChatLi);
-        chatbox.scrollTo(0, chatbox.scrollHeight);
+    // Display "Thinking..." message while we wait
+    const incomingChatLi = createChatLi("Thinking...", "incoming");
+    chatbox.appendChild(incomingChatLi);
+    chatbox.scrollTo(0, chatbox.scrollHeight);
 
-        // SIMULATION: For now, just reply with a dummy message after 1 second
-        setTimeout(() => {
-            incomingChatLi.querySelector("p").textContent = "I am the Crescent AI Prototype. I see you said: " + userMessage;
-        }, 1000);
-
-    }, 600);
+    // Call the real API
+    generateResponse(incomingChatLi);
 }
 
 // Handle "Enter" key press
