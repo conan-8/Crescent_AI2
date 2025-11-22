@@ -12,19 +12,18 @@ import json
 
 
 
-urls = ["https://www.crescentschool.org/family-handbook",
-        "https://www.crescentschool.org/family-handbook/general-information",
-        "https://www.crescentschool.org/family-handbook/general-information/a-message-from-our-headmaster",
-        "https://www.crescentschool.org/family-handbook/general-information/mission-and-values",
-        "https://www.crescentschool.org/family-handbook/general-information/campus-access",
-        "https://www.crescentschool.org/family-handbook/general-information/transportation-and-parking",
-        "https://www.crescentschool.org/family-handbook/general-information/food-services",
-        "https://www.crescentschool.org/family-handbook/general-information/school-communication",
-        "https://www.crescentschool.org/family-handbook/general-information/dress-code",
-        "https://www.crescentschool.org/family-handbook/general-information/student-property",
-        "https://www.crescentschool.org/family-handbook/general-information/house-system",
-        "https://www.crescentschool.org/family-handbook/general-information/prefect-system",
-        "https://www.crescentschool.org/family-handbook/general-information/school-constitution"
+urls = ["https://www.crescentschool.org/family-handbook/upper-school",
+        "https://www.crescentschool.org/family-handbook/upper-school/attendance-and-punctuality",
+        "https://www.crescentschool.org/family-handbook/upper-school/mentor-program",
+        "https://www.crescentschool.org/family-handbook/upper-school/academics"
+        "https://www.crescentschool.org/family-handbook/upper-school/academic-integrity",
+        "https://www.crescentschool.org/family-handbook/upper-school/promotion-from-grade-to-grade"
+        # "https://www.crescentschool.org/family-handbook/policies/code-of-conduct",
+        # "https://www.crescentschool.org/family-handbook/policies/code-of-sportsmanship",
+        # "https://www.crescentschool.org/family-handbook/policies/generative-artificial-intelligence-ai",
+        # "https://www.crescentschool.org/family-handbook/policies/laptop-use-policy",
+        # "https://www.crescentschool.org/family-handbook/policies/parent-concern-policy",
+        # "https://www.crescentschool.org/family-handbook/policies/video-conferencing"
 ]
 
 class ExtractedContent(BaseModel):
@@ -110,7 +109,7 @@ async def crawlinfo(db):
     )
 
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=2000, 
+        chunk_size=1000, 
         chunk_overlap=100,
         length_function=len
     )

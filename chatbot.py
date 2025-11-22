@@ -19,11 +19,19 @@ def get_chroma_db(name):
     )
     return collection
 
+def print_passages(passages):
+    print("\n--- Retrieved Passages ---")
+    for i, p in enumerate(passages, 1):
+        print(f"Passage {i}:\n{p.strip()}\n")
+    print("--------------------------\n")
+
 def get_relevant_documents(query, db):
     try:
         result = db.query(query_texts=[query], n_results=3)
         if result['documents'] and len(result['documents'][0]) > 0:
-            return "\n\n".join(result['documents'][0])
+            passages = result['documents'][0]
+            print_passages(passages)
+            return "\n\n".join(passages)
         return "No relevant information found."
     except Exception as e:
         print(f"Error querying database: {e}")
