@@ -1,7 +1,10 @@
 import sys
 import os
+import chromadb
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import uuid
+import datetime
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,6 +25,14 @@ try:
 except Exception as e:
     print(f"CRITICAL ERROR loading database: {e}")
     db = None
+
+# Initialize Conversations Database
+try:
+    conversations_db = get_chroma_db("conversations")
+    print("Conversations database loaded successfully.")
+except Exception as e:
+    print(f"Error loading conversations database: {e}")
+    conversations_db = None
 
 @app.route('/chat', methods=['POST'])
 def chat_endpoint():
@@ -61,6 +72,21 @@ def chat_endpoint():
         
         response_text = answer.text.strip()
         print(f"[Gemini Answer]: {response_text}")
+
+        # 5. Log Conversation
+        if conversations_db:
+            try:
+                interaction_id = str(uuid.uuid4())
+                timestamp = datetime.datetime.now().isoformat()
+                log_entry = f"User: {user_query}\nAI: {response_text}"
+                conversations_db.add(
+                    documents=[log_entry],
+                    metadatas=[{"role": "interaction", "timestamp": timestamp}],
+                    ids=[interaction_id]
+                )
+                print(f"Logged interaction {interaction_id} to conversations DB.")
+            except Exception as log_error:
+                print(f"Error logging conversation: {log_error}")
         
         return jsonify({"response": response_text})
 
