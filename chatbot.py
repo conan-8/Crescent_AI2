@@ -74,6 +74,12 @@ def main():
 
         # Add debugging to see what query returns
         print(f"\nSearching for: '{query}'...")
+
+        # --- GREETING HANDLING ---
+        greetings = ["hello", "hi", "hey", "how are you", "how are you?"]
+        if query.lower().strip() in greetings:
+            print("\nAnswer: Hello! I am an AI assistant for Crescent School. How can I help you today with information about the school?\n")
+            continue
         
         try:
             result = db.query(query_texts=[query], n_results=3)
@@ -89,7 +95,7 @@ def main():
         print(f"\nPassage length: {len(passage)} characters")
         
         if passage == "No relevant information found." or len(passage) < 10:
-            print("No relevant passage found, skipping generation.")
+            print("My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?")
             continue
             
         prompt = make_prompt(query, passage)
@@ -99,7 +105,20 @@ def main():
                 model="gemini-2.5-flash",
                 contents=prompt
             )
-            print("\nAnswer:", answer.text.strip(), "\n")
+            response_text = answer.text.strip()
+            
+            # Check for standard "no information" responses from Gemini
+            negative_phrases = [
+                "does not contain information",
+                "passage does not mention",
+                "provided passage does not",
+                "i don't have that information"
+            ]
+            
+            if any(phrase in response_text.lower() for phrase in negative_phrases):
+                response_text = "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?"
+
+            print("\nAnswer:", response_text, "\n")
         except Exception as e:
             print(f"\nError: {e}\n")
 

@@ -50,28 +50,51 @@ def chat_endpoint():
     print(f"\n[User Query]: {user_query}")
 
     try:
-        # --- LOGIC COPIED EXACTLY FROM YOUR chatbot.py MAIN() LOOP ---
-
-        # 1. Retrieve Context
-        passage = get_relevant_documents(user_query, db)
+        # --- GREETING HANDLING ---
+        greetings = ["hello", "hi", "hey", "how are you", "how are you?"]
+        response_text = ""
         
-        # 2. Validation (Logic from your script)
-        if passage == "No relevant information found." or len(passage) < 10:
-            print("No relevant passage found.")
-            return jsonify({"response": "I don't have that information in the family handbook."})
+        if user_query.lower().strip() in greetings:
+            response_text = "Hello! I am an AI assistant for Crescent School. How can I help you today with information about the school?"
+            print(f"[AI Response]: {response_text}")
+        else:
+            # --- LOGIC COPIED EXACTLY FROM YOUR chatbot.py MAIN() LOOP ---
 
-        # 3. Construct Prompt
-        prompt = make_prompt(user_query, passage)
+            # 1. Retrieve Context
+            passage = get_relevant_documents(user_query, db)
+            
+            # 2. Validation (Logic from your script)
+            if passage == "No relevant information found." or len(passage) < 10:
+                # This fallback might not trigger often if vector search is fuzzy, but keeping it as a first line of defense
+                response_text = "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?"
+                print(f"[AI Response]: {response_text}")
+                # We can return early or just let it fall through to logging
+            else:
+                # 3. Construct Prompt
+                prompt = make_prompt(user_query, passage)
 
-        # 4. Generate Answer with Gemini
-        # Using the same model "gemini-2.5-flash" defined in your script
-        answer = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
-        
-        response_text = answer.text.strip()
-        print(f"[Gemini Answer]: {response_text}")
+                # 4. Generate Answer with Gemini
+                # Using the same model "gemini-2.5-flash" defined in your script
+                answer = client.models.generate_content(
+                    model="gemini-2.5-flash",
+                    contents=prompt
+                )
+                
+                response_text = answer.text.strip()
+                
+                # Check for standard "no information" responses from Gemini
+                negative_phrases = [
+                    "does not contain information",
+                    "passage does not mention",
+                    "provided passage does not",
+                    "i don't have that information",
+                    "cannot answer this question"
+                ]
+                
+                if any(phrase in response_text.lower() for phrase in negative_phrases):
+                    response_text = "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?"
+
+                print(f"[Gemini Answer]: {response_text}")
 
         # 5. Log Conversation
         if conversations_db:
