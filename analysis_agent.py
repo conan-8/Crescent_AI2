@@ -50,9 +50,14 @@ def analyze_with_gemini(conversations):
     for i, conv in enumerate(conversations, 1):
         conversation_text += f"Interaction {i}:\nUser: {conv['query']}\nAI: {conv['response']}\n\n"
 
+    import datetime
+    current_date = datetime.datetime.now().strftime("%B %d, %Y")
+
     prompt = f"""
     You are an expert data analyst for a school chatbot. 
     Analyze the following conversation logs and generate a report.
+    
+    CURRENT DATE: {current_date}
 
     DATA:
     {conversation_text}
@@ -64,7 +69,7 @@ def analyze_with_gemini(conversations):
     4. **Recommendations**: Suggest any improvements for the chatbot's responses or what information needs to be added to the school website in order to produce a satisfying answer to the user's query.
 
     OUTPUT FORMAT:
-    Produce a clean Markdown report.
+    Produce a clean Markdown report. Start the report with the date provided above.
     """
 
     try:
