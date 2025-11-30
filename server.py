@@ -58,23 +58,18 @@ def chat_endpoint():
             response_text = "Hello! I am an AI assistant for Crescent School. How can I help you today with information about the school?"
             print(f"[AI Response]: {response_text}")
         else:
-            # --- LOGIC COPIED EXACTLY FROM YOUR chatbot.py MAIN() LOOP ---
-
             # 1. Retrieve Context
-            passage = get_relevant_documents(user_query, db)
+            passage, metadatas = get_relevant_documents(user_query, db)
             
-            # 2. Validation (Logic from your script)
+            # 2. Validation
             if passage == "No relevant information found." or len(passage) < 10:
-                # This fallback might not trigger often if vector search is fuzzy, but keeping it as a first line of defense
                 response_text = "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?"
                 print(f"[AI Response]: {response_text}")
-                # We can return early or just let it fall through to logging
             else:
                 # 3. Construct Prompt
                 prompt = make_prompt(user_query, passage)
 
                 # 4. Generate Answer with Gemini
-                # Using the same model "gemini-2.5-flash" defined in your script
                 answer = client.models.generate_content(
                     model="gemini-2.5-flash",
                     contents=prompt
@@ -82,7 +77,7 @@ def chat_endpoint():
                 
                 response_text = answer.text.strip()
                 
-                # Check for standard "no information" responses from Gemini
+                # Check for standard "no information" responses
                 negative_phrases = [
                     "does not contain information",
                     "passage does not mention",
@@ -93,6 +88,12 @@ def chat_endpoint():
                 
                 if any(phrase in response_text.lower() for phrase in negative_phrases):
                     response_text = "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?"
+                else:
+                    # Add source link if available
+                    if metadatas:
+                        sources = list(set([m.get('source') for m in metadatas if m and m.get('source')]))
+                        if sources:
+                            response_text += f"\n\nSource: {sources[0]}"
 
                 print(f"[Gemini Answer]: {response_text}")
 

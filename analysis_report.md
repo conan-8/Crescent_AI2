@@ -1,48 +1,72 @@
-November 26, 2025
+November 29, 2025
 
 ## Chatbot Interaction Analysis Report - Crescent School
 
-This report analyzes conversation logs from the Crescent School chatbot to identify user interaction patterns, areas where the AI failed, and recommendations for improvement.
+### 1. Identify Trends: Top 5 Most Frequent Topics
 
-### 1. Identified Trends
+Based on the 19 interactions analyzed, the following are the top 5 most frequent topics or types of questions:
 
-Based on the provided interactions, the following trends in user queries were observed:
-
-1.  **Off-topic / Non-school related inquiries (3 instances):** Users frequently engaged the chatbot with questions entirely unrelated to Crescent School (e.g., "Where is mars", "skibidi sigma") or general commands ("quit").
-2.  **Specific School Policies (1 instance):** Users sought detailed information regarding school policies, exemplified by the "dress code" query.
-3.  **Daily Operational Information (1 instance):** Queries about day-to-day school operations, such as "what's for lunch," were present.
-4.  **Extracurricular Activities / Athletics (1 instance):** Users inquired about school activities, specifically sports teams for a particular season.
+1.  **School Value Proposition / Admissions (Why Crescent is a good school):** 5 queries
+    *   Examples: "WHy should I send my son to crescent", "why is crescent a good school", "what differentiates crescent", "为什么crescent是一个好学习", "Men of Character from Boys of Promise".
+    2.  **School Policies & Handbook Information:** 5 queries
+    *   Examples: "dress code at crescent", "What is the attendance policy", "What are the school's core values", "what's the school spirit like", "what is the mission".
+3.  **Out-of-Scope / Off-topic Queries:** 4 queries
+    *   Examples: "Where is mars", "skibidi sigma", "quit", "what is the purpose of life".
+4.  **Food Services:** 3 queries
+    *   Examples: "what's for lunch at crescent", "tell me about food at crescent", "tell me about the food".
+5.  **Extracurricular Activities:** 2 queries
+    *   Examples: "what sports teams are there in the fall", "Tell me about the robotics team".
 
 ### 2. Unanswered Questions
 
-The AI failed to provide helpful answers for the following legitimate school-related questions:
+The AI failed to provide a helpful or specific answer for the following school-related questions:
 
-1.  **"please tell me about the dress code at crescent"**: The AI correctly identified the topic but explicitly stated it lacked specific details, directing the user to the handbook/website without providing an answer.
-2.  **"what sports teams are there in the fall"**: The AI incorrectly categorized this as outside its purpose, responding with its generic "My purpose is to provide information about Crescent School" message, despite it being a valid school-related question.
+*   **Interaction 3:** User: `please tell me about the dress code at crescent`
+    *   AI Response: "The passage does not provide specific details about the dress code itself."
+*   **Interaction 5:** User: `what sports teams are there in the fall`
+    *   AI Response: "My purpose is to provide information about Crescent School."
+*   **Interaction 7:** User: `What is the attendance policy`
+    *   AI Response: "My purpose is to provide information about Crescent School."
+*   **Interaction 8:** User: `tell me about food at crescent`
+    *   AI Response: "My purpose is to provide information about Crescent School." (Note: This is particularly problematic as other food-related queries received good answers).
+*   **Interaction 12:** User: `Tell me about the robotics team`
+    *   AI Response: "My purpose is to provide information about Crescent School."
+*   **Interaction 15:** User: `what's the school spirit like`
+    *   AI Response: "The passage does not describe the school spirit."
+*   **Interaction 16:** User: `what is the mission`
+    *   AI Response: "The provided passage mentions "the Schools mission" but does not define what the mission is."
 
 ### 3. Content Gaps
 
-Based on the unanswered questions, the following specific information should be added to the chatbot's knowledge base and/or primary information sources (Family Handbook/Crescent's website):
+Based on the unanswered questions, the following specific information is either missing or inadequately detailed within the chatbot's accessible knowledge base (likely the Family Handbook or Crescent's website):
 
-*   **Detailed Dress Code Policy:** The chatbot needs access to the specific rules and guidelines of the Crescent School dress code.
-*   **Seasonal Sports Team Rosters/Listings:** Information about which sports teams are offered during specific seasons (e.g., Fall, Winter, Spring) should be readily available.
+*   **Specific Dress Code Details:** The explicit rules and guidelines of the school's dress code.
+*   **Comprehensive Fall Sports Teams Information:** A list of specific sports teams offered in the fall season, and ideally, for other seasons as well.
+*   **Detailed Attendance Policy:** Clear guidelines regarding attendance, absences, reporting procedures, and related policies.
+*   **General Food Services Overview:** While specific lunch items and the SAGE program were covered, a broader, consolidated overview of "food at Crescent" seems to be missing or not easily retrievable for certain phrasings.
+*   **Information on Specific Extracurricular Teams/Clubs:** Details about clubs like the robotics team, including their activities, achievements, and how to participate.
+*   **Description of School Spirit and Culture:** Content that articulates and describes the general atmosphere, traditions, and "spirit" of Crescent School.
+*   **Explicit School Mission Statement:** The full, defined text of the school's mission.
 
 ### 4. Recommendations
 
-To improve the chatbot's performance and user satisfaction, the following recommendations are suggested:
+To improve the chatbot's performance and user satisfaction, the following improvements are suggested:
 
-1.  **Refine AI's Intent Recognition and Response Logic:**
-    *   **Differentiate between Off-Topic and On-Topic but Unknown:** The chatbot currently uses the same generic response ("My purpose is to provide information about Crescent School...") for both completely unrelated queries and valid school-related questions it cannot answer. This is confusing and unhelpful.
-        *   For truly off-topic or nonsensical queries, the current response is acceptable.
-        *   For on-topic questions where the AI lacks specific information, it should provide a more helpful response, such as: "I don't have the specific details about the [topic, e.g., dress code] right now. Please refer to the Family Handbook or the Crescent School website for the most current information." or "I can't provide a list of fall sports teams directly. Please check the Athletics section of the Crescent School website for current team listings."
-    *   **Improve Sensitivity for School-Related Keywords:** The AI failed to recognize "sports teams" and "fall" as school-related when asked about "Crescent School," indicating a need for better keyword and context parsing for relevant inquiries.
+#### Chatbot Response Improvements:
 
-2.  **Enrich Chatbot Knowledge Base:**
-    *   **Integrate Detailed Dress Code Information:** Populate the chatbot's database with the full details of Crescent School's dress code policy. This would allow the chatbot to answer direct questions about it.
-    *   **Add Comprehensive Sports Information:** Include listings of all sports teams, organized by season (Fall, Winter, Spring), along with potential links to relevant athletic department pages.
+1.  **More Informative "Content Gap" Responses:** For questions where the AI finds *some* mention of a topic but lacks specific details (e.g., dress code, mission, school spirit), the response should be more helpful than just stating the passage doesn't provide details.
+    *   **Example:** Instead of "The passage does not provide specific details about the dress code itself," respond with something like: "While I know Crescent School has a dress code, I don't have the specific details available. Please refer to the official Family Handbook on the school's website for comprehensive information." This acknowledges the topic and directs the user to a known source.
+2.  **Refined Semantic Understanding for Common Queries:** The discrepancy in responses for "what's for lunch," "tell me about the food," and "tell me about food at crescent" indicates a need for better natural language processing or improved indexing of food-related information. All queries about "food" should ideally pull from the same comprehensive knowledge source.
+3.  **Standardized Out-of-Scope Response:** The current "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?" is appropriate for completely irrelevant queries. No change needed here.
 
-3.  **Content Review for School Website/Handbook:**
-    *   **Ensure Accessibility of Key Information:** Verify that the Crescent School website and Family Handbook contain clear, easy-to-find, and comprehensive sections for:
-        *   The school's full dress code policy.
-        *   An up-to-date listing of all sports teams by season.
-    *   **Consistent Information:** Ensure the information provided via the chatbot, website, and handbook is consistent and current.
+#### Information to Add to the School Website / Knowledge Base:
+
+To address the identified content gaps and enable the chatbot to provide more satisfying answers, the following information should be explicitly added or enhanced on the Crescent School website/Family Handbook, making it accessible for the chatbot's knowledge base:
+
+1.  **Detailed Dress Code Policy:** Create a clear, comprehensive section outlining the specific dress code rules for all relevant school divisions and occasions.
+2.  **Comprehensive Sports Program Information:** Dedicate pages or sections for athletics that clearly list all sports offered per season (Fall, Winter, Spring), along with brief descriptions or links to team-specific details.
+3.  **Explicit Attendance Policy:** Publish a detailed, easily navigable section on attendance policies, including procedures for reporting absences, excused vs. unexcused absences, and truancy policies.
+4.  **Consolidated Food Services Information:** Ensure a single, comprehensive source for all food-related queries, covering daily lunch offerings, the SAGE program philosophy, any snack options, dietary accommodations, and general food service operational details.
+5.  **Extracurricular Activities Directory:** Create dedicated pages or a detailed directory for key clubs and teams (e.g., Robotics Team, Debating Club, Arts groups), outlining their mission, activities, faculty advisors, and how students can get involved.
+6.  **"Crescent School Spirit and Culture" Page:** Develop content that actively describes and conveys the school's unique spirit, traditions, community feel, and overall student experience.
+7.  **Clear School Mission Statement:** Ensure the full, explicit text of the school's mission statement is prominently displayed and easily retrievable.

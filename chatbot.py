@@ -30,12 +30,13 @@ def get_relevant_documents(query, db):
         result = db.query(query_texts=[query], n_results=3)
         if result['documents'] and len(result['documents'][0]) > 0:
             passages = result['documents'][0]
+            metadatas = result['metadatas'][0] if 'metadatas' in result else []
             print_passages(passages)
-            return "\n\n".join(passages)
-        return "No relevant information found."
+            return "\n\n".join(passages), metadatas
+        return "No relevant information found.", []
     except Exception as e:
         print(f"Error querying database: {e}")
-        return "Error retrieving documents."
+        return "Error retrieving documents.", []
 
 def make_prompt(query, relevant_passage):
     escaped = relevant_passage.replace("'", "").replace('"', "").replace("\n", " ")
@@ -91,7 +92,7 @@ def main():
             print(f"Query error: {e}")
             continue
 
-        passage = get_relevant_documents(query, db)
+        passage, metadatas = get_relevant_documents(query, db)
         print(f"\nPassage length: {len(passage)} characters")
         
         if passage == "No relevant information found." or len(passage) < 10:
@@ -117,6 +118,12 @@ def main():
             
             if any(phrase in response_text.lower() for phrase in negative_phrases):
                 response_text = "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?"
+            else:
+                # Add source link if available
+                if metadatas:
+                    sources = list(set([m.get('source') for m in metadatas if m and m.get('source')]))
+                    if sources:
+                        response_text += f"\n\nSource: {sources[0]}"
 
             print("\nAnswer:", response_text, "\n")
         except Exception as e:

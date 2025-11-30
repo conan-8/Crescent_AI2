@@ -37,8 +37,28 @@ const generateResponse = async (incomingChatLi) => {
         if (!response.ok) throw new Error(data.error || "Server Error");
 
         // Update the "Thinking..." text with the real answer
-        messageElement.textContent = data.response;
-        
+        // Helper to format text: escape HTML, linkify URLs, handle newlines
+        const formatMessage = (text) => {
+            // 1. Escape HTML to prevent XSS (basic)
+            let safeText = text.replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+            // 2. Linkify URLs
+            // Regex to find URLs (starting with http:// or https://)
+            safeText = safeText.replace(
+                /(https?:\/\/[^\s]+)/g,
+                '<a href="$1" target="_blank" style="color: #00401A; text-decoration: underline;">$1</a>'
+            );
+
+            // 3. Handle newlines
+            return safeText.replace(/\n/g, "<br>");
+        };
+
+        messageElement.innerHTML = formatMessage(data.response);
+
     } catch (error) {
         // Handle errors (like if the server isn't running)
         messageElement.textContent = "Oops! I couldn't connect to the server. Make sure 'python server.py' is running.";
@@ -51,12 +71,12 @@ const generateResponse = async (incomingChatLi) => {
 
 const handleChat = () => {
     userMessage = chatInput.value.trim(); // Get user entered message
-    if(!userMessage) return;
+    if (!userMessage) return;
 
     // Append the user's message to the chatbox
     chatbox.appendChild(createChatLi(userMessage, "outgoing"));
     chatbox.scrollTo(0, chatbox.scrollHeight);
-    
+
     // Clear the input area
     chatInput.value = "";
 
@@ -72,7 +92,7 @@ const handleChat = () => {
 // Handle "Enter" key press
 chatInput.addEventListener("keydown", (e) => {
     // If Enter key is pressed without Shift key and the window width is greater than 800px
-    if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
         e.preventDefault();
         handleChat();
     }
