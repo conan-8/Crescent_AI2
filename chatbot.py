@@ -115,7 +115,8 @@ def main():
         try:
             answer = client.models.generate_content(
                 model="gemini-2.5-flash",
-                contents=prompt
+                contents=prompt,
+                config=types.GenerateContentConfig(temperature=0.5)
             )
             response_text = answer.text.strip()
             

@@ -9,6 +9,7 @@ import datetime
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client
+from google.genai import types
 
 app = Flask(__name__)
 
@@ -59,7 +60,8 @@ def contextualize_query(history, latest_query):
     try:
         response = client.models.generate_content(
             model="gemini-2.5-flash",
-            contents=prompt
+            contents=prompt,
+            config=types.GenerateContentConfig(temperature=0.5)
         )
         return response.text.strip()
     except Exception as e:
@@ -111,7 +113,8 @@ def chat_endpoint():
                 # 4. Generate Answer with Gemini
                 answer = client.models.generate_content(
                     model="gemini-2.5-flash",
-                    contents=prompt
+                    contents=prompt,
+                    config=types.GenerateContentConfig(temperature=0.5)
                 )
                 
                 response_text = answer.text.strip()
