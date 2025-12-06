@@ -5,8 +5,9 @@ const sendChatBtn = document.querySelector(".chat-input span");
 const chatbox = document.querySelector(".chatbox");
 
 let userMessage = null;
+let chatHistory = []; // Store conversation history
 // The address of your local Python server
-const API_URL = " https://polydisperse-vaguest-makeda.ngrok-free.dev/chat";
+const API_URL = "http://127.0.0.1:5000/chat";
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
@@ -29,7 +30,8 @@ const generateResponse = async (incomingChatLi) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                message: userMessage
+                message: userMessage,
+                history: chatHistory // Send history to server
             })
         });
 
@@ -59,6 +61,9 @@ const generateResponse = async (incomingChatLi) => {
 
         messageElement.innerHTML = formatMessage(data.response);
 
+        // Add AI response to history
+        chatHistory.push({ role: "model", content: data.response });
+
     } catch (error) {
         // Handle errors (like if the server isn't running)
         messageElement.textContent = "Oops! I couldn't connect to the server. Make sure 'python server.py' is running.";
@@ -76,6 +81,9 @@ const handleChat = () => {
     // Append the user's message to the chatbox
     chatbox.appendChild(createChatLi(userMessage, "outgoing"));
     chatbox.scrollTo(0, chatbox.scrollHeight);
+
+    // Add user message to history
+    chatHistory.push({ role: "user", content: userMessage });
 
     // Clear the input area
     chatInput.value = "";

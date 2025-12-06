@@ -34,6 +34,38 @@ except Exception as e:
     print(f"Error loading conversations database: {e}")
     conversations_db = None
 
+def contextualize_query(history, latest_query):
+    if not history:
+        return latest_query
+    
+    history_text = ""
+    # Use only the last 3 turns to keep context focused and reduce token usage
+    for msg in history[-6:]: 
+        role = "User" if msg['role'] == "user" else "AI"
+        history_text += f"{role}: {msg['content']}\n"
+    
+    prompt = f"""
+    Given the following conversation history and a follow-up question, rephrase the follow-up question to be a standalone question that includes all necessary context.
+    If the follow-up question is already self-contained, return it unchanged.
+    
+    Chat History:
+    {history_text}
+    
+    Follow-up Question: {latest_query}
+    
+    Standalone Question:
+    """
+    
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
+        return response.text.strip()
+    except Exception as e:
+        print(f"Error contextualizing query: {e}")
+        return latest_query
+
 @app.route('/chat', methods=['POST'])
 def chat_endpoint():
     # Safety check
@@ -43,6 +75,7 @@ def chat_endpoint():
     # Get message from Frontend
     data = request.json
     user_query = data.get('message')
+    history = data.get('history', []) # Get history, default to empty list
 
     if not user_query:
         return jsonify({"error": "No message provided"}), 400
@@ -58,16 +91,22 @@ def chat_endpoint():
             response_text = "Hello! I am an AI assistant for Crescent School. How can I help you today with information about the school?"
             print(f"[AI Response]: {response_text}")
         else:
-            # 1. Retrieve Context
-            passage, metadatas = get_relevant_documents(user_query, db)
+            # 0. Contextualize Query (Rewrite if needed)
+            search_query = user_query
+            if history:
+                search_query = contextualize_query(history, user_query)
+                print(f"[Rewritten Query]: {search_query}")
+
+            # 1. Retrieve Context using the REWRITTEN query
+            passage, metadatas = get_relevant_documents(search_query, db)
             
             # 2. Validation
             if passage == "No relevant information found." or len(passage) < 10:
                 response_text = "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?"
                 print(f"[AI Response]: {response_text}")
             else:
-                # 3. Construct Prompt
-                prompt = make_prompt(user_query, passage)
+                # 3. Construct Prompt (Pass ORIGINAL query to keep flow natural, but use passage from rewritten query)
+                prompt = make_prompt(user_query, passage, history)
 
                 # 4. Generate Answer with Gemini
                 answer = client.models.generate_content(

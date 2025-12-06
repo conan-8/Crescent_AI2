@@ -38,12 +38,23 @@ def get_relevant_documents(query, db):
         print(f"Error querying database: {e}")
         return "Error retrieving documents.", []
 
-def make_prompt(query, relevant_passage):
+def make_prompt(query, relevant_passage, history=[]):
     escaped = relevant_passage.replace("'", "").replace('"', "").replace("\n", " ")
+    
+    history_text = ""
+    if history:
+        history_text = "HISTORY:\n"
+        for msg in history:
+            role = "User" if msg['role'] == "user" else "AI"
+            history_text += f"{role}: {msg['content']}\n"
+        history_text += "\n"
+
     return f"""
 You are a helpful assistant that answers questions using the reference passage below.
-Please keep your response short, concise, and accurate
+Please keep your response short, concise, and accurate.
+Use the conversation history to understand context if needed.
 
+{history_text}
 QUESTION: {query}
 PASSAGE: {escaped}
 
