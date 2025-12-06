@@ -6,7 +6,7 @@ const chatbox = document.querySelector(".chatbox");
 
 let userMessage = null;
 // The address of your local Python server
-const API_URL = "https://8f8887c17017.ngrok-free.app/chat";
+const API_URL = " https://polydisperse-vaguest-makeda.ngrok-free.dev/chat";
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
@@ -101,3 +101,63 @@ chatInput.addEventListener("keydown", (e) => {
 // Event Listeners
 sendChatBtn.addEventListener("click", handleChat);
 chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+
+// --- Resizing Logic ---
+
+// 1. Create and inject the resize handle
+const resizeHandle = document.createElement("div");
+resizeHandle.classList.add("resize-handle");
+chatbot.appendChild(resizeHandle);
+
+// 2. Variables to track dragging
+let isResizing = false;
+let startX, startY, startWidth, startHeight;
+
+// 3. Mouse Down Event
+resizeHandle.addEventListener("mousedown", (e) => {
+    e.preventDefault(); // Prevent text selection
+    isResizing = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    startWidth = parseInt(document.defaultView.getComputedStyle(chatbot).width, 10);
+    startHeight = parseInt(document.defaultView.getComputedStyle(chatbot).height, 10);
+
+    // Disable transition during resize for smooth dragging
+    chatbot.style.transition = 'none';
+
+    document.addEventListener("mousemove", doDrag);
+    document.addEventListener("mouseup", stopDrag);
+});
+
+// 4. Mouse Move Event (The actual resizing)
+const doDrag = (e) => {
+    if (!isResizing) return;
+
+    // Calculate the new dimensions
+    // Since we are dragging the top-left corner:
+    // Moving left (negative dx) increases width
+    // Moving up (negative dy) increases height
+    const dx = startX - e.clientX;
+    const dy = startY - e.clientY;
+
+    const newWidth = startWidth + dx;
+    const newHeight = startHeight + dy;
+
+    // Apply new dimensions with minimum limits
+    if (newWidth > 300) { // Min width
+        chatbot.style.width = `${newWidth}px`;
+    }
+    if (newHeight > 400) { // Min height
+        chatbot.style.height = `${newHeight}px`;
+    }
+};
+
+// 5. Mouse Up Event (Stop resizing)
+const stopDrag = () => {
+    isResizing = false;
+    // Re-enable transition (optional, might want to keep it off if user resizes often)
+    chatbot.style.transition = 'all 0.1s ease';
+
+    document.removeEventListener("mousemove", doDrag);
+    document.removeEventListener("mouseup", stopDrag);
+};
