@@ -51,8 +51,9 @@ def make_prompt(query, relevant_passage, history=[]):
 
     return f"""
 You are a helpful assistant that answers questions using the reference passage below.
-Please keep your response short, concise, and accurate.
+Please keep your response short, concise, and accurate. Make sure to include all relevant details in your response
 Use the conversation history to understand context if needed.
+Make your response natural.
 
 {history_text}
 QUESTION: {query}

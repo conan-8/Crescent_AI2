@@ -61,7 +61,7 @@ def contextualize_query(history, latest_query):
         response = client.models.generate_content(
             model="gemini-2.5-flash",
             contents=prompt,
-            config=types.GenerateContentConfig(temperature=0.5)
+            config=types.GenerateContentConfig(temperature=0)
         )
         return response.text.strip()
     except Exception as e:
