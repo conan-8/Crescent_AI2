@@ -4,10 +4,13 @@ from google import genai
 from google.genai import types
 import os
 import sys
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Configuration
-API_KEY = "AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI"
-DB_PATH = r"C:\crescent_ai_source"
+API_KEY = os.environ.get("GEMINI_API_KEY")
+DB_PATH = os.environ.get("CHROMA_DB_PATH")
 COLLECTION_NAME = "conversations"
 MODEL_NAME = "gemini-2.5-flash"
 

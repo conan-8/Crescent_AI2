@@ -85,10 +85,10 @@ Bad extraction (empty):
 
 def get_chroma_db(name):
         google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
-            api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI",
+            api_key=os.environ.get("GEMINI_API_KEY"),
             model_name="gemini-embedding-001"
         )
-        chroma_client = chromadb.PersistentClient(path=r"C:\crescent_ai_source") # u will have to change this for ur local db or if u have never runned this script before
+        chroma_client = chromadb.PersistentClient(path=os.environ.get("CHROMA_DB_PATH")) # u will have to change this for ur local db or if u have never runned this script before
         collection = chroma_client.get_or_create_collection(name=name, embedding_function=google_ef)
         return collection
 
