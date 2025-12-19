@@ -1,8 +1,8 @@
 /* Position the chat button in the bottom right corner */
 .chatbot-toggler {
-    position: fixed;
-    bottom: 30px;
-    right: 35px;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
     outline: none;
     border: none;
     height: 50px;
@@ -21,9 +21,9 @@
 
 /* The Chat Window */
 .chatbot {
-    position: fixed;
-    right: 35px;
-    bottom: 90px;
+    position: absolute;
+    right: 5px;
+    bottom: 65px;
     width: 420px;
     height: 600px;
     /* Default height */

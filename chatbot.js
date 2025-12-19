@@ -108,7 +108,11 @@ chatInput.addEventListener("keydown", (e) => {
 
 // Event Listeners
 sendChatBtn.addEventListener("click", handleChat);
-chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+chatbotToggler.addEventListener("click", () => {
+    const isShowing = document.body.classList.toggle("show-chatbot");
+    // Notify parent window of toggle
+    window.parent.postMessage({ type: "toggle", showing: isShowing }, "*");
+});
 
 // --- Resizing Logic ---
 
@@ -158,6 +162,13 @@ const doDrag = (e) => {
     if (newHeight > 400) { // Min height
         chatbot.style.height = `${newHeight}px`;
     }
+
+    // Notify parent to resize the iframe
+    window.parent.postMessage({
+        type: "resize",
+        width: chatbot.style.width,
+        height: chatbot.style.height
+    }, "*");
 };
 
 // 5. Mouse Up Event (Stop resizing)
