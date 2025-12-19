@@ -61,7 +61,9 @@ def contextualize_query(history, latest_query):
         response = client.models.generate_content(
             model="gemini-2.5-flash",
             contents=prompt,
-            config=types.GenerateContentConfig(temperature=0)
+            config=types.GenerateContentConfig(
+                temperature=0
+            )
         )
         return response.text.strip()
     except Exception as e:
@@ -114,7 +116,15 @@ def chat_endpoint():
                 answer = client.models.generate_content(
                     model="gemini-2.5-flash",
                     contents=prompt,
-                    config=types.GenerateContentConfig(temperature=0.5)
+                    config=types.GenerateContentConfig(
+                        temperature=0.5,
+                        safety_settings=[
+                            types.SafetySetting(
+                                category=types.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+                                threshold=types.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+                            ),
+                        ]
+                    )
                 )
                 
                 response_text = answer.text.strip()

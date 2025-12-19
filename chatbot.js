@@ -7,7 +7,7 @@ const chatbox = document.querySelector(".chatbox");
 let userMessage = null;
 let chatHistory = []; // Store conversation history
 // The address of your local Python server
-const API_URL = "https://f69259f5e679.ngrok-free.app/chat";
+const API_URL = "http://127.0.0.1:5000/chat";
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className

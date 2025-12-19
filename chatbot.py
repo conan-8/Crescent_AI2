@@ -1,18 +1,21 @@
+import os
 import chromadb
 import chromadb.utils.embedding_functions as embedding_functions
 from google import genai
 from google.genai import types
+from dotenv import load_dotenv
 
-client = genai.Client(api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI")
+load_dotenv()
+
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 def get_chroma_db(name):
-    # ADD THIS: Same embedding function as your crawl script
     google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
-        api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI",
+        api_key=os.environ.get("GEMINI_API_KEY"),
         model_name="gemini-embedding-001",
     )
     
-    chroma_client = chromadb.PersistentClient(path=r"C:\crescent_ai_source")
+    chroma_client = chromadb.PersistentClient(path=os.environ.get("CHROMA_DB_PATH"))
     collection = chroma_client.get_or_create_collection(
         name=name, 
         embedding_function=google_ef  # ADD THIS
@@ -50,10 +53,10 @@ def make_prompt(query, relevant_passage, history=[]):
         history_text += "\n"
 
     return f"""
-You are a helpful assistant that answers questions using the reference passage below.
+You are a helpful, polite, and neutral assistant that answers questions using the reference passage below.
+If the user asks about personal opinions, politics, or inappropriate topics, politely decline
 Please keep your response short, concise, and accurate. Make sure to include all relevant details in your response
 Use the conversation history to understand context if needed.
-Make your response natural.
 
 {history_text}
 QUESTION: {query}
