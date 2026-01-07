@@ -3,6 +3,8 @@ import os
 import chromadb
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 import uuid
 import datetime
 
@@ -12,8 +14,19 @@ from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client
 from google.genai import types
 
 app = Flask(__name__)
-
 CORS(app) # Allow your HTML website to talk to this Python script
+
+# Initialize Rate Limiter
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per day", "50 per hour"],
+    storage_uri="memory://",
+)
+
+@app.errorhandler(429)
+def ratelimit_handler(e):
+    return jsonify({"response": "You have sent too many messages recently. Please wait a minute before trying again."}), 200
 
 print("--- Crescent AI Server Starting ---")
 
@@ -71,6 +84,7 @@ def contextualize_query(history, latest_query):
         return latest_query
 
 @app.route('/chat', methods=['POST'])
+@limiter.limit("5 per minute")
 def chat_endpoint():
     # Safety check
     if not db:

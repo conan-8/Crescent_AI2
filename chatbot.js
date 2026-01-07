@@ -36,6 +36,12 @@ const generateResponse = async (incomingChatLi) => {
         });
 
         const data = await response.json();
+
+        // Handle Rate Limit specifically
+        if (response.status === 429) {
+            throw new Error("You have sent too many messages recently. Please wait a minute before trying again.");
+        }
+
         if (!response.ok) throw new Error(data.error || "Server Error");
 
         // Update the "Thinking..." text with the real answer
@@ -65,8 +71,14 @@ const generateResponse = async (incomingChatLi) => {
         chatHistory.push({ role: "model", content: data.response });
 
     } catch (error) {
-        // Handle errors (like if the server isn't running)
-        messageElement.textContent = "Oops! I couldn't connect to the server. Make sure 'python server.py' is running.";
+        // Handle errors
+        // If it's our custom rate limit error (or other server error msg), show that.
+        // Otherwise, show generic connection error.
+        if (error.message && (error.message.includes("429") || error.message.includes("Server Error"))) {
+            messageElement.textContent = error.message;
+        } else {
+            messageElement.textContent = "Oops! I couldn't connect to the server. Make sure 'python server.py' is running.";
+        }
         messageElement.style.color = "#cc0000";
     } finally {
         // Scroll to bottom to see the new message
@@ -99,8 +111,8 @@ const handleChat = () => {
 
 // Handle "Enter" key press
 chatInput.addEventListener("keydown", (e) => {
-    // If Enter key is pressed without Shift key and the window width is greater than 800px
-    if (e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
+    // If Enter key is pressed without Shift key
+    if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
         handleChat();
     }
