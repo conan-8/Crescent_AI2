@@ -185,6 +185,7 @@ def chat_endpoint():
         return jsonify({"response": "I encountered an internal error."}), 500
 
 if __name__ == '__main__':
-    print("Server running on http://127.0.0.1:5000")
-    print("Keep this window OPEN while using the chatbot!")
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    print(f"Server running on port {port}")
+    # Host must be 0.0.0.0 for Render to detect the open port
+    app.run(host='0.0.0.0', port=port)
