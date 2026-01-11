@@ -7,18 +7,87 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import uuid
 import datetime
+import hashlib
+import time
+from collections import defaultdict
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client
 from google.genai import types
 
+# --- Client Fingerprinting ---
+def get_client_fingerprint():
+    """Generate a unique fingerprint for a client based on request headers."""
+    ip = request.remote_addr or ''
+    user_agent = request.headers.get('User-Agent', '')
+    accept_language = request.headers.get('Accept-Language', '')
+    accept_encoding = request.headers.get('Accept-Encoding', '')
+
+    fingerprint_data = f"{ip}|{user_agent}|{accept_language}|{accept_encoding}"
+    fingerprint_hash = hashlib.sha256(fingerprint_data.encode()).hexdigest()[:16]
+    return fingerprint_hash
+
+# --- Spam Detection ---
+# Store message history per fingerprint: {fingerprint: [(timestamp, message), ...]}
+spam_tracker = defaultdict(list)
+
+def cleanup_old_messages(fingerprint, max_age_seconds=300):
+    """Remove messages older than max_age_seconds (default 5 minutes)."""
+    current_time = time.time()
+    spam_tracker[fingerprint] = [
+        (ts, msg) for ts, msg in spam_tracker[fingerprint]
+        if current_time - ts < max_age_seconds
+    ]
+
+def is_gibberish(message):
+    """Check if message is gibberish (less than 50% alphanumeric, only for messages > 10 chars)."""
+    if len(message) <= 10:
+        return False
+    alphanumeric_count = sum(1 for c in message if c.isalnum())
+    return alphanumeric_count / len(message) < 0.5
+
+def check_spam(fingerprint, message):
+    """
+    Check if message is spam. Returns (is_spam, spam_type) tuple.
+    spam_type: 'duplicate', 'too_fast', 'gibberish', or None
+    """
+    current_time = time.time()
+
+    # Clean up old entries first
+    cleanup_old_messages(fingerprint)
+
+    # Check for gibberish
+    if is_gibberish(message):
+        return True, 'gibberish'
+
+    # Check for duplicate messages (same message 2+ times within 5 minutes)
+    message_lower = message.lower().strip()
+    duplicate_count = sum(1 for ts, msg in spam_tracker[fingerprint] if msg.lower().strip() == message_lower)
+    if duplicate_count >= 2:
+        return True, 'duplicate'
+
+    # Check for rapid-fire messaging (10+ messages within 60 seconds)
+    recent_messages = [ts for ts, msg in spam_tracker[fingerprint] if current_time - ts < 60]
+    if len(recent_messages) >= 10:
+        return True, 'too_fast'
+
+    # Not spam - record this message
+    spam_tracker[fingerprint].append((current_time, message))
+    return False, None
+
+SPAM_RESPONSES = {
+    'duplicate': "Please don't send the same message repeatedly.",
+    'too_fast': "You're sending messages too quickly. Please slow down.",
+    'gibberish': "Please enter a valid question about Crescent School."
+}
+
 app = Flask(__name__)
 CORS(app) # Allow your HTML website to talk to this Python script
 
-# Initialize Rate Limiter
+# Initialize Rate Limiter (uses client fingerprint instead of just IP)
 limiter = Limiter(
-    get_remote_address,
+    get_client_fingerprint,
     app=app,
     default_limits=["200 per day", "50 per hour"],
     storage_uri="memory://",
@@ -99,6 +168,13 @@ def chat_endpoint():
         return jsonify({"error": "No message provided"}), 400
 
     print(f"\n[User Query]: {user_query}")
+
+    # --- Spam Detection ---
+    fingerprint = get_client_fingerprint()
+    is_spam, spam_type = check_spam(fingerprint, user_query)
+    if is_spam:
+        print(f"[Spam Detected]: {spam_type} from {fingerprint}")
+        return jsonify({"response": SPAM_RESPONSES[spam_type]}), 200
 
     try:
         # --- GREETING HANDLING ---
