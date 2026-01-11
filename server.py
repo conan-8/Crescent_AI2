@@ -119,7 +119,7 @@ def chat_endpoint():
             passage, metadatas = get_relevant_documents(search_query, db)
             
             # 2. Validation
-            if passage == "No relevant information found." or len(passage) < 10:
+            if passage == "No relevant information found.":
                 response_text = "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?"
                 print(f"[AI Response]: {response_text}")
             else:
