@@ -45,24 +45,86 @@ const generateResponse = async (incomingChatLi) => {
         if (!response.ok) throw new Error(data.error || "Server Error");
 
         // Update the "Thinking..." text with the real answer
-        // Helper to format text: escape HTML, linkify URLs, handle newlines
+        // Helper to format text: escape HTML, parse markdown, linkify URLs, handle newlines
         const formatMessage = (text) => {
-            // 1. Escape HTML to prevent XSS (basic)
+            // 1. Escape HTML to prevent XSS (must happen first)
             let safeText = text.replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
                 .replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#039;");
 
-            // 2. Linkify URLs
-            // Regex to find URLs (starting with http:// or https://)
+            // 2. Parse markdown - block level elements (headers, lists)
+            const lines = safeText.split('\n');
+            const processedLines = [];
+            let inUnorderedList = false;
+            let inOrderedList = false;
+
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i];
+
+                // Check for headers (## text) - convert to h3 as specified
+                const headerMatch = line.match(/^(#{1,6})\s+(.+)$/);
+                if (headerMatch) {
+                    if (inUnorderedList) { processedLines.push('</ul>'); inUnorderedList = false; }
+                    if (inOrderedList) { processedLines.push('</ol>'); inOrderedList = false; }
+                    processedLines.push(`<h3>${headerMatch[2]}</h3>`);
+                    continue;
+                }
+
+                // Check for unordered list items (- item or * item at start of line)
+                const unorderedMatch = line.match(/^[-*]\s+(.+)$/);
+                if (unorderedMatch) {
+                    if (inOrderedList) { processedLines.push('</ol>'); inOrderedList = false; }
+                    if (!inUnorderedList) { processedLines.push('<ul>'); inUnorderedList = true; }
+                    processedLines.push(`<li>${unorderedMatch[1]}</li>`);
+                    continue;
+                }
+
+                // Check for ordered list items (1. item, 2. item, etc.)
+                const orderedMatch = line.match(/^\d+\.\s+(.+)$/);
+                if (orderedMatch) {
+                    if (inUnorderedList) { processedLines.push('</ul>'); inUnorderedList = false; }
+                    if (!inOrderedList) { processedLines.push('<ol>'); inOrderedList = true; }
+                    processedLines.push(`<li>${orderedMatch[1]}</li>`);
+                    continue;
+                }
+
+                // Regular line - close any open lists
+                if (inUnorderedList) { processedLines.push('</ul>'); inUnorderedList = false; }
+                if (inOrderedList) { processedLines.push('</ol>'); inOrderedList = false; }
+                processedLines.push(line);
+            }
+
+            // Close any remaining open lists
+            if (inUnorderedList) processedLines.push('</ul>');
+            if (inOrderedList) processedLines.push('</ol>');
+
+            safeText = processedLines.join('\n');
+
+            // 3. Parse markdown - inline elements
+            // Bold (**text**) - must be parsed before italics
+            safeText = safeText.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            // Italics (*text*) - single asterisks around text
+            safeText = safeText.replace(/\*([^*\n]+?)\*/g, '<em>$1</em>');
+
+            // 4. Linkify URLs (after markdown to avoid conflicts)
             safeText = safeText.replace(
-                /(https?:\/\/[^\s]+)/g,
+                /(https?:\/\/[^\s<]+)/g,
                 '<a href="$1" target="_blank" style="color: #00401A; text-decoration: underline;">$1</a>'
             );
 
-            // 3. Handle newlines
-            return safeText.replace(/\n/g, "<br>");
+            // 5. Handle newlines
+            safeText = safeText.replace(/\n/g, "<br>");
+            // Clean up <br> after/before block elements
+            safeText = safeText.replace(/<\/h3><br>/g, '</h3>');
+            safeText = safeText.replace(/<\/li><br>/g, '</li>');
+            safeText = safeText.replace(/<\/ul><br>/g, '</ul>');
+            safeText = safeText.replace(/<\/ol><br>/g, '</ol>');
+            safeText = safeText.replace(/<ul><br>/g, '<ul>');
+            safeText = safeText.replace(/<ol><br>/g, '<ol>');
+
+            return safeText;
         };
 
         messageElement.innerHTML = formatMessage(data.response);
