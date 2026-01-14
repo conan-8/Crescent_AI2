@@ -1,9 +1,11 @@
+import os
 import chromadb
 from chromadb import EmbeddingFunction, Documents, Embeddings
 import chromadb.utils.embedding_functions as embedding_functions
 import asyncio
 import crawl4ai
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode, LLMExtractionStrategy, LLMConfig
+from crawl4ai.extraction_strategy import CosineStrategy
 from google import genai
 from google.genai import types
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -181,10 +183,137 @@ async def crawlinfo(db):
     else:
         print("No successful documents to add.")
 
+# Enrollment URLs for LLM-free crawling
+enrollment_urls = [
+    "https://www.crescentschool.org/admissions",
+    "https://www.crescentschool.org/admissions/how-to-apply",
+    "https://www.crescentschool.org/admissions/tuition-and-fees",
+    "https://www.crescentschool.org/admissions/open-house",
+    "https://www.crescentschool.org/admissions/faqs"
+]
+
+
+async def crawl_enrollment(db):
+    """
+    Crawl enrollment pages using LLM-free CosineStrategy.
+    This is faster and cheaper than LLM-based extraction.
+    """
+    print("Starting enrollment crawl (LLM-free)...")
+
+    # CosineStrategy for semantic content extraction without LLM
+    extraction_strategy = CosineStrategy(
+        semantic_filter="enrollment admission tuition application fees apply school",
+        word_count_threshold=50,  # Filter out very short chunks
+        sim_threshold=0.3,        # Similarity threshold for clustering
+        top_k=10,                 # Get top 10 relevant clusters per page
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
+    )
+
+    # Configure crawler with content cleaning (no nav/footer)
+    run_conf = CrawlerRunConfig(
+        cache_mode=CacheMode.BYPASS,
+        extraction_strategy=extraction_strategy,
+        excluded_tags=["nav", "footer", "header", "aside", "script", "style"],
+        remove_overlay_elements=True
+    )
+
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000,
+        chunk_overlap=100,
+        length_function=len
+    )
+
+    doc_list = []
+    id_list = []
+    metadata_list = []
+
+    async with AsyncWebCrawler() as crawler:
+        for i, url in enumerate(enrollment_urls):
+            print(f"\n[Crawling {i+1}/{len(enrollment_urls)}] {url}")
+
+            result = await crawler.arun(url, config=run_conf)
+
+            if result.success:
+                # CosineStrategy returns extracted content as JSON string
+                extracted_text = ""
+
+                if result.extracted_content:
+                    try:
+                        # Parse the JSON result from CosineStrategy
+                        data = json.loads(result.extracted_content)
+
+                        # CosineStrategy returns a list of clusters
+                        if isinstance(data, list):
+                            # Combine all cluster content
+                            text_parts = []
+                            for cluster in data:
+                                if isinstance(cluster, dict):
+                                    # Get the content from each cluster
+                                    content = cluster.get("content", "") or cluster.get("text", "")
+                                    if content:
+                                        text_parts.append(content)
+                                elif isinstance(cluster, str):
+                                    text_parts.append(cluster)
+                            extracted_text = "\n\n".join(text_parts)
+                        elif isinstance(data, dict):
+                            extracted_text = data.get("content", "") or data.get("text", "") or str(data)
+                        else:
+                            extracted_text = str(data)
+                    except json.JSONDecodeError:
+                        # If not valid JSON, use the raw extracted content
+                        extracted_text = result.extracted_content
+
+                # Fallback to markdown if no extracted content
+                if not extracted_text and result.markdown:
+                    extracted_text = result.markdown
+
+                if extracted_text and len(extracted_text.strip()) > 50:
+                    # Split the extracted text into chunks
+                    chunks = text_splitter.split_text(extracted_text)
+                    print(f"[OK] Extracted and split into {len(chunks)} chunks.")
+
+                    for j, chunk in enumerate(chunks):
+                        doc_list.append(chunk)
+                        chunk_id = f"enrollment_{url}_chunk_{j}"
+                        id_list.append(chunk_id)
+                        metadata_list.append({"source": url, "type": "enrollment"})
+                else:
+                    print(f"[WARN] No substantial content extracted for {url}")
+            else:
+                print(f"[ERROR] Crawl failed for {url}: {result.error_message}")
+
+    # Add all chunks to ChromaDB in a single batch
+    if doc_list:
+        print(f"\nEnrollment crawl complete. Adding {len(doc_list)} total document chunks to ChromaDB...")
+        db.add(
+            ids=id_list,
+            documents=doc_list,
+            metadatas=metadata_list
+        )
+        print("Done.")
+    else:
+        print("No successful documents to add for enrollment.")
+
+
 def main():
-        db = get_chroma_db("family_handbook_1")
-        asyncio.run(crawlinfo(db))
-        print(db.count())
+    # Build handbook database (existing LLM-based crawling)
+    handbook_db = get_chroma_db("family_handbook_1")
+
+    # Build enrollment database (new LLM-free crawling)
+    enrollment_db = get_chroma_db("enrollment_info")
+
+    # Run both crawlers
+    print("=" * 60)
+    print("BUILDING FAMILY HANDBOOK DATABASE (LLM-based)")
+    print("=" * 60)
+    asyncio.run(crawlinfo(handbook_db))
+    print(f"\nHandbook database document count: {handbook_db.count()}")
+
+    print("\n" + "=" * 60)
+    print("BUILDING ENROLLMENT DATABASE (LLM-free)")
+    print("=" * 60)
+    asyncio.run(crawl_enrollment(enrollment_db))
+    print(f"\nEnrollment database document count: {enrollment_db.count()}")
 
 if __name__ == "__main__":
         main()
