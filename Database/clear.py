@@ -5,8 +5,8 @@ chroma_client = chromadb.PersistentClient(path=r"C:\crescent_ai_source")
 
 # Delete the old collection
 try:
-    chroma_client.delete_collection(name="conversations")
-    print("✓ Successfully deleted 'conversations' collection")
+    chroma_client.delete_collection(name="enrollment_info")
+    print("✓ Successfully deleted 'enrollment_info' collection")
 except Exception as e:
     print(f"Error deleting collection: {e}")
 

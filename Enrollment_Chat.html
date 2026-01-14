@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)https://www.crescentschool.org/ -->
+<html lang="en"
+    class="body normal js no-mobile desktop no-ie chrome chrome142 root-section w-1528 gt-240 gt-320 gt-480 gt-640 gt-768 gt-800 gt-1024 gt-1280 gt-1440 lt-1680 lt-1920 no-portrait landscape gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions no-touch retina fontface domloaded"
+    id="index-page">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Enrollment Information - Crescent School</title>
+    <!-- Just including essential styles for layout - Assuming Main Page styles are present or linked generally 
+         For simplicity in this standalone file, I will keep standard metas but rely on the chatbot largely.
+         In a real scenario, this would duplicate the massive Main Page.html head content or extend it.
+         For this task, I will clone the Main Page structure but pointing to the new iframe.
+    -->
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #00401A;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Crescent School Enrollment Information</h1>
+    <p>This page demonstrates the specialized Enrollment Chatbot.</p>
+    <p>Click the chat bubble in the bottom right to ask about admissions, tuition, and fees.</p>
+
+    <iframe id="chatbot-iframe" src="enrollment_chatbot_iframe.html"
+        style="position: fixed; bottom: 30px; right: 35px; width: 60px; height: 60px; border: none; z-index: 10000; background: transparent; transition: all 0.3s ease;"></iframe>
+
+    <script>
+        const iframe = document.getElementById('chatbot-iframe');
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'toggle') {
+                if (event.data.showing) {
+                    // When showing chatbot, expand iframe to cover the chatbot window area
+                    // Default width 420px + some buffer, height 600px + toggler height
+                    iframe.style.width = '450px';
+                    iframe.style.height = '680px';
+                } else {
+                    // When hidden, shrink back to toggler size
+                    iframe.style.width = '60px';
+                    iframe.style.height = '60px';
+                }
+            } else if (event.data.type === 'resize') {
+                // Adjust iframe size based on internal chatbot resizing
+                const newWidth = parseInt(event.data.width) + 30;
+                const newHeight = parseInt(event.data.height) + 80;
+                iframe.style.width = newWidth + 'px';
+                iframe.style.height = newHeight + 'px';
+            }
+        });
+    </script>
+</body>
+
+</html>

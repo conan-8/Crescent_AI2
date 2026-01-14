@@ -117,6 +117,15 @@ except Exception as e:
     print(f"Error loading conversations database: {e}")
     conversations_db = None
 
+# Initialize Enrollment Database
+try:
+    enrollment_db = get_chroma_db("enrollment_info")
+    count_enroll = enrollment_db.count()
+    print(f"Enrollment database loaded successfully. Documents indexed: {count_enroll}")
+except Exception as e:
+    print(f"CRITICAL ERROR loading enrollment database: {e}")
+    enrollment_db = None
+
 def contextualize_query(history, latest_query):
     if not history:
         return latest_query
@@ -258,6 +267,115 @@ def chat_endpoint():
 
     except Exception as e:
         print(f"Error processing request: {e}")
+        return jsonify({"response": "I encountered an internal error."}), 500
+
+@app.route('/enrollment-chat', methods=['POST'])
+@limiter.limit("5 per minute")
+def enrollment_chat_endpoint():
+    # Safety check
+    if not enrollment_db:
+        return jsonify({"response": "Error: Enrollment database connection failed. Check server console."}), 500
+
+    # Get message from Frontend
+    data = request.json
+    user_query = data.get('message')
+    history = data.get('history', []) 
+
+    if not user_query:
+        return jsonify({"error": "No message provided"}), 400
+
+    print(f"\n[Enrollment User Query]: {user_query}")
+
+    # --- Spam Detection ---
+    fingerprint = get_client_fingerprint()
+    is_spam, spam_type = check_spam(fingerprint, user_query)
+    if is_spam:
+        print(f"[Spam Detected]: {spam_type} from {fingerprint}")
+        return jsonify({"response": SPAM_RESPONSES[spam_type]}), 200
+
+    try:
+        # --- GREETING HANDLING ---
+        greetings = ["hello", "hi", "hey", "how are you", "how are you?"]
+        response_text = ""
+        
+        if user_query.lower().strip() in greetings:
+            response_text = "Hello! I am the Crescent School Enrollment Assistant. How can I help you with admissions, tuition, or application questions?"
+            print(f"[AI Response]: {response_text}")
+        else:
+            # 0. Contextualize Query
+            search_query = user_query
+            if history:
+                search_query = contextualize_query(history, user_query)
+                print(f"[Rewritten Query]: {search_query}")
+
+            # 1. Retrieve Context
+            passage, metadatas = get_relevant_documents(search_query, enrollment_db)
+            
+            # 2. Validation
+            if passage == "No relevant information found.":
+                response_text = "I specialize in enrollment information. Could you please rephrase your question or ask something specific about the application process?"
+                print(f"[AI Response]: {response_text}")
+            else:
+                # 3. Construct Prompt (Specialized for enrollment agent)
+                prompt = make_prompt(user_query, passage, history)
+                # Maybe modify prompt slightly for enrollment context if needed, 
+                # but standard make_prompt works if passage is good.
+
+                # 4. Generate Answer
+                answer = client.models.generate_content(
+                    model="gemini-2.5-flash",
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.3, # Slightly lower temp for factual info
+                        safety_settings=[
+                            types.SafetySetting(
+                                category=types.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+                                threshold=types.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+                            ),
+                        ]
+                    )
+                )
+                
+                response_text = answer.text.strip()
+                
+                # Check for standard "no information" responses
+                negative_phrases = [
+                    "does not contain information",
+                    "passage does not mention",
+                    "provided passage does not",
+                    "i don't have that information",
+                    "cannot answer this question"
+                ]
+                
+                if any(phrase in response_text.lower() for phrase in negative_phrases):
+                     response_text = "I specialize in enrollment information. Could you please rephrase your question or ask something specific about the application process?"
+                else:
+                    # Add source link
+                    if metadatas:
+                        sources = list(set([m.get('source') for m in metadatas if m and m.get('source')]))
+                        if sources:
+                            response_text += f"\n\nSource: {sources[0]}"
+
+                print(f"[Enrollment Answer]: {response_text}")
+
+        # 5. Log Conversation (to same conversations DB, maybe add a tag? or just leave as is)
+        if conversations_db:
+            try:
+                interaction_id = str(uuid.uuid4())
+                timestamp = datetime.datetime.now().isoformat()
+                log_entry = f"[Enrollment] User: {user_query}\nAI: {response_text}"
+                conversations_db.add(
+                    documents=[log_entry],
+                    metadatas=[{"role": "interaction", "timestamp": timestamp, "type": "enrollment"}],
+                    ids=[interaction_id]
+                )
+            except Exception as log_error:
+                print(f"Error logging conversation: {log_error}")
+        
+        return jsonify({"response": response_text})
+
+    except Exception as e:
+        print(f"Error processing enrollment request: {e}")
         return jsonify({"response": "I encountered an internal error."}), 500
 
 if __name__ == '__main__':
