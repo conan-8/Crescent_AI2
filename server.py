@@ -201,7 +201,7 @@ def chat_endpoint():
                 print(f"[Rewritten Query]: {search_query}")
 
             # 1. Retrieve Context using the REWRITTEN query
-            passage, metadatas = get_relevant_documents(search_query, db)
+            passage, metadatas = get_relevant_documents(search_query, enrollment_db)
             
             # 2. Validation
             if passage == "No relevant information found.":

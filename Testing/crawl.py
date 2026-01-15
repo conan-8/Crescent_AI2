@@ -10,7 +10,8 @@ async def main():
         result = await crawler.arun(
             url="https://www.crescentschool.org/family-handbook/general-information",
         )
-        print(result.markdown)
+        print(result.markdown.raw_markdown)
+        print(result.markdown.fit_markdown)
 
 if __name__ == "__main__":
     asyncio.run(main())

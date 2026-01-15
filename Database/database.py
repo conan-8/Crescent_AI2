@@ -11,13 +11,14 @@ from google.genai import types
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from pydantic import BaseModel, Field
 import json
+from dotenv import load_dotenv
 
-
+load_dotenv()
 
 urls = ["https://www.crescentschool.org/family-handbook/upper-school",
         "https://www.crescentschool.org/family-handbook/upper-school/attendance-and-punctuality",
         "https://www.crescentschool.org/family-handbook/upper-school/mentor-program",
-        "https://www.crescentschool.org/family-handbook/upper-school/academics"
+        "https://www.crescentschool.org/family-handbook/upper-school/academics",
         "https://www.crescentschool.org/family-handbook/upper-school/academic-integrity",
         "https://www.crescentschool.org/family-handbook/upper-school/promotion-from-grade-to-grade"
         # "https://www.crescentschool.org/family-handbook/policies/code-of-conduct",
@@ -96,7 +97,7 @@ def get_chroma_db(name):
 
 async def crawlinfo(db):
     print("Starting crawl...")
-    llm_conf = LLMConfig(provider="gemini/gemini-2.5-flash", api_token="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI")
+    llm_conf = LLMConfig(provider="gemini/gemini-2.5-flash", api_token=os.environ.get("GEMINI_API_KEY"))
 
     extraction_strategy = LLMExtractionStrategy(
         llm_config=llm_conf,
@@ -185,40 +186,33 @@ async def crawlinfo(db):
 
 # Enrollment URLs for LLM-free crawling
 enrollment_urls = [
-    "https://www.crescentschool.org/admissions",
-    "https://www.crescentschool.org/admissions/how-to-apply",
-    "https://www.crescentschool.org/admissions/tuition-and-fees",
-    "https://www.crescentschool.org/admissions/open-house",
-    "https://www.crescentschool.org/admissions/faqs"
+    "https://www.crescentschool.org/how-to-apply",
+    "https://www.crescentschool.org/how-to-apply/visit-crescent",
+    "https://www.crescentschool.org/how-to-apply/application-process",
+    "https://www.crescentschool.org/how-to-apply/admission-dates-and-events",
+    "https://www.crescentschool.org/how-to-apply/tuition-and-fees",
+    "https://www.crescentschool.org/page/how-to-apply/financial-assistance",
+    "https://www.crescentschool.org/how-to-apply/enrolment-team",
+    "https://www.crescentschool.org/how-to-apply/faqs",
+    "https://www.crescentschool.org/how-to-apply/answers-from-the-enrolment-office",
+    "https://www.crescentschool.org/how-to-apply/apply-now"
 ]
 
 
 async def crawl_enrollment(db):
     """
-    Crawl enrollment pages using LLM-free CosineStrategy.
+    Crawl enrollment pages using simple markdown extraction (fit_markdown).
     This is faster and cheaper than LLM-based extraction.
     """
-    print("Starting enrollment crawl (LLM-free)...")
+    print("Starting enrollment crawl (LLM-free with fit_markdown)...")
 
-    # CosineStrategy for semantic content extraction without LLM
-    extraction_strategy = CosineStrategy(
-        semantic_filter="enrollment admission tuition application fees apply school",
-        word_count_threshold=50,  # Filter out very short chunks
-        sim_threshold=0.3,        # Similarity threshold for clustering
-        top_k=10,                 # Get top 10 relevant clusters per page
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
-
-    # Configure crawler with content cleaning (no nav/footer)
+    # Simple run config - no LLM strategy needed
     run_conf = CrawlerRunConfig(
-        cache_mode=CacheMode.BYPASS,
-        extraction_strategy=extraction_strategy,
-        excluded_tags=["nav", "footer", "header", "aside", "script", "style"],
-        remove_overlay_elements=True
+        cache_mode=CacheMode.BYPASS
     )
 
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
+        chunk_size=1000, 
         chunk_overlap=100,
         length_function=len
     )
@@ -230,69 +224,57 @@ async def crawl_enrollment(db):
     async with AsyncWebCrawler() as crawler:
         for i, url in enumerate(enrollment_urls):
             print(f"\n[Crawling {i+1}/{len(enrollment_urls)}] {url}")
-
+            
             result = await crawler.arun(url, config=run_conf)
-
+            
             if result.success:
-                # CosineStrategy returns extracted content as JSON string
-                extracted_text = ""
+                # Use fit_markdown as requested for cleaner content
+                content = result.markdown.fit_markdown
+                
+                if not content:
+                    print(f"[WARN] No fit_markdown content found for {url}")
+                    # Fallback to standard markdown if fit_markdown implies empty
+                    content = result.markdown
+                
+                if not content:
+                    print(f"[Warn] No content available for {url}")
+                    continue
+                    
+                print(f"[OK] Content length: {len(content)} chars")
 
-                if result.extracted_content:
-                    try:
-                        # Parse the JSON result from CosineStrategy
-                        data = json.loads(result.extracted_content)
+                chunks = text_splitter.split_text(content)
+                print(f"     Split into {len(chunks)} chunks.")
+                
+                for j, chunk in enumerate(chunks):
+                    doc_list.append(chunk)
+                    chunk_id = f"enrollment_{url}_chunk_{j}"
+                    id_list.append(chunk_id)
+                    metadata_list.append({"source": url, "type": "enrollment"})
 
-                        # CosineStrategy returns a list of clusters
-                        if isinstance(data, list):
-                            # Combine all cluster content
-                            text_parts = []
-                            for cluster in data:
-                                if isinstance(cluster, dict):
-                                    # Get the content from each cluster
-                                    content = cluster.get("content", "") or cluster.get("text", "")
-                                    if content:
-                                        text_parts.append(content)
-                                elif isinstance(cluster, str):
-                                    text_parts.append(cluster)
-                            extracted_text = "\n\n".join(text_parts)
-                        elif isinstance(data, dict):
-                            extracted_text = data.get("content", "") or data.get("text", "") or str(data)
-                        else:
-                            extracted_text = str(data)
-                    except json.JSONDecodeError:
-                        # If not valid JSON, use the raw extracted content
-                        extracted_text = result.extracted_content
-
-                # Fallback to markdown if no extracted content
-                if not extracted_text and result.markdown:
-                    extracted_text = result.markdown
-
-                if extracted_text and len(extracted_text.strip()) > 50:
-                    # Split the extracted text into chunks
-                    chunks = text_splitter.split_text(extracted_text)
-                    print(f"[OK] Extracted and split into {len(chunks)} chunks.")
-
-                    for j, chunk in enumerate(chunks):
-                        doc_list.append(chunk)
-                        chunk_id = f"enrollment_{url}_chunk_{j}"
-                        id_list.append(chunk_id)
-                        metadata_list.append({"source": url, "type": "enrollment"})
-                else:
-                    print(f"[WARN] No substantial content extracted for {url}")
             else:
                 print(f"[ERROR] Crawl failed for {url}: {result.error_message}")
+            
+            await asyncio.sleep(2)
 
-    # Add all chunks to ChromaDB in a single batch
+    # Add to ChromaDB
     if doc_list:
-        print(f"\nEnrollment crawl complete. Adding {len(doc_list)} total document chunks to ChromaDB...")
-        db.add(
-            ids=id_list,
-            documents=doc_list,
-            metadatas=metadata_list
-        )
+        print(f"\nEnrollment crawl complete. Adding {len(doc_list)} chunks to ChromaDB...")
+        
+        batch_size = 20
+        total_batches = (len(doc_list) + batch_size - 1) // batch_size
+        
+        for i in range(0, len(doc_list), batch_size):
+            batch_ids = id_list[i:i+batch_size]
+            batch_docs = doc_list[i:i+batch_size]
+            batch_meta = metadata_list[i:i+batch_size]
+            
+            print(f"  Adding batch {i//batch_size + 1}/{total_batches}...")
+            db.add(ids=batch_ids, documents=batch_docs, metadatas=batch_meta)
+            await asyncio.sleep(1)
+            
         print("Done.")
     else:
-        print("No successful documents to add for enrollment.")
+        print("No successful enrollment documents found.")
 
 
 def main():
@@ -303,11 +285,11 @@ def main():
     enrollment_db = get_chroma_db("enrollment_info")
 
     # Run both crawlers
-    print("=" * 60)
-    print("BUILDING FAMILY HANDBOOK DATABASE (LLM-based)")
-    print("=" * 60)
-    asyncio.run(crawlinfo(handbook_db))
-    print(f"\nHandbook database document count: {handbook_db.count()}")
+    # print("=" * 60)
+    # print("BUILDING FAMILY HANDBOOK DATABASE (LLM-based)")
+    # print("=" * 60)
+    # asyncio.run(crawlinfo(handbook_db))
+    # print(f"\nHandbook database document count: {handbook_db.count()}")
 
     print("\n" + "=" * 60)
     print("BUILDING ENROLLMENT DATABASE (LLM-free)")

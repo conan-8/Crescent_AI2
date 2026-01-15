@@ -8,7 +8,7 @@ google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
 )
 
 chroma_client = chromadb.PersistentClient(path=r"C:\crescent_ai_source")
-collection = chroma_client.get_or_create_collection(name="enrollment_info", embedding_function=google_ef)
+collection = chroma_client.get_or_create_collection(name="conversations", embedding_function=google_ef)
 
 print(f"Collection count: {collection.count()}")
 print(f"Collection peek: {collection.peek()}")

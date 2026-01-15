@@ -1,3 +1,4 @@
+import os
 import chromadb
 from chromadb import EmbeddingFunction, Documents, Embeddings
 import chromadb.utils.embedding_functions as embedding_functions
@@ -9,22 +10,22 @@ from google.genai import types
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from pydantic import BaseModel, Field
 import json
-import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# Enrollment URLs
 urls = [
-    "https://www.crescentschool.org/how-to-apply",
-    "https://www.crescentschool.org/how-to-apply/visit-crescent",
-    "https://www.crescentschool.org/how-to-apply/application-process",
-    "https://www.crescentschool.org/how-to-apply/admission-dates-and-events",
-    "https://www.crescentschool.org/how-to-apply/tuition-and-fees",
-    "https://www.crescentschool.org/page/how-to-apply/financial-assistance",
-    "https://www.crescentschool.org/how-to-apply/enrolment-team",
-    "https://www.crescentschool.org/how-to-apply/faqs",
-    "https://www.crescentschool.org/how-to-apply/answers-from-the-enrolment-office",
-    "https://www.crescentschool.org/how-to-apply/apply-now"
+    # "https://www.crescentschool.org/how-to-apply",
+    # "https://www.crescentschool.org/how-to-apply/visit-crescent",
+    # "https://www.crescentschool.org/how-to-apply/application-process",
+    # "https://www.crescentschool.org/how-to-apply/admission-dates-and-events",
+    # "https://www.crescentschool.org/how-to-apply/tuition-and-fees",
+    # "https://www.crescentschool.org/page/how-to-apply/financial-assistance",
+    "https://www.crescentschool.org/how-to-apply/enrolment-team"
+    # "https://www.crescentschool.org/how-to-apply/faqs",
+    # "https://www.crescentschool.org/how-to-apply/answers-from-the-enrolment-office",
+    # "https://www.crescentschool.org/how-to-apply/apply-now"
 ]
 
 class ExtractedContent(BaseModel):
@@ -77,11 +78,19 @@ def get_chroma_db(name):
         return collection
 
 async def crawlinfo(db):
-    print("Starting crawl (Optimized: No LLM Extraction)...")
-    
-    # Simple run config - no LLM strategy needed, crawl4ai defaults to smart markdown
+    print("Starting crawl (LLM-based)...")
+    llm_conf = LLMConfig(provider="gemini/gemini-2.5-flash", api_token=os.environ.get("GEMINI_API_KEY"))
+
+    extraction_strategy = LLMExtractionStrategy(
+        llm_config=llm_conf,
+        schema=ExtractedContent.model_json_schema(),
+        instruction=EXTRACTION_INSTRUCTION,
+        extraction_type="schema"
+    )
+
     run_conf = CrawlerRunConfig(
-        cache_mode=CacheMode.BYPASS
+        cache_mode=CacheMode.BYPASS,
+        extraction_strategy=extraction_strategy
     )
 
     text_splitter = RecursiveCharacterTextSplitter(
@@ -95,66 +104,64 @@ async def crawlinfo(db):
     metadata_list = []
 
     async with AsyncWebCrawler() as crawler:
+        # Loop one-by-one to respect rate limits
         for i, url in enumerate(urls):
             print(f"\n[Crawling {i+1}/{len(urls)}] {url}")
             
-            # Basic crawl - crawl4ai automatically converts to markdown
             result = await crawler.arun(url, config=run_conf)
             
-            if result.success:
-                # Use the raw markdown content directly
-                # crawl4ai usually does a good job cleaning up navs/footers in markdown mode
-                content = result.markdown
-                
-                if not content:
-                    print(f"[WARN] No content found for {url}")
-                    continue
+            if result.success and result.extracted_content:
+                try:
+                    # The result is a JSON string
+                    data = json.loads(result.extracted_content)
+                    extracted_text = None
                     
-                print(f"[OK] Content length: {len(content)} chars")
+                    # Handle potential list or dict response
+                    if isinstance(data, list) and data:
+                        extracted_text = data[0].get("relevant_text")
+                    elif isinstance(data, dict):
+                        extracted_text = data.get("relevant_text")
 
-                # Split the text
-                chunks = text_splitter.split_text(content)
-                print(f"     Split into {len(chunks)} chunks.")
-                
-                for j, chunk in enumerate(chunks):
-                    doc_list.append(chunk)
-                    chunk_id = f"{url}_chunk_{j}"
-                    id_list.append(chunk_id)
-                    metadata_list.append({"source": url})
+                    if not extracted_text:
+                        print(f"[WARN] LLM returned no 'relevant_text' for {url}")
+                        continue
 
+                    # Split the extracted text
+                    chunks = text_splitter.split_text(extracted_text)
+                    print(f"[OK] Extracted and split into {len(chunks)} chunks.")
+                    
+                    for j, chunk in enumerate(chunks):
+                        doc_list.append(chunk)
+                        chunk_id = f"{url}_chunk_{j}"
+                        id_list.append(chunk_id)
+                        metadata_list.append({"source": url})
+
+                except json.JSONDecodeError:
+                    print(f"[ERROR] Failed to parse LLM output for {url}")
+                except Exception as e:
+                    print(f"[ERROR] processing {url}: {e}")
             else:
                 print(f"[ERROR] Crawl failed for {url}: {result.error_message}")
             
-            # Much shorter wait time needed since we aren't calling the LLM
-            await asyncio.sleep(2)
+            # Rate limit wait
+            if i < len(urls) - 1:
+                print("Waiting 10 seconds for 'generate_content' rate limit...")
+                await asyncio.sleep(10)
 
-    # Add to ChromaDB
+    # Add all chunks to ChromaDB
     if doc_list:
-        print(f"\nCrawl complete. Adding {len(doc_list)} chunks to ChromaDB...")
-        # Note: This is where the Gemini Embedding API is called.
-        # It's much cheaper/faster than the generation API, but still has limits.
-        # If this fails, we might need to batch it or wait between adds.
-        
-        # Batching adds to be safe
-        batch_size = 20
-        total_batches = (len(doc_list) + batch_size - 1) // batch_size
-        
-        for i in range(0, len(doc_list), batch_size):
-            batch_ids = id_list[i:i+batch_size]
-            batch_docs = doc_list[i:i+batch_size]
-            batch_meta = metadata_list[i:i+batch_size]
-            
-            print(f"  Adding batch {i//batch_size + 1}/{total_batches}...")
-            db.add(ids=batch_ids, documents=batch_docs, metadatas=batch_meta)
-            # Small sleep to be nice to the embedding API
-            await asyncio.sleep(1)
-            
+        print(f"\nCrawl complete. Adding {len(doc_list)} total document chunks to ChromaDB...")
+        db.add(
+            ids=id_list,
+            documents=doc_list,
+            metadatas=metadata_list
+        )
         print("Done.")
     else:
-        print("No documents found.")
+        print("No successful documents to add.")
 
 def main():
-        # Using a new collection name for enrollment info
+        # Using the enrollment_info collection
         db = get_chroma_db("enrollment_info")
         asyncio.run(crawlinfo(db))
         print(f"Total documents in enrollment_info: {db.count()}")
