@@ -22,8 +22,8 @@ urls = [
     # "https://www.crescentschool.org/how-to-apply/admission-dates-and-events",
     # "https://www.crescentschool.org/how-to-apply/tuition-and-fees",
     # "https://www.crescentschool.org/page/how-to-apply/financial-assistance",
-    "https://www.crescentschool.org/how-to-apply/enrolment-team"
-    # "https://www.crescentschool.org/how-to-apply/faqs",
+    # "https://www.crescentschool.org/how-to-apply/enrolment-team",
+    # "https://www.crescentschool.org/how-to-apply/faqs", //note ts did not crawl correctly
     # "https://www.crescentschool.org/how-to-apply/answers-from-the-enrolment-office",
     # "https://www.crescentschool.org/how-to-apply/apply-now"
 ]
