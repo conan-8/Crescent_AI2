@@ -126,6 +126,14 @@ except Exception as e:
     print(f"CRITICAL ERROR loading enrollment database: {e}")
     enrollment_db = None
 
+# Initialize Enrollment Conversations Database
+try:
+    enrollment_conversations_db = get_chroma_db("enrollment_conversations")
+    print("Enrollment conversations database loaded successfully.")
+except Exception as e:
+    print(f"Error loading enrollment conversations database: {e}")
+    enrollment_conversations_db = None
+
 def contextualize_query(history, latest_query):
     if not history:
         return latest_query
@@ -358,19 +366,20 @@ def enrollment_chat_endpoint():
 
                 print(f"[Enrollment Answer]: {response_text}")
 
-        # 5. Log Conversation (to same conversations DB, maybe add a tag? or just leave as is)
-        if conversations_db:
+        # 5. Log Conversation
+        if enrollment_conversations_db:
             try:
                 interaction_id = str(uuid.uuid4())
                 timestamp = datetime.datetime.now().isoformat()
-                log_entry = f"[Enrollment] User: {user_query}\nAI: {response_text}"
-                conversations_db.add(
+                log_entry = f"User: {user_query}\nAI: {response_text}"
+                enrollment_conversations_db.add(
                     documents=[log_entry],
-                    metadatas=[{"role": "interaction", "timestamp": timestamp, "type": "enrollment"}],
+                    metadatas=[{"role": "interaction", "timestamp": timestamp}],
                     ids=[interaction_id]
                 )
             except Exception as log_error:
-                print(f"Error logging conversation: {log_error}")
+                print(f"Error logging enrollment conversation: {log_error}")
+
         
         return jsonify({"response": response_text})
 
