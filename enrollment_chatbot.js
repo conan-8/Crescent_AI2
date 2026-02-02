@@ -6,6 +6,7 @@ const chatbox = document.querySelector(".chatbox");
 
 let userMessage = null;
 let chatHistory = []; // Store conversation history
+let waitingForName = false; // Flag to track if we are asking for user's name
 // The address of your local Python server
 const API_URL = "http://127.0.0.1:5000/enrollment-chat";
 
@@ -18,6 +19,48 @@ const createChatLi = (message, className) => {
     chatLi.querySelector("p").textContent = message;
     return chatLi;
 }
+
+const appendSchedulerOptions = () => {
+    // Remove any existing scheduler options first
+    const existing = document.querySelectorAll(".scheduler-chat-li");
+    existing.forEach(el => el.remove());
+
+    const chatLi = document.createElement("li");
+    chatLi.classList.add("chat", "incoming", "scheduler-chat-li");
+
+    // Structure with buttons
+    chatLi.innerHTML = `
+        <span>🤖</span>
+        <div class="scheduler-container">
+            <p style="margin: 0;">Would you like to schedule a call with enrollment?</p>
+            <div class="scheduler-buttons">
+                <button class="scheduler-btn yes">Yes</button>
+                <button class="scheduler-btn no">No</button>
+            </div>
+        </div>
+    `;
+
+    chatbox.appendChild(chatLi);
+    chatbox.scrollTo(0, chatbox.scrollHeight);
+
+    // Handlers
+    const btnYes = chatLi.querySelector(".yes");
+    const btnNo = chatLi.querySelector(".no");
+
+    btnYes.addEventListener("click", () => {
+        chatLi.remove();
+        waitingForName = true;
+
+        // Bot message
+        const askLi = createChatLi("Please provide your name.", "incoming");
+        chatbox.appendChild(askLi);
+        chatbox.scrollTo(0, chatbox.scrollHeight);
+    });
+
+    btnNo.addEventListener("click", () => {
+        chatLi.remove();
+    });
+};
 
 const generateResponse = async (incomingChatLi) => {
     const messageElement = incomingChatLi.querySelector("p");
@@ -132,6 +175,9 @@ const generateResponse = async (incomingChatLi) => {
         // Add AI response to history
         chatHistory.push({ role: "model", content: data.response });
 
+        // Ask if they want to schedule a call
+        appendSchedulerOptions();
+
     } catch (error) {
         // Handle errors
         // If it's our custom rate limit error (or other server error msg), show that.
@@ -156,11 +202,42 @@ const handleChat = () => {
     chatbox.appendChild(createChatLi(userMessage, "outgoing"));
     chatbox.scrollTo(0, chatbox.scrollHeight);
 
-    // Add user message to history
-    chatHistory.push({ role: "user", content: userMessage });
-
     // Clear the input area
     chatInput.value = "";
+
+    // 1. Check if we are waiting for a name (Scheduler Flow)
+    if (waitingForName) {
+        waitingForName = false;
+        const name = userMessage;
+        const confirmMsg = `Thank you ${name}, your conversation has been saved and will be provided to enrollment before your call.`;
+
+        // Send to server
+        fetch("http://127.0.0.1:5000/schedule-call", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: name,
+                history: chatHistory
+            })
+        }).catch(err => console.error("Error scheduling call:", err));
+
+        // Add to history so context is preserved for future messages
+        chatHistory.push({ role: "user", content: name });
+        chatHistory.push({ role: "model", content: confirmMsg });
+
+        setTimeout(() => {
+            chatbox.appendChild(createChatLi(confirmMsg, "incoming"));
+            chatbox.scrollTo(0, chatbox.scrollHeight);
+        }, 600);
+        return;
+    }
+
+    // 2. If valid question, remove any lingering scheduler buttons
+    const existingScheduler = document.querySelectorAll(".scheduler-chat-li");
+    existingScheduler.forEach(el => el.remove());
+
+    // Add user message to history
+    chatHistory.push({ role: "user", content: userMessage });
 
     // Display "Thinking..." message while we wait
     const incomingChatLi = createChatLi("Thinking...", "incoming");

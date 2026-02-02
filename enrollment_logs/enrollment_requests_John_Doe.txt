@@ -1,0 +1,16 @@
+
+==================================================
+NEW ENROLLMENT CALL REQUEST
+Timestamp: 2026-02-01 19:57:14
+Name: John Doe
+--------------------
+CONVERSATION HISTORY:
+User: How do I apply for grade 9
+Model: To apply for Grade 9, applications are accepted online every year from September 1 to December 1. Late applications are accepted with a $325 fee, but priority is given to those who submit by the deadline, and late applications will automatically be waitlisted. The passage indicates there is an online application form to begin the process. Interviews for Grade 9 are by invitation only.
+
+Source: https://www.crescentschool.org/how-to-apply/application-process
+User: What about grade 10
+Model: The passage does not provide specific details for applying to Grade 10. However, it states that applications are accepted online every year from September 1 to December 1. Late applications are accepted with a $325 fee, but priority is given to those who submit by the deadline, and late applications will automatically be waitlisted. The passage indicates there is an online application form to begin the process. Interviews are only mentioned for Grade 9.
+
+Source: https://www.crescentschool.org/how-to-apply/tuition-and-fees
+==================================================

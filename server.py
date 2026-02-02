@@ -387,6 +387,55 @@ def enrollment_chat_endpoint():
         print(f"Error processing enrollment request: {e}")
         return jsonify({"response": "I encountered an internal error."}), 500
 
+@app.route('/schedule-call', methods=['POST'])
+@limiter.limit("5 per minute")
+def schedule_call_endpoint():
+    try:
+        data = request.json
+        name = data.get('name')
+        history = data.get('history', [])
+
+        if not name:
+            return jsonify({"error": "Name is required"}), 400
+
+        # Format the content
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        file_content = f"\n{'='*50}\n"
+        file_content += f"NEW ENROLLMENT CALL REQUEST\n"
+        file_content += f"Timestamp: {timestamp}\n"
+        file_content += f"Name: {name}\n"
+        file_content += f"{'-'*20}\n"
+        file_content += "CONVERSATION HISTORY:\n"
+        
+        for msg in history:
+            role = msg.get('role', 'unknown').capitalize()
+            content = msg.get('content', '')
+            file_content += f"{role}: {content}\n"
+            
+        file_content += f"{'='*50}\n"
+
+        # Write to file
+        # Sanitize name for filename
+        safe_name = "".join([c if c.isalnum() else "_" for c in name])
+        
+        # Save to 'enrollment_logs' directory to avoid triggering hot-reloads on the frontend
+        log_dir = "enrollment_logs"
+        if not os.path.exists(log_dir):
+            os.makedirs(log_dir)
+            
+        filename = os.path.join(log_dir, f"enrollment_requests_{safe_name}.txt")
+        
+        with open(filename, "a", encoding="utf-8") as f:
+            f.write(file_content)
+
+        print(f"Scheduled call request saved for {name}")
+        return jsonify({"success": True})
+
+    except Exception as e:
+        print(f"Error saving schedule request: {e}")
+        return jsonify({"error": "Internal server error"}), 500
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     print(f"Server running on port {port}")

@@ -1,0 +1,10 @@
+
+==================================================
+NEW ENROLLMENT CALL REQUEST
+Timestamp: 2026-02-01 19:51:32
+Name: Joe
+--------------------
+CONVERSATION HISTORY:
+User: Hello
+Model: Hello! I am the Crescent School Enrollment Assistant. How can I help you with admissions, tuition, or application questions?
+==================================================

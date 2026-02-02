@@ -202,3 +202,49 @@ body.show-chatbot .chatbot {
     border-left: 2px solid rgba(255, 255, 255, 0.5);
     border-top-left-radius: 4px;
 }
+
+/* Scheduler Options */
+.scheduler-container {
+    background: #f2f2f2;
+    border-radius: 10px 10px 10px 0;
+    max-width: 75%;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    font-family: sans-serif;
+    color: #000;
+}
+
+.scheduler-buttons {
+    display: flex;
+    gap: 10px;
+    /* Space between buttons */
+    margin-top: 10px;
+}
+
+.scheduler-btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.scheduler-btn.yes {
+    background: #00401A;
+    color: #fff;
+}
+
+.scheduler-btn.yes:hover {
+    background: #002a11;
+}
+
+.scheduler-btn.no {
+    background: #ccc;
+    color: #000;
+}
+
+.scheduler-btn.no:hover {
+    background: #bbb;
+}
