@@ -1,0 +1,24 @@
+
+==================================================
+NEW ENROLLMENT CALL REQUEST
+Timestamp: 2026-02-11 15:49:55
+Name: John
+--------------------
+CONVERSATION HISTORY:
+User: Hello
+Model: Hello! I am the Crescent School Enrollment Assistant. How can I help you with admissions, tuition, or application questions?
+User: What are the steps for applying for gr 9
+Model: To apply for Grade 9, please follow these steps:
+
+1.  **Complete the online application form.** Your application will save automatically, and you will receive a confirmation webpage and email after submission and payment.
+2.  **Upload required documents** to your application checklist:
+    *   Final report cards from June 2024 and June 2025, and the latest progress or first term report from the current school year.
+    *   Passport or other government-issued photo identification.
+    *   Teacher assessment form.
+3.  **Complete an in-person assessment** in mathematics and literacy. Registration details will be provided in October 2025.
+4.  **Attend an interview** if invited. Interviews for Grade 9 are by invitation only and take place between October and January. Candidates will be notified of interview selection by Monday, January 19, 2026.
+
+Applications are accepted from September 1 to December 1 each year. Late applications with a $325 fee are accepted but will be waitlisted, and priority is given to on-time submissions.
+
+Source: https://www.crescentschool.org/how-to-apply/application-process
+==================================================
