@@ -1,0 +1,18 @@
+
+==================================================
+NEW ENROLLMENT CALL REQUEST
+Timestamp: 2026-02-12 22:08:07
+Name: EFN
+--------------------
+CONVERSATION HISTORY:
+User: Hello
+Model: Hello! I am the Crescent School Enrollment Assistant. How can I help you with admissions, tuition, or application questions?
+User: Who's the head of middle school
+Model: I specialize in enrollment information. Could you please rephrase your question or ask something specific about the application process?
+User: Why should I apply
+Model: The provided passage outlines the steps for applying to Grades 10 & 11, but does not include information on why one should apply.
+
+Source: https://www.crescentschool.org/how-to-apply
+User: How can I apply
+Model: I am sorry, but I cannot answer your question as the document retrieval failed.
+==================================================

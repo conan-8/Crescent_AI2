@@ -1,7 +1,7 @@
 /* Position the chat button in the bottom right corner */
 .chatbot-toggler {
     position: absolute;
-    bottom: 5px;
+    bottom: 105px;
     right: 5px;
     outline: none;
     border: none;
@@ -57,6 +57,20 @@ body.show-chatbot .chatbot {
     background: #00401A;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
+}
+
+.chatbot header .close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
+    font-size: 1.8rem;
+}
+
+body.show-chatbot .chatbot header .close-btn {
+    display: block;
 }
 
 .chatbot header h2 {
@@ -203,48 +217,56 @@ body.show-chatbot .chatbot {
     border-top-left-radius: 4px;
 }
 
-/* Scheduler Options */
-.scheduler-container {
-    background: #f2f2f2;
-    border-radius: 10px 10px 10px 0;
-    max-width: 75%;
-    padding: 12px 16px;
-    font-size: 0.95rem;
-    font-family: sans-serif;
-    color: #000;
-}
-
-.scheduler-buttons {
+/* Enrollment Banner (persistent, below header) */
+.enrollment-banner {
     display: flex;
-    gap: 10px;
-    /* Space between buttons */
-    margin-top: 10px;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-bottom: 1px solid #a5d6a7;
+    flex-shrink: 0;
+    font-family: sans-serif;
+    font-size: 0.88rem;
+    color: #1b5e20;
 }
 
-.scheduler-btn {
+.banner-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.banner-text {
+    flex: 1;
+    font-weight: 500;
+}
+
+.banner-btn {
     border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 6px 14px;
+    border-radius: 6px;
     cursor: pointer;
     font-family: sans-serif;
-    font-size: 0.9rem;
-    transition: background 0.2s;
-}
-
-.scheduler-btn.yes {
+    font-size: 0.82rem;
+    font-weight: 600;
     background: #00401A;
     color: #fff;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
-.scheduler-btn.yes:hover {
+.banner-btn:hover:not(:disabled) {
     background: #002a11;
+    transform: scale(1.03);
 }
 
-.scheduler-btn.no {
-    background: #ccc;
-    color: #000;
+.banner-btn:active:not(:disabled) {
+    transform: scale(0.97);
 }
 
-.scheduler-btn.no:hover {
-    background: #bbb;
+.banner-btn-waiting {
+    background: #78909c !important;
+    cursor: default;
+    opacity: 0.85;
 }

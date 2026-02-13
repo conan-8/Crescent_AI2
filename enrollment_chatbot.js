@@ -3,6 +3,7 @@ const chatbot = document.querySelector(".chatbot");
 const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 const chatbox = document.querySelector(".chatbox");
+const closeBtn = document.querySelector(".close-btn");
 
 let userMessage = null;
 let chatHistory = []; // Store conversation history
@@ -20,45 +21,25 @@ const createChatLi = (message, className) => {
     return chatLi;
 }
 
-const appendSchedulerOptions = () => {
-    // Remove any existing scheduler options first
-    const existing = document.querySelectorAll(".scheduler-chat-li");
-    existing.forEach(el => el.remove());
+const initEnrollmentBanner = () => {
+    const banner = document.getElementById("enrollment-banner");
+    const bannerBtn = document.getElementById("banner-schedule-btn");
 
-    const chatLi = document.createElement("li");
-    chatLi.classList.add("chat", "incoming", "scheduler-chat-li");
+    bannerBtn.addEventListener("click", () => {
+        // If already waiting for name, don't re-trigger
+        if (waitingForName) return;
 
-    // Structure with buttons
-    chatLi.innerHTML = `
-        <span>🤖</span>
-        <div class="scheduler-container">
-            <p style="margin: 0;">Would you like to schedule a call with enrollment?</p>
-            <div class="scheduler-buttons">
-                <button class="scheduler-btn yes">Yes</button>
-                <button class="scheduler-btn no">No</button>
-            </div>
-        </div>
-    `;
-
-    chatbox.appendChild(chatLi);
-    chatbox.scrollTo(0, chatbox.scrollHeight);
-
-    // Handlers
-    const btnYes = chatLi.querySelector(".yes");
-    const btnNo = chatLi.querySelector(".no");
-
-    btnYes.addEventListener("click", () => {
-        chatLi.remove();
         waitingForName = true;
 
-        // Bot message
-        const askLi = createChatLi("Please provide your name.", "incoming");
+        // Bot message asking for name
+        const askLi = createChatLi("Please provide your name so we can schedule your call with enrollment.", "incoming");
         chatbox.appendChild(askLi);
         chatbox.scrollTo(0, chatbox.scrollHeight);
-    });
 
-    btnNo.addEventListener("click", () => {
-        chatLi.remove();
+        // Visual feedback: temporarily disable the button
+        bannerBtn.textContent = "Awaiting Name...";
+        bannerBtn.disabled = true;
+        bannerBtn.classList.add("banner-btn-waiting");
     });
 };
 
@@ -175,8 +156,7 @@ const generateResponse = async (incomingChatLi) => {
         // Add AI response to history
         chatHistory.push({ role: "model", content: data.response });
 
-        // Ask if they want to schedule a call
-        appendSchedulerOptions();
+        // Enrollment banner is persistent — no need to append scheduler options here
 
     } catch (error) {
         // Handle errors
@@ -229,12 +209,17 @@ const handleChat = () => {
             chatbox.appendChild(createChatLi(confirmMsg, "incoming"));
             chatbox.scrollTo(0, chatbox.scrollHeight);
         }, 600);
+
+        // Reset the banner button so it can be used again
+        const bannerBtn = document.getElementById("banner-schedule-btn");
+        bannerBtn.textContent = "Schedule Call";
+        bannerBtn.disabled = false;
+        bannerBtn.classList.remove("banner-btn-waiting");
+
         return;
     }
 
-    // 2. If valid question, remove any lingering scheduler buttons
-    const existingScheduler = document.querySelectorAll(".scheduler-chat-li");
-    existingScheduler.forEach(el => el.remove());
+    // Enrollment banner is persistent — no cleanup generatedScheduler buttons here
 
     // Add user message to history
     chatHistory.push({ role: "user", content: userMessage });
@@ -259,10 +244,16 @@ chatInput.addEventListener("keydown", (e) => {
 
 // Event Listeners
 sendChatBtn.addEventListener("click", handleChat);
+initEnrollmentBanner();
 chatbotToggler.addEventListener("click", () => {
     const isShowing = document.body.classList.toggle("show-chatbot");
     // Notify parent window of toggle
     window.parent.postMessage({ type: "toggle", showing: isShowing }, "*");
+});
+
+closeBtn.addEventListener("click", () => {
+    document.body.classList.remove("show-chatbot");
+    window.parent.postMessage({ type: "toggle", showing: false }, "*");
 });
 
 // --- Resizing Logic ---
