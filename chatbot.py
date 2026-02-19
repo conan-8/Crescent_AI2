@@ -1,13 +1,18 @@
 import os
 import chromadb
 import chromadb.utils.embedding_functions as embedding_functions
+from openai import OpenAI
 from google import genai
 from google.genai import types
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
+# Initialize OpenAI Client for OpenRouter
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=os.environ.get("OPENROUTER_API_KEY"),
+)
 
 def get_chroma_db(name):
     google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
@@ -117,14 +122,17 @@ def main():
         prompt = make_prompt(query, passage)
 
         try:
-            answer = client.models.generate_content(
-                model="gemini-2.5-flash",
-                contents=prompt,
-                config=types.GenerateContentConfig(temperature=0.5)
+            completion = client.chat.completions.create(
+                model="xiaomi/mimo-v2-flash",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.5,
             )
-            response_text = answer.text.strip()
+            response_text = completion.choices[0].message.content.strip()
             
-            # Check for standard "no information" responses from Gemini
+            # Check for standard "no information" responses
             negative_phrases = [
                 "does not contain information",
                 "passage does not mention",

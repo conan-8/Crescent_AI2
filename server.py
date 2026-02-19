@@ -14,7 +14,7 @@ from collections import defaultdict
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client
-from google.genai import types
+
 
 # --- Client Fingerprinting ---
 def get_client_fingerprint():
@@ -157,14 +157,15 @@ def contextualize_query(history, latest_query):
     """
     
     try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                temperature=0
-            )
+        completion = client.chat.completions.create(
+            model="xiaomi/mimo-v2-flash",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0,
         )
-        return response.text.strip()
+        return completion.choices[0].message.content.strip()
     except Exception as e:
         print(f"Error contextualizing query: {e}")
         return latest_query
@@ -219,22 +220,17 @@ def chat_endpoint():
                 # 3. Construct Prompt (Pass ORIGINAL query to keep flow natural, but use passage from rewritten query)
                 prompt = make_prompt(user_query, passage, history)
 
-                # 4. Generate Answer with Gemini
-                answer = client.models.generate_content(
-                    model="gemini-2.5-flash",
-                    contents=prompt,
-                    config=types.GenerateContentConfig(
-                        temperature=0.5,
-                        safety_settings=[
-                            types.SafetySetting(
-                                category=types.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-                                threshold=types.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-                            ),
-                        ]
-                    )
+                # 4. Generate Answer with OpenRouter
+                completion = client.chat.completions.create(
+                    model="xiaomi/mimo-v2-flash",
+                    messages=[
+                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    temperature=0.5,
                 )
                 
-                response_text = answer.text.strip()
+                response_text = completion.choices[0].message.content.strip()
                 
                 # Check for standard "no information" responses
                 negative_phrases = [
@@ -329,22 +325,17 @@ def enrollment_chat_endpoint():
                 # Maybe modify prompt slightly for enrollment context if needed, 
                 # but standard make_prompt works if passage is good.
 
-                # 4. Generate Answer
-                answer = client.models.generate_content(
-                    model="gemini-2.5-flash",
-                    contents=prompt,
-                    config=types.GenerateContentConfig(
-                        temperature=0.3, # Slightly lower temp for factual info
-                        safety_settings=[
-                            types.SafetySetting(
-                                category=types.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-                                threshold=types.HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-                            ),
-                        ]
-                    )
+                # 4. Generate Answer with OpenRouter
+                completion = client.chat.completions.create(
+                    model="xiaomi/mimo-v2-flash",
+                    messages=[
+                        {"role": "system", "content": "You are a helpful assistant."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    temperature=0.3,
                 )
                 
-                response_text = answer.text.strip()
+                response_text = completion.choices[0].message.content.strip()
                 
                 # Check for standard "no information" responses
                 negative_phrases = [

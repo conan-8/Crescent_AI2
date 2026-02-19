@@ -1,5 +1,6 @@
 import chromadb
 import chromadb.utils.embedding_functions as embedding_functions
+from openai import OpenAI
 from google import genai
 from google.genai import types
 import os
@@ -9,10 +10,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configuration
-API_KEY = os.environ.get("GEMINI_API_KEY")
+API_KEY = os.environ.get("GEMINI_API_KEY") # Still needed for embeddings
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 DB_PATH = os.environ.get("CHROMA_DB_PATH")
 COLLECTION_NAME = "conversations"
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "qwen/qwen3.5-397b-a17b"
 
 def get_chroma_collection():
     """Connects to the ChromaDB collection."""
@@ -43,8 +45,8 @@ def parse_conversations(documents):
             continue
     return parsed_data
 
-def analyze_with_gemini(conversations):
-    """Sends the conversation data to Gemini for analysis."""
+def analyze_with_openrouter(conversations):
+    """Sends the conversation data to OpenRouter for analysis."""
     if not conversations:
         return "No conversations found to analyze."
 
@@ -76,12 +78,19 @@ def analyze_with_gemini(conversations):
     """
 
     try:
-        client = genai.Client(api_key=API_KEY)
-        response = client.models.generate_content(
-            model=MODEL_NAME,
-            contents=prompt
+        client = OpenAI(
+            base_url="https://openrouter.ai/api/v1",
+            api_key=OPENROUTER_API_KEY,
         )
-        return response.text
+        
+        completion = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {"role": "system", "content": "You are a helpful data analyst."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+        return completion.choices[0].message.content
     except Exception as e:
         return f"Error during AI analysis: {e}"
 
@@ -107,8 +116,8 @@ def main():
     parsed_conversations = parse_conversations(documents)
     
     # 3. Analyze
-    print("Analyzing with Gemini...")
-    report = analyze_with_gemini(parsed_conversations)
+    print(f"Analyzing with OpenRouter ({MODEL_NAME})...")
+    report = analyze_with_openrouter(parsed_conversations)
 
     # 4. Output
     print("\n--- Analysis Report ---\n")
