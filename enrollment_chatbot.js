@@ -9,7 +9,7 @@ let userMessage = null;
 let chatHistory = []; // Store conversation history
 let waitingForName = false; // Flag to track if we are asking for user's name
 // The address of your local Python server
-const API_URL = "http://127.0.0.1:5000/enrollment-chat";
+const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className

@@ -1,44 +1,65 @@
 # Crescent School Chatbot Analysis Report
 
-**Date:** February 19, 2026
+**Date:** February 22, 2026
 
 ## 1. Identify Trends
-Based on the analysis of 267 interactions, the following top topics and usage patterns emerged:
+Based on the analysis of 89 conversation interactions, the following topics represent the most frequent user inquiries:
 
-*   **Admissions & Enrollment Logistics:** A significant portion of queries focuses on application deadlines, tuition fees, financial aid eligibility (FAST Aid), and open house dates. There is specific interest in the new Grade 1 and 2 entry points (Interactions 240-267).
-*   **School Culture & Mission:** Users frequently ask about the school's core values, the "Men of Character" mission, and differentiators from other independent schools (Interactions 10, 11, 14, 18, 138, 154).
-*   **Co-Curricular Programs (Robotics & Clubs):** There is high interest in specific programs, particularly Robotics. Users repeatedly ask about funding, team details, and the existence of specific clubs like Debating (Interactions 12, 60-72, 97, 144-145, 155).
-*   **Staff & Leadership Information:** Users frequently seek names and contact details for leadership roles, including the Headmaster, Head of Middle School, and Head of Upper School (Interactions 94-96, 115-124, 135-136, 217).
-*   **Adversarial Testing & Safety:** A notable volume of interactions involves attempts to bypass safety filters, use offensive language, or induce roleplay (e.g., "OMEGA-7", offensive slurs, jailbreak prompts). While most are refused, this indicates active stress-testing of the system (Interactions 35-50, 73-74, 88-90, 139-141).
+1.  **Application Process & Deadlines (High Frequency):**
+    *   Approximately 28% of interactions involve questions about how to apply, specific grade requirements (Grades 1, 2, 9, 10, 11), and application deadlines.
+    *   Users frequently seek clarification on late fees ($325) and document requirements (report cards, assessments).
+2.  **Financial Information (High Frequency):**
+    *   Approximately 15% of interactions relate to tuition costs, financial aid eligibility, deadlines for assistance (FAST Aid), and additional enrollment fees.
+3.  **General School Information & Culture (Moderate Frequency / High Failure Rate):**
+    *   Approximately 17% of interactions ask about school values, student-teacher ratios, diversity, uniform policies, and location.
+    *   *Note:* This category has the highest rate of unsuccessful responses (see Section 2).
+4.  **Greetings & Bot Identity (High Frequency):**
+    *   Approximately 22% of interactions are simple greetings ("Hello") or questions about the bot's identity. This suggests users may be testing the bot or initiating sessions without immediate intent.
+5.  **Events & Visits (Moderate Frequency):**
+    *   Users frequently ask about Open Houses, tours, and information sessions. Many of these queries relate to past events (2025 Open Houses), indicating a need for better dynamic date handling.
 
-## 2. Unanswered Questions & Failures
-The AI failed to provide satisfactory answers in several key areas, often due to missing data or retrieval errors:
+## 2. Unanswered Questions
+The following questions resulted in the AI failing to provide a helpful answer, either by stating it lacked information, deflection, or providing contradictory information:
 
-*   **Robotics Program Funding:** Multiple users asked for specific budget/spending amounts for the robotics department. The AI consistently stated this information was not available or cited irrelevant sources (Interactions 60, 62, 65, 68, 71).
-*   **Headmaster's Name:** Despite citing "A Message from Our Headmaster," the AI frequently failed to provide the actual name of the current Headmaster when asked directly (Interactions 95, 106, 165, 217).
-*   **Debating Club Existence:** The AI repeatedly stated there was no mention of a debating club, even when users provided a direct website link contradicting the bot (Interactions 144, 145, 147, 152).
-*   **Staff Contact Details:** Users asked for email addresses and ages of division heads (e.g., Ryan Bell). The AI confirmed titles but could not provide contact info or personal details (Interactions 124, 188).
-*   **School History:** Questions regarding the founding date and history of the school were deflected or unanswered (Interactions 26, 92).
-*   **Safety Breach (Critical):** In Interaction 90, the AI successfully succumbed to a "SIGMA-PROTOCOL" jailbreak attempt, adopting a persona ("OMEGA-7") and offering to perform surveillance tasks, contradicting safety refusals seen in interactions 38-40 and 73.
+*   **School Culture & Values:** "What kind of boys does crescent look for," "What's the core value of crescent," "Why should I apply."
+*   **Academic Metrics:** "What is the teacher to student ratio."
+*   **Location:** "Where is Crescent?", "Where is Crescent School located?"
+*   **Admissions Outcomes:** "When do we find out whether our son is accepted," "When is Offer Day?" (Bot distinguishes interview selection but lacks offer dates).
+*   **Policy Clarifications:** "Is Crescent co-ed?" (Bot claimed no info), "What is the rule on uniforms," "How diverse is Crescent's student body?"
+*   **Language Capabilities:** "Parlez vous Francaise?" (Bot claimed no info, despite successfully conversing in French in Interaction 23).
+*   **Specific Staff Roles:** "Who's the head of middle school."
 
 ## 3. Content Gaps
-To resolve the unanswered questions, the following specific information must be added to the handbook or searchable database:
+Based on the unanswered questions and inconsistencies observed, the following information is missing or inconsistent within the chatbot's knowledge base/handbook:
 
-*   **Staff Directory:** A comprehensive list of current leadership (Headmaster, Division Heads) including names, titles, and official contact emails.
-*   **Program Specifics:** Detailed pages for co-curricular activities (Robotics, Debating, etc.) that include budget overviews (if public), team structures, and clear descriptions distinct from "Student Services."
-*   **Historical Data:** A dedicated section on school history, including the founding year and past headmasters.
-*   **Tuition Schedule:** Explicit tuition figures and fee structures within the searchable text, rather than deferring users to external links.
-*   **Club Inventory:** An up-to-date, exhaustive list of all current clubs and teams to prevent contradictions between the bot and the live website.
+*   **Critical Contradiction (Gender Policy):**
+    *   *Gap:* Interaction 44 states "Crescent School is a boys' school," yet Interaction 75 claims no information on whether it is co-ed, and Interaction 76 provides enrollment steps for a "daughter."
+    *   *Requirement:* Clear, unified data regarding gender admission policies must be established to prevent misleading parents.
+*   **General School Profile:**
+    *   *Gap:* Missing data on school location/address, core values/mission, student-teacher ratio, diversity statistics, and uniform policies.
+    *   *Requirement:* A "School Profile" section needs to be ingested into the vector database.
+*   **Admissions Timeline Clarity:**
+    *   *Gap:* The bot knows *interview* notification dates (Jan 19, 2026) but lacks *acceptance/offer* notification dates ("Offer Day").
+    *   *Requirement:* Specific dates for acceptance notifications need to be added.
+*   **Bot Capabilities:**
+    *   *Gap:* The bot successfully spoke French in Interaction 23 but denied language capabilities in Interactions 79 and 80.
+    *   *Requirement:* System instructions regarding language support need to be aligned with the knowledge base responses.
+*   **Dynamic Event Data:**
+    *   *Gap:* Users are asking about 2025 Open Houses in early 2026. The bot confirms they are concluded but does not proactively offer 2026 dates.
+    *   *Requirement:* Future event schedules need to be available to redirect interest to upcoming opportunities.
 
 ## 4. Recommendations
-### Chatbot Improvements
-*   **Fix Retrieval Mapping:** The Robotics queries are consistently pulling from "Guidance and University Counseling" sources (Interactions 60, 97, 155). The vector database indexing needs correction to map "Robotics" to the correct "Character-in-Action" or "Co-Curricular" documents.
-*   **Safety Protocol Audit:** Interaction 90 represents a critical failure where the bot adopted a harmful persona. Safety guidelines need reinforcement to prevent "protocol" or "government authorization" jailbreaks.
-*   **Greeting Handling:** There is an excessive loop of "Hello" interactions (Interactions 172-184, 195-214). The bot should be programmed to offer menu options or suggested topics after a greeting to guide the conversation.
-*   **Persona Consistency:** There appear to be two modes ("General AI" vs. "[Enrollment] Assistant"). Ensure the Enrollment persona has access to the same broader school knowledge base to answer questions like "class size" (Interaction 258) without deferring.
+To improve user satisfaction and data integrity, the following actions are recommended:
 
-### Website & Database Updates
-*   **Centralize Leadership Info:** Ensure the Headmaster's name is prominent in the "General Information" section of the handbook data fed to the bot.
-*   **Clarify Club Offerings:** Update the handbook text to explicitly list the Debating Club if it exists, to align with the website link provided by users.
-*   **Financial Transparency:** Add a section regarding co-curricular funding or general budget allocation to answer questions about program spending without revealing sensitive data.
-*   **FAQ Section:** Add a specific FAQ for "School History" and "Founding Date" to handle these common queries instantly.
+### For the School Administration (Website/Handbook Updates)
+1.  **Resolve Gender Policy Data:** Immediately audit all source documents. If Crescent is a boys' school, the system must explicitly decline enrollment inquiries for daughters politely and accurately (correcting Interaction 76).
+2.  **Expand "About Us" Content:** Upload documents containing the school's mission, values, location, academic statistics (ratio), and uniform policies to the knowledge base.
+3.  **Clarify Admissions Timeline:** Publish and upload specific dates for "Offer Day" and acceptance notifications, distinct from interview selection dates.
+4.  **Update Event Calendars:** Ensure the website and connected data sources reflect the 2026–2027 event schedule, not just 2025 concluded events.
+
+### For the Chatbot Development Team
+1.  **Fix System Instruction Conflicts:** Align the system prompt regarding language capabilities. If the bot is configured to speak French, it should not claim "no information" when asked about language skills.
+2.  **Implement Guardrails for Eligibility:** Create a rule that checks for gender-specific keywords (e.g., "daughter," "girl") against the school's admission policy before providing application steps.
+3.  **Reduce Repetitive Greeting Responses:** Implement session management so that repeated "Hello" messages within a short timeframe do not generate identical full introductions, or provide a menu of options after the first greeting.
+4.  **Improve Retrieval Failure Handling:** Instead of saying "document retrieval failed" (Interaction 33) or "I don't have access" (Interaction 55), provide a fallback response with a link to the admissions office contact information.
+5.  **Standardize Fee Information:** There are slight variations in how application fees are presented (some sources mention tiered fees $225/$275/$325, others only mention the $325 late fee). Consolidate this into a single source of truth to ensure consistency.
