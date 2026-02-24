@@ -129,12 +129,13 @@ def main():
 
         try:
             completion = client.chat.completions.create(
-                model="moonshotai/kimi-k2.5",
+                model="qwen/qwen3.5-397b-a17b",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.5,
+                extra_body={"reasoning": {"enabled": False}}
             )
             response_text = completion.choices[0].message.content.strip()
             
