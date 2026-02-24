@@ -19,6 +19,10 @@ const createChatLi = (message, className) => {
     return chatLi;
 }
 
+const startThinkingAnimation = (messageElement) => {
+    messageElement.innerHTML = '<div class="thinking-animation"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+}
+
 const generateResponse = async (incomingChatLi) => {
     const messageElement = incomingChatLi.querySelector("p");
 
@@ -162,8 +166,9 @@ const handleChat = () => {
     // Clear the input area
     chatInput.value = "";
 
-    // Display "Thinking..." message while we wait
-    const incomingChatLi = createChatLi("Thinking...", "incoming");
+    // Display animated thinking indicator while we wait
+    const incomingChatLi = createChatLi("", "incoming");
+    startThinkingAnimation(incomingChatLi.querySelector("p"));
     chatbox.appendChild(incomingChatLi);
     chatbox.scrollTo(0, chatbox.scrollHeight);
 

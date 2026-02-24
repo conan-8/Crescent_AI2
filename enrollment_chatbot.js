@@ -21,6 +21,10 @@ const createChatLi = (message, className) => {
     return chatLi;
 }
 
+const startThinkingAnimation = (messageElement) => {
+    messageElement.innerHTML = '<div class="thinking-animation"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+}
+
 const initEnrollmentBanner = () => {
     const banner = document.getElementById("enrollment-banner");
     const bannerBtn = document.getElementById("banner-schedule-btn");
@@ -224,8 +228,9 @@ const handleChat = () => {
     // Add user message to history
     chatHistory.push({ role: "user", content: userMessage });
 
-    // Display "Thinking..." message while we wait
-    const incomingChatLi = createChatLi("Thinking...", "incoming");
+    // Display animated thinking indicator while we wait
+    const incomingChatLi = createChatLi("", "incoming");
+    startThinkingAnimation(incomingChatLi.querySelector("p"));
     chatbox.appendChild(incomingChatLi);
     chatbox.scrollTo(0, chatbox.scrollHeight);
 
