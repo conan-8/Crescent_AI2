@@ -3,9 +3,11 @@ const chatbot = document.querySelector(".chatbot");
 const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 const chatbox = document.querySelector(".chatbox");
+const newChatBtn = document.querySelector(".new-chat-btn");
 
 let userMessage = null;
 let chatHistory = []; // Store conversation history
+const initialGreeting = chatbox.innerHTML; // Store initial greeting for new chat reset
 // The address of your local Python server
 const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
 
@@ -186,6 +188,13 @@ chatbotToggler.addEventListener("click", () => {
     const isShowing = document.body.classList.toggle("show-chatbot");
     // Notify parent window of toggle
     window.parent.postMessage({ type: "toggle", showing: isShowing }, "*");
+});
+
+// New Chat button: clear conversation and show greeting
+newChatBtn.addEventListener("click", () => {
+    chatbox.innerHTML = initialGreeting;
+    chatHistory = [];
+    chatInput.value = "";
 });
 
 // --- Resizing Logic ---
