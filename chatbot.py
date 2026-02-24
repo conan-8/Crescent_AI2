@@ -129,7 +129,7 @@ def main():
 
         try:
             completion = client.chat.completions.create(
-                model="xiaomi/mimo-v2-flash",
+                model="moonshotai/kimi-k2.5",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": prompt}

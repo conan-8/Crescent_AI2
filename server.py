@@ -158,7 +158,7 @@ def contextualize_query(history, latest_query):
     
     try:
         completion = client.chat.completions.create(
-            model="xiaomi/mimo-v2-flash",
+            model="moonshotai/kimi-k2.5",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
@@ -222,7 +222,7 @@ def chat_endpoint():
 
                 # 4. Generate Answer with OpenRouter
                 completion = client.chat.completions.create(
-                    model="xiaomi/mimo-v2-flash",
+                    model="moonshotai/kimi-k2.5",
                     messages=[
                         {"role": "system", "content": "You are a helpful assistant."},
                         {"role": "user", "content": prompt}
@@ -327,7 +327,7 @@ def enrollment_chat_endpoint():
 
                 # 4. Generate Answer with OpenRouter
                 completion = client.chat.completions.create(
-                    model="xiaomi/mimo-v2-flash",
+                    model="moonshotai/kimi-k2.5",
                     messages=[
                         {"role": "system", "content": "You are a helpful assistant."},
                         {"role": "user", "content": prompt}
