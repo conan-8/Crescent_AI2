@@ -73,6 +73,30 @@ body.show-chatbot .chatbot header .close-btn {
     display: block;
 }
 
+/* New Chat Button */
+.chatbot header .new-chat-btn {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.chatbot header .new-chat-btn:hover {
+    color: #fff;
+}
+
+body.show-chatbot .chatbot header .new-chat-btn {
+    display: block;
+}
+
 .chatbot header h2 {
     font-size: 1.4rem;
     font-family: sans-serif;

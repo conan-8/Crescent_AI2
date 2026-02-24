@@ -4,10 +4,12 @@ const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
 const chatbox = document.querySelector(".chatbox");
 const closeBtn = document.querySelector(".close-btn");
+const newChatBtn = document.querySelector(".new-chat-btn");
 
 let userMessage = null;
 let chatHistory = []; // Store conversation history
 let waitingForName = false; // Flag to track if we are asking for user's name
+const initialGreeting = chatbox.innerHTML; // Store initial greeting for new chat reset
 // The address of your local Python server
 const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
 
@@ -259,6 +261,22 @@ chatbotToggler.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
     document.body.classList.remove("show-chatbot");
     window.parent.postMessage({ type: "toggle", showing: false }, "*");
+});
+
+// New Chat button: clear conversation and show greeting
+newChatBtn.addEventListener("click", () => {
+    chatbox.innerHTML = initialGreeting;
+    chatHistory = [];
+    chatInput.value = "";
+    waitingForName = false;
+
+    // Reset the enrollment banner button
+    const bannerBtn = document.getElementById("banner-schedule-btn");
+    if (bannerBtn) {
+        bannerBtn.textContent = "Schedule Call";
+        bannerBtn.disabled = false;
+        bannerBtn.classList.remove("banner-btn-waiting");
+    }
 });
 
 // --- Resizing Logic ---
