@@ -15,7 +15,7 @@ const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
     const chatLi = document.createElement("li");
     chatLi.classList.add("chat", className);
-    let chatContent = className === "outgoing" ? `<p></p>` : `<span>🤖</span><p></p>`;
+    let chatContent = className === "outgoing" ? `<p></p>` : `<span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28"><polygon points="6,17 9,2 14,13" fill="#D4A843"/><polygon points="7.5,16 9.5,6 12.5,13" fill="#F5E6B8"/><polygon points="26,17 23,2 18,13" fill="#D4A843"/><polygon points="24.5,16 22.5,6 19.5,13" fill="#F5E6B8"/><ellipse cx="16" cy="21" rx="12" ry="11" fill="#D4A843"/><ellipse cx="16" cy="26" rx="6.5" ry="5" fill="#F5E6B8"/><circle cx="12" cy="20" r="2.2" fill="#1a0a00"/><circle cx="20" cy="20" r="2.2" fill="#1a0a00"/><ellipse cx="16" cy="24" rx="1.8" ry="1.2" fill="#1a0a00"/></svg></span><p></p>`;
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").textContent = message;
     return chatLi;
