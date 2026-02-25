@@ -318,6 +318,20 @@ body.show-chatbot .chatbot header .new-chat-btn {
     opacity: 0.85;
 }
 
+/* Top-to-bottom reveal animation for AI responses */
+@keyframes revealTopToBottom {
+    from {
+        clip-path: inset(0 0 100% 0);
+        opacity: 0;
+    }
+    to {
+        clip-path: inset(0 0 0% 0);
+        opacity: 1;
+    }
+}
+
+.chatbox .incoming.response-reveal {
+    animation: revealTopToBottom 0.7s ease-out forwards;
 /* Schedule Call Inline Message */
 .schedule-call-msg {
     display: flex;
