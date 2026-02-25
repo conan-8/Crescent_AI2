@@ -22,7 +22,7 @@ const createChatLi = (message, className) => {
 }
 
 const startThinkingAnimation = (messageElement) => {
-    messageElement.innerHTML = '<div class="thinking-animation"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+    messageElement.innerHTML = '<span class="thinking-animation"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
 }
 
 const generateResponse = async (incomingChatLi) => {

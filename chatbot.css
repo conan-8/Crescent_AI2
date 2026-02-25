@@ -127,7 +127,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     /* Align icon to the bottom of the message */
 }
 
-.chatbox .incoming span {
+.chatbox .incoming > span {
     width: 32px;
     height: 32px;
     color: #fff;
@@ -381,7 +381,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
 
 /* Thinking Animation (bouncing dots) */
 .thinking-animation {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 5px;
     padding: 2px 0;
