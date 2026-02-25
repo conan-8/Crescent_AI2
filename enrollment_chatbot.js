@@ -1,7 +1,7 @@
 const chatbotToggler = document.querySelector(".chatbot-toggler");
 const chatbot = document.querySelector(".chatbot");
 const chatInput = document.querySelector(".chat-input textarea");
-const sendChatBtn = document.querySelector(".chat-input span");
+const sendChatBtn = document.querySelector("#send-btn");
 const chatbox = document.querySelector(".chatbox");
 const closeBtn = document.querySelector(".close-btn");
 
@@ -182,8 +182,9 @@ const handleChat = () => {
     chatbox.appendChild(createChatLi(userMessage, "outgoing"));
     chatbox.scrollTo(0, chatbox.scrollHeight);
 
-    // Clear the input area
+    // Clear the input area and reset send button
     chatInput.value = "";
+    sendChatBtn.classList.remove("active");
 
     // 1. Check if we are waiting for a name (Scheduler Flow)
     if (waitingForName) {
@@ -232,6 +233,15 @@ const handleChat = () => {
     // Call the real API
     generateResponse(incomingChatLi);
 }
+
+// Toggle send button active state based on textarea content
+chatInput.addEventListener("input", () => {
+    if (chatInput.value.trim()) {
+        sendChatBtn.classList.add("active");
+    } else {
+        sendChatBtn.classList.remove("active");
+    }
+});
 
 // Handle "Enter" key press
 chatInput.addEventListener("keydown", (e) => {

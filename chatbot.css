@@ -168,22 +168,38 @@ body.show-chatbot .chatbot header .close-btn {
 }
 
 /* Send Button */
-.chat-input span {
+.send-btn {
     align-self: flex-end;
-    color: #00401A;
+    margin-bottom: 10px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid #ccc;
+    background: #e8e8e8;
     cursor: pointer;
-    height: 55px;
     display: flex;
     align-items: center;
-    visibility: hidden;
-    /* Hidden by default */
-    font-size: 1.35rem;
-    padding-right: 25px;
+    justify-content: center;
+    flex-shrink: 0;
+    outline: none;
+    padding: 0;
+    transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-/* Show button when textarea has content OR is focused */
-.chat-input textarea:valid~span {
-    visibility: visible;
+.send-btn svg {
+    width: 15px;
+    height: 15px;
+    stroke: #aaa;
+    transition: stroke 0.2s ease;
+}
+
+.send-btn.active {
+    background: #00D403;
+    border-color: #009B02;
+}
+
+.send-btn.active svg {
+    stroke: #fff;
 }
 
 .chatbot-toggler span {
