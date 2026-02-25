@@ -170,7 +170,7 @@ body.show-chatbot .chatbot header .close-btn {
 /* Send Button */
 .chat-input span {
     align-self: flex-end;
-    color: #00401A;
+    color: #7AC143;
     cursor: pointer;
     height: 55px;
     display: flex;
