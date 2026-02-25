@@ -40,7 +40,7 @@ const initEnrollmentBanner = () => {
         // Bot message asking for name
         const askLi = createChatLi("Please provide your name so we can schedule your call with enrollment.", "incoming");
         chatbox.appendChild(askLi);
-        chatbox.scrollTo(0, chatbox.scrollHeight);
+        askLi.scrollIntoView({ behavior: "smooth", block: "start" });
 
         // Visual feedback: temporarily disable the button
         bannerBtn.textContent = "Awaiting Name...";
@@ -159,6 +159,11 @@ const generateResponse = async (incomingChatLi) => {
 
         messageElement.innerHTML = formatMessage(data.response);
 
+        // Trigger top-to-bottom reveal animation on the response
+        incomingChatLi.classList.remove("response-reveal");
+        void incomingChatLi.offsetHeight; // force reflow to restart animation
+        incomingChatLi.classList.add("response-reveal");
+
         // Add AI response to history
         chatHistory.push({ role: "model", content: data.response });
 
@@ -175,8 +180,8 @@ const generateResponse = async (incomingChatLi) => {
         }
         messageElement.style.color = "#cc0000";
     } finally {
-        // Scroll to bottom to see the new message
-        chatbox.scrollTo(0, chatbox.scrollHeight);
+        // Scroll to the top of the response so the user reads from the start
+        incomingChatLi.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 }
 
@@ -186,7 +191,6 @@ const handleChat = () => {
 
     // Append the user's message to the chatbox
     chatbox.appendChild(createChatLi(userMessage, "outgoing"));
-    chatbox.scrollTo(0, chatbox.scrollHeight);
 
     // Clear the input area and reset send button
     chatInput.value = "";
@@ -213,8 +217,9 @@ const handleChat = () => {
         chatHistory.push({ role: "model", content: confirmMsg });
 
         setTimeout(() => {
-            chatbox.appendChild(createChatLi(confirmMsg, "incoming"));
-            chatbox.scrollTo(0, chatbox.scrollHeight);
+            const confirmLi = createChatLi(confirmMsg, "incoming");
+            chatbox.appendChild(confirmLi);
+            confirmLi.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 600);
 
         // Reset the banner button so it can be used again
@@ -235,7 +240,8 @@ const handleChat = () => {
     const incomingChatLi = createChatLi("", "incoming");
     startThinkingAnimation(incomingChatLi.querySelector("p"));
     chatbox.appendChild(incomingChatLi);
-    chatbox.scrollTo(0, chatbox.scrollHeight);
+    // Scroll so the top of the incoming message is visible
+    incomingChatLi.scrollIntoView({ behavior: "smooth", block: "start" });
 
     // Call the real API
     generateResponse(incomingChatLi);
