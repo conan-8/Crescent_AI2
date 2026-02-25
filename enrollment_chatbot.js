@@ -228,6 +228,13 @@ const handleChat = () => {
         bannerBtn.disabled = false;
         bannerBtn.classList.remove("banner-btn-waiting");
 
+        // Reset the inline schedule call button so it can be used again
+        const inlineBtn = document.getElementById("inline-schedule-btn");
+        if (inlineBtn) {
+            inlineBtn.textContent = "📞 Schedule a Call";
+            inlineBtn.disabled = false;
+        }
+
         return;
     }
 
@@ -268,6 +275,30 @@ chatInput.addEventListener("keydown", (e) => {
 // Event Listeners
 sendChatBtn.addEventListener("click", handleChat);
 initEnrollmentBanner();
+
+// Handle inline schedule call button via event delegation (works after new-chat resets innerHTML)
+chatbox.addEventListener("click", (e) => {
+    if (!e.target.classList.contains("inline-schedule-btn")) return;
+    if (waitingForName) return;
+
+    waitingForName = true;
+
+    const askLi = createChatLi("Please provide your name so we can schedule your call with enrollment.", "incoming");
+    chatbox.appendChild(askLi);
+    chatbox.scrollTo(0, chatbox.scrollHeight);
+
+    // Disable the inline button as visual feedback
+    e.target.textContent = "📞 Awaiting Name...";
+    e.target.disabled = true;
+
+    // Keep the banner button in sync
+    const bannerBtn = document.getElementById("banner-schedule-btn");
+    if (bannerBtn) {
+        bannerBtn.textContent = "Awaiting Name...";
+        bannerBtn.disabled = true;
+        bannerBtn.classList.add("banner-btn-waiting");
+    }
+});
 chatbotToggler.addEventListener("click", () => {
     const isShowing = document.body.classList.toggle("show-chatbot");
     // Notify parent window of toggle

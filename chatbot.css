@@ -332,6 +332,51 @@ body.show-chatbot .chatbot header .new-chat-btn {
 
 .chatbox .incoming.response-reveal {
     animation: revealTopToBottom 0.7s ease-out forwards;
+/* Schedule Call Inline Message */
+.schedule-call-msg {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 75%;
+}
+
+.schedule-call-msg p {
+    background: #f2f2f2;
+    color: #000;
+    border-radius: 10px 10px 10px 0;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.inline-schedule-btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    background: #00401A;
+    color: #fff;
+    transition: background 0.2s, transform 0.1s;
+    align-self: flex-start;
+}
+
+.inline-schedule-btn:hover:not(:disabled) {
+    background: #002a11;
+    transform: scale(1.03);
+}
+
+.inline-schedule-btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.inline-schedule-btn:disabled {
+    background: #78909c;
+    cursor: default;
+    opacity: 0.85;
 }
 
 /* Thinking Animation (bouncing dots) */
