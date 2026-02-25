@@ -1,11 +1,13 @@
 const chatbotToggler = document.querySelector(".chatbot-toggler");
 const chatbot = document.querySelector(".chatbot");
 const chatInput = document.querySelector(".chat-input textarea");
-const sendChatBtn = document.querySelector(".chat-input span");
+const sendChatBtn = document.querySelector("#send-btn");
 const chatbox = document.querySelector(".chatbox");
+const newChatBtn = document.querySelector(".new-chat-btn");
 
 let userMessage = null;
 let chatHistory = []; // Store conversation history
+const initialGreeting = chatbox.innerHTML; // Store initial greeting for new chat reset
 // The address of your local Python server
 const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
 
@@ -17,6 +19,10 @@ const createChatLi = (message, className) => {
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").textContent = message;
     return chatLi;
+}
+
+const startThinkingAnimation = (messageElement) => {
+    messageElement.innerHTML = '<div class="thinking-animation"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
 }
 
 const generateResponse = async (incomingChatLi) => {
@@ -159,17 +165,28 @@ const handleChat = () => {
     // Add user message to history
     chatHistory.push({ role: "user", content: userMessage });
 
-    // Clear the input area
+    // Clear the input area and reset send button
     chatInput.value = "";
+    sendChatBtn.classList.remove("active");
 
-    // Display "Thinking..." message while we wait
-    const incomingChatLi = createChatLi("Thinking...", "incoming");
+    // Display animated thinking indicator while we wait
+    const incomingChatLi = createChatLi("", "incoming");
+    startThinkingAnimation(incomingChatLi.querySelector("p"));
     chatbox.appendChild(incomingChatLi);
     chatbox.scrollTo(0, chatbox.scrollHeight);
 
     // Call the real API
     generateResponse(incomingChatLi);
 }
+
+// Toggle send button active state based on textarea content
+chatInput.addEventListener("input", () => {
+    if (chatInput.value.trim()) {
+        sendChatBtn.classList.add("active");
+    } else {
+        sendChatBtn.classList.remove("active");
+    }
+});
 
 // Handle "Enter" key press
 chatInput.addEventListener("keydown", (e) => {
@@ -186,6 +203,13 @@ chatbotToggler.addEventListener("click", () => {
     const isShowing = document.body.classList.toggle("show-chatbot");
     // Notify parent window of toggle
     window.parent.postMessage({ type: "toggle", showing: isShowing }, "*");
+});
+
+// New Chat button: clear conversation and show greeting
+newChatBtn.addEventListener("click", () => {
+    chatbox.innerHTML = initialGreeting;
+    chatHistory = [];
+    chatInput.value = "";
 });
 
 // --- Resizing Logic ---

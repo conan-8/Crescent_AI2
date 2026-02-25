@@ -1,13 +1,15 @@
 const chatbotToggler = document.querySelector(".chatbot-toggler");
 const chatbot = document.querySelector(".chatbot");
 const chatInput = document.querySelector(".chat-input textarea");
-const sendChatBtn = document.querySelector(".chat-input span");
+const sendChatBtn = document.querySelector("#send-btn");
 const chatbox = document.querySelector(".chatbox");
 const closeBtn = document.querySelector(".close-btn");
+const newChatBtn = document.querySelector(".new-chat-btn");
 
 let userMessage = null;
 let chatHistory = []; // Store conversation history
 let waitingForName = false; // Flag to track if we are asking for user's name
+const initialGreeting = chatbox.innerHTML; // Store initial greeting for new chat reset
 // The address of your local Python server
 const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
 
@@ -19,6 +21,10 @@ const createChatLi = (message, className) => {
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").textContent = message;
     return chatLi;
+}
+
+const startThinkingAnimation = (messageElement) => {
+    messageElement.innerHTML = '<div class="thinking-animation"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
 }
 
 const initEnrollmentBanner = () => {
@@ -182,8 +188,9 @@ const handleChat = () => {
     chatbox.appendChild(createChatLi(userMessage, "outgoing"));
     chatbox.scrollTo(0, chatbox.scrollHeight);
 
-    // Clear the input area
+    // Clear the input area and reset send button
     chatInput.value = "";
+    sendChatBtn.classList.remove("active");
 
     // 1. Check if we are waiting for a name (Scheduler Flow)
     if (waitingForName) {
@@ -224,14 +231,24 @@ const handleChat = () => {
     // Add user message to history
     chatHistory.push({ role: "user", content: userMessage });
 
-    // Display "Thinking..." message while we wait
-    const incomingChatLi = createChatLi("Thinking...", "incoming");
+    // Display animated thinking indicator while we wait
+    const incomingChatLi = createChatLi("", "incoming");
+    startThinkingAnimation(incomingChatLi.querySelector("p"));
     chatbox.appendChild(incomingChatLi);
     chatbox.scrollTo(0, chatbox.scrollHeight);
 
     // Call the real API
     generateResponse(incomingChatLi);
 }
+
+// Toggle send button active state based on textarea content
+chatInput.addEventListener("input", () => {
+    if (chatInput.value.trim()) {
+        sendChatBtn.classList.add("active");
+    } else {
+        sendChatBtn.classList.remove("active");
+    }
+});
 
 // Handle "Enter" key press
 chatInput.addEventListener("keydown", (e) => {
@@ -254,6 +271,22 @@ chatbotToggler.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
     document.body.classList.remove("show-chatbot");
     window.parent.postMessage({ type: "toggle", showing: false }, "*");
+});
+
+// New Chat button: clear conversation and show greeting
+newChatBtn.addEventListener("click", () => {
+    chatbox.innerHTML = initialGreeting;
+    chatHistory = [];
+    chatInput.value = "";
+    waitingForName = false;
+
+    // Reset the enrollment banner button
+    const bannerBtn = document.getElementById("banner-schedule-btn");
+    if (bannerBtn) {
+        bannerBtn.textContent = "Schedule Call";
+        bannerBtn.disabled = false;
+        bannerBtn.classList.remove("banner-btn-waiting");
+    }
 });
 
 // --- Resizing Logic ---
