@@ -14,19 +14,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Enrollment URLs
+# Enrollment URLs (Starting Point)
 urls = [
-    # "https://www.crescentschool.org/how-to-apply",
-    # "https://www.crescentschool.org/how-to-apply/visit-crescent",
-    # "https://www.crescentschool.org/how-to-apply/application-process",
-    # "https://www.crescentschool.org/how-to-apply/admission-dates-and-events",
-    # "https://www.crescentschool.org/how-to-apply/tuition-and-fees",
-    # "https://www.crescentschool.org/page/how-to-apply/financial-assistance",
-    # "https://www.crescentschool.org/how-to-apply/enrolment-team",
-    # "https://www.crescentschool.org/how-to-apply/faqs", //note ts did not crawl correctly
-    # "https://www.crescentschool.org/how-to-apply/answers-from-the-enrolment-office",
-    # "https://www.crescentschool.org/how-to-apply/apply-now"
+    "https://www.crescentschool.org/how-to-apply"
 ]
+
+MAX_DEPTH = 2
+ALLOWED_DOMAIN = "crescentschool.org"
+
 
 class ExtractedContent(BaseModel):
      relevant_text: str = Field(description="The clean text block containing only the content that is special to that specific URL.")
@@ -79,7 +74,7 @@ def get_chroma_db(name):
 
 async def crawlinfo(db):
     print("Starting crawl (LLM-based)...")
-    llm_conf = LLMConfig(provider="gemini/gemini-2.5-flash", api_token=os.environ.get("GEMINI_API_KEY"))
+    llm_conf = LLMConfig(provider="openrouter/qwen/qwen3.5-397b-a17b", api_token=os.environ.get("OPENROUTER_API_KEY"))
 
     extraction_strategy = LLMExtractionStrategy(
         llm_config=llm_conf,
@@ -104,13 +99,34 @@ async def crawlinfo(db):
     metadata_list = []
 
     async with AsyncWebCrawler() as crawler:
-        # Loop one-by-one to respect rate limits
-        for i, url in enumerate(urls):
-            print(f"\n[Crawling {i+1}/{len(urls)}] {url}")
+        queue = [{"url": u, "depth": 0} for u in urls]
+        visited = set()
+
+        while queue:
+            current = queue.pop(0)
+            url = current["url"]
+            depth = current["depth"]
+
+            if url in visited: continue
+            visited.add(url)
+            
+            print(f"\n[Crawling Depth {depth} | Queue: {len(queue)}] {url}")
             
             result = await crawler.arun(url, config=run_conf)
             
             if result.success and result.extracted_content:
+                # Add discovered internal links to queue
+                if depth < MAX_DEPTH and hasattr(result, 'links') and isinstance(result.links, dict):
+                    internal_links = result.links.get('internal', [])
+                    for link_obj in internal_links:
+                        next_url = link_obj.get('href')
+                        if next_url and ALLOWED_DOMAIN in next_url:
+                            # Clean URL (remove fragments)
+                            clean_url = next_url.split('#')[0]
+                            # Only add if it's not already in visited or queue to save space
+                            if clean_url not in visited and not any(q['url'] == clean_url for q in queue):
+                                queue.append({"url": clean_url, "depth": depth + 1})
+
                 try:
                     # The result is a JSON string
                     data = json.loads(result.extracted_content)
@@ -142,11 +158,6 @@ async def crawlinfo(db):
                     print(f"[ERROR] processing {url}: {e}")
             else:
                 print(f"[ERROR] Crawl failed for {url}: {result.error_message}")
-            
-            # Rate limit wait
-            if i < len(urls) - 1:
-                print("Waiting 10 seconds for 'generate_content' rate limit...")
-                await asyncio.sleep(10)
 
     # Add all chunks to ChromaDB
     if doc_list:
@@ -162,7 +173,7 @@ async def crawlinfo(db):
 
 def main():
         # Using the enrollment_info collection
-        db = get_chroma_db("enrollment_info")
+        db = get_chroma_db("test")
         asyncio.run(crawlinfo(db))
         print(f"Total documents in enrollment_info: {db.count()}")
 
