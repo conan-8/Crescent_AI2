@@ -89,7 +89,7 @@ CORS(app) # Allow your HTML website to talk to this Python script
 limiter = Limiter(
     get_client_fingerprint,
     app=app,
-    default_limits=["200 per day", "50 per hour"],
+    default_limits=["200 per day", "100 per hour"],
     storage_uri="memory://",
 )
 
