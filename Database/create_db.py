@@ -16,10 +16,10 @@ load_dotenv()
 
 # Enrollment URLs (Starting Point)
 urls = [
-    "https://www.crescentschool.org/how-to-apply"
+    "https://www.crescentschool.org"
 ]
 
-MAX_DEPTH = 2
+MAX_DEPTH = 4
 ALLOWED_DOMAIN = "crescentschool.org"
 
 
@@ -101,6 +101,7 @@ async def crawlinfo(db):
     async with AsyncWebCrawler() as crawler:
         queue = [{"url": u, "depth": 0} for u in urls]
         visited = set()
+        pages_crawled = 0
 
         while queue:
             current = queue.pop(0)
@@ -140,17 +141,16 @@ async def crawlinfo(db):
 
                     if not extracted_text:
                         print(f"[WARN] LLM returned no 'relevant_text' for {url}")
-                        continue
-
-                    # Split the extracted text
-                    chunks = text_splitter.split_text(extracted_text)
-                    print(f"[OK] Extracted and split into {len(chunks)} chunks.")
-                    
-                    for j, chunk in enumerate(chunks):
-                        doc_list.append(chunk)
-                        chunk_id = f"{url}_chunk_{j}"
-                        id_list.append(chunk_id)
-                        metadata_list.append({"source": url})
+                    else:
+                        # Split the extracted text
+                        chunks = text_splitter.split_text(extracted_text)
+                        print(f"[OK] Extracted and split into {len(chunks)} chunks.")
+                        
+                        for j, chunk in enumerate(chunks):
+                            doc_list.append(chunk)
+                            chunk_id = f"{url}_chunk_{j}"
+                            id_list.append(chunk_id)
+                            metadata_list.append({"source": url})
 
                 except json.JSONDecodeError:
                     print(f"[ERROR] Failed to parse LLM output for {url}")
@@ -158,10 +158,22 @@ async def crawlinfo(db):
                     print(f"[ERROR] processing {url}: {e}")
             else:
                 print(f"[ERROR] Crawl failed for {url}: {result.error_message}")
+                
+            pages_crawled += 1
+            if pages_crawled % 10 == 0 and doc_list:
+                print(f"\n[INFO] Saving {len(doc_list)} chunks to ChromaDB at {pages_crawled} pages...")
+                db.add(
+                    ids=id_list,
+                    documents=doc_list,
+                    metadatas=metadata_list
+                )
+                doc_list.clear() # clear memory for next batch
+                id_list.clear()
+                metadata_list.clear()
 
-    # Add all chunks to ChromaDB
+    # Add remaining chunks to ChromaDB
     if doc_list:
-        print(f"\nCrawl complete. Adding {len(doc_list)} total document chunks to ChromaDB...")
+        print(f"\nCrawl complete. Adding remaining {len(doc_list)} document chunks to ChromaDB...")
         db.add(
             ids=id_list,
             documents=doc_list,
@@ -169,13 +181,13 @@ async def crawlinfo(db):
         )
         print("Done.")
     else:
-        print("No successful documents to add.")
+        print("\nCrawl complete. No remaining documents to add.")
 
 def main():
         # Using the enrollment_info collection
-        db = get_chroma_db("test")
+        db = get_chroma_db("full_database")
         asyncio.run(crawlinfo(db))
-        print(f"Total documents in enrollment_info: {db.count()}")
+        print(f"Total documents in full_database: {db.count()}")
 
 if __name__ == "__main__":
         main()

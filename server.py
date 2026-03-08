@@ -100,14 +100,13 @@ def ratelimit_handler(e):
 print("--- Crescent AI Server Starting ---")
 
 # 3. Initialize the Database
-# We use the same collection name "family_handbook_1" as your main() function
 try:
-    db = get_chroma_db("family_handbook_1")
-    count = db.count()
-    print(f"Database loaded successfully. Documents indexed: {count}")
+    full_database = get_chroma_db("full_database")
+    count = full_database.count()
+    print(f"Full database loaded successfully. Documents indexed: {count}")
 except Exception as e:
-    print(f"CRITICAL ERROR loading database: {e}")
-    db = None
+    print(f"CRITICAL ERROR loading full database: {e}")
+    full_database = None
 
 # Initialize Conversations Database
 try:
@@ -117,22 +116,13 @@ except Exception as e:
     print(f"Error loading conversations database: {e}")
     conversations_db = None
 
-# Initialize Enrollment Database
+# Initialize Full Database Conversations Database
 try:
-    enrollment_db = get_chroma_db("enrollment_info")
-    count_enroll = enrollment_db.count()
-    print(f"Enrollment database loaded successfully. Documents indexed: {count_enroll}")
+    full_database_conversations = get_chroma_db("full_database_conversations")
+    print("Full database conversations loaded successfully.")
 except Exception as e:
-    print(f"CRITICAL ERROR loading enrollment database: {e}")
-    enrollment_db = None
-
-# Initialize Enrollment Conversations Database
-try:
-    enrollment_conversations_db = get_chroma_db("enrollment_conversations")
-    print("Enrollment conversations database loaded successfully.")
-except Exception as e:
-    print(f"Error loading enrollment conversations database: {e}")
-    enrollment_conversations_db = None
+    print(f"Error loading full database conversations: {e}")
+    full_database_conversations = None
 
 def contextualize_query(history, latest_query):
     if not history:
@@ -175,7 +165,7 @@ def contextualize_query(history, latest_query):
 @limiter.limit("5 per minute")
 def chat_endpoint():
     # Safety check
-    if not db:
+    if not full_database:
         return jsonify({"response": "Error: Database connection failed. Check server console."}), 500
 
     # Get message from Frontend
@@ -211,7 +201,7 @@ def chat_endpoint():
                 print(f"[Rewritten Query]: {search_query}")
 
             # 1. Retrieve Context using the REWRITTEN query
-            passage, metadatas = get_relevant_documents(search_query, enrollment_db)
+            passage, metadatas = get_relevant_documents(search_query, full_database)
             
             # 2. Validation
             if passage == "No relevant information found.":
@@ -279,7 +269,7 @@ def chat_endpoint():
 @limiter.limit("5 per minute")
 def enrollment_chat_endpoint():
     # Safety check
-    if not enrollment_db:
+    if not full_database:
         return jsonify({"response": "Error: Enrollment database connection failed. Check server console."}), 500
 
     # Get message from Frontend
@@ -315,7 +305,7 @@ def enrollment_chat_endpoint():
                 print(f"[Rewritten Query]: {search_query}")
 
             # 1. Retrieve Context
-            passage, metadatas = get_relevant_documents(search_query, enrollment_db)
+            passage, metadatas = get_relevant_documents(search_query, full_database)
             
             # 2. Validation
             if passage == "No relevant information found.":
@@ -361,12 +351,12 @@ def enrollment_chat_endpoint():
                 print(f"[Enrollment Answer]: {response_text}")
 
         # 5. Log Conversation
-        if enrollment_conversations_db:
+        if full_database_conversations:
             try:
                 interaction_id = str(uuid.uuid4())
                 timestamp = datetime.datetime.now().isoformat()
                 log_entry = f"User: {user_query}\nAI: {response_text}"
-                enrollment_conversations_db.add(
+                full_database_conversations.add(
                     documents=[log_entry],
                     metadatas=[{"role": "interaction", "timestamp": timestamp}],
                     ids=[interaction_id]

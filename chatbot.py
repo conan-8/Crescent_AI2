@@ -77,7 +77,7 @@ ANSWER:
 """
 
 def main():
-    db = get_chroma_db("family_handbook_1")
+    db = get_chroma_db("full_database")
     
     # DIAGNOSTIC CODE
     print(f"Database loaded with {db.count()} documents")
