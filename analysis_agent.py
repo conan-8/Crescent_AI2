@@ -13,7 +13,7 @@ load_dotenv()
 API_KEY = os.environ.get("GEMINI_API_KEY") # Still needed for embeddings
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 DB_PATH = os.environ.get("CHROMA_DB_PATH")
-COLLECTION_NAME = "enrollment_conversations"
+COLLECTION_NAME = "full_database_conversations"
 MODEL_NAME = "qwen/qwen3.5-397b-a17b"
 
 def get_chroma_collection():

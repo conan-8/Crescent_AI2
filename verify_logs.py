@@ -10,7 +10,7 @@ def verify_logs():
         )
         
         chroma_client = chromadb.PersistentClient(path=r"C:\crescent_ai_source")
-        collection = chroma_client.get_collection(name="enrollment_conversations", embedding_function=google_ef)
+        collection = chroma_client.get_collection(name="full_database_conversations", embedding_function=google_ef)
         
         count = collection.count()
         print(f"Total conversations logged: {count}")

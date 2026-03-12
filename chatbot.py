@@ -72,6 +72,15 @@ Critical Rules:
 {history_text}
 QUESTION: {query}
 PASSAGE: {escaped}
+For your information, here are also some facts about Crescent School to be considered in your response if relevant:
+1. Founding Year of Crescent: 1913
+2. There are 800 students in Crescent
+3. The student-teacher ratio is 9:1
+4. The average Class size is 18
+5. 41% of teachers have advanced degrees
+6. Over $1.2 Million in student financial Aid annually provided
+7. 99% of the 2022 grads were Ontario scholars
+8. 100% of the 2024 Grads received University Offers
 
 ANSWER:
 """
