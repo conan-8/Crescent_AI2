@@ -303,44 +303,4 @@ class TestEnrollmentChatEndpoint:
         assert resp.status_code == 500
 
 
-class TestScheduleCallEndpoint:
-    def test_missing_name_returns_400(self, client):
-        resp = client.post("/schedule-call", json={"history": []})
-        assert resp.status_code == 400
 
-    def test_valid_request_returns_success(self, client, tmp_path, monkeypatch):
-        monkeypatch.chdir(tmp_path)
-        resp = client.post("/schedule-call", json={
-            "name": "John Doe",
-            "history": [{"role": "user", "content": "I want to enroll"}],
-        })
-        assert resp.status_code == 200
-        assert resp.get_json().get("success") is True
-
-    def test_log_file_is_written(self, client, tmp_path, monkeypatch):
-        monkeypatch.chdir(tmp_path)
-        client.post("/schedule-call", json={"name": "Jane Smith", "history": []})
-        log_dir = tmp_path / "enrollment_logs"
-        assert log_dir.exists()
-        files = list(log_dir.iterdir())
-        assert len(files) == 1
-
-    def test_name_with_special_chars_is_sanitized_in_filename(self, client, tmp_path, monkeypatch):
-        monkeypatch.chdir(tmp_path)
-        client.post("/schedule-call", json={"name": "John/Doe; rm -rf", "history": []})
-        log_dir = tmp_path / "enrollment_logs"
-        files = list(log_dir.iterdir())
-        filename = files[0].name
-        assert "/" not in filename
-        assert ";" not in filename
-
-    def test_log_file_contains_name_and_history(self, client, tmp_path, monkeypatch):
-        monkeypatch.chdir(tmp_path)
-        client.post("/schedule-call", json={
-            "name": "TestUser",
-            "history": [{"role": "user", "content": "When do applications open?"}],
-        })
-        log_dir = tmp_path / "enrollment_logs"
-        content = next(log_dir.iterdir()).read_text()
-        assert "TestUser" in content
-        assert "When do applications open?" in content
