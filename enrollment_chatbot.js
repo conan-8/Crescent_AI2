@@ -206,22 +206,27 @@ const handleChat = () => {
     }
 
     // Append the user's message to the chatbox
-    chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+    const outgoingChatLi = createChatLi(userMessage, "outgoing");
+    chatbox.appendChild(outgoingChatLi);
+
+    // Add user message to history
+    chatHistory.push({ role: "user", content: userMessage });
 
     // Clear the input area and reset send button
     chatInput.value = "";
     chatInput.style.height = "38px";
     sendChatBtn.classList.remove("active");
 
-    // Enrollment banner is persistent — no cleanup generatedScheduler buttons here
-
-    // Add user message to history
-    chatHistory.push({ role: "user", content: userMessage });
-
     // Display animated thinking indicator while we wait
     const incomingChatLi = createChatLi("", "incoming");
     startThinkingAnimation(incomingChatLi.querySelector("p"));
     chatbox.appendChild(incomingChatLi);
+
+    // Scroll the chatbox so the user's new message is at the top
+    chatbox.scrollTo({
+        top: outgoingChatLi.offsetTop - 15, // 15px matches the chatbox padding-top
+        behavior: 'smooth'
+    });
 
     // Call the real API
     generateResponse(incomingChatLi);
