@@ -36,7 +36,10 @@
     pointer-events: none;
     transform: scale(0.5);
     transform-origin: bottom right;
-    box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.06),
+        0 8px 24px rgba(0, 0, 0, 0.08),
+        0 24px 48px rgba(0, 0, 0, 0.10),
         0 32px 64px -48px rgba(0, 0, 0, 0.5);
     transition: all 0.1s ease;
     z-index: 9999;
