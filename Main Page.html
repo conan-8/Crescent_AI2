@@ -9968,12 +9968,8 @@
         (function () {
             var popup = document.getElementById('chatbot-hint-popup');
             var closeBtn = document.getElementById('chatbot-hint-close');
-            if (localStorage.getItem('crescentChatbotHintShown')) {
-                popup.classList.add('chatbot-hint-hidden');
-            }
             function dismissHint() {
                 popup.classList.add('chatbot-hint-hidden');
-                localStorage.setItem('crescentChatbotHintShown', '1');
             }
             closeBtn.addEventListener('click', dismissHint);
             window.addEventListener('message', function (event) {
