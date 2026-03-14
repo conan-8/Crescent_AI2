@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #00401A;
+    background: #006e4f;
     /* Crescent School Green */
     transition: all 0.2s ease;
     z-index: 9999;
@@ -56,7 +56,7 @@ body.show-chatbot .chatbot {
     position: relative;
     text-align: center;
     color: #fff;
-    background: #00401A;
+    background: #006e4f;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
 }
@@ -131,7 +131,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     width: 32px;
     height: 32px;
     color: #fff;
-    background: #00401A;
+    background: #006e4f;
     text-align: center;
     line-height: 32px;
     border-radius: 4px;
@@ -164,7 +164,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
 }
 
 .chatbox .outgoing p {
-    background: #00401A;
+    background: #006e4f;
     color: #fff;
     border-radius: 10px 10px 0 10px;
     max-width: 75%;
@@ -225,8 +225,8 @@ body.show-chatbot .chatbot header .new-chat-btn {
 }
 
 .send-btn.active {
-    background: #00D403;
-    border-color: #009B02;
+    background: #006e4f;
+    border-color: #005a41;
 }
 
 .send-btn.active svg {
@@ -296,7 +296,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     font-family: 'Noto Rashi Hebrew', sans-serif;
     font-size: 0.82rem;
     font-weight: 600;
-    background: #00401A;
+    background: #006e4f;
     color: #fff;
     transition: background 0.2s, transform 0.1s;
     white-space: nowrap;
@@ -304,7 +304,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
 }
 
 .banner-btn:hover:not(:disabled) {
-    background: #002a11;
+    background: #004d37;
     transform: scale(1.03);
 }
 
@@ -360,14 +360,14 @@ body.show-chatbot .chatbot header .new-chat-btn {
     font-family: 'Noto Rashi Hebrew', sans-serif;
     font-size: 0.88rem;
     font-weight: 600;
-    background: #00401A;
+    background: #006e4f;
     color: #fff;
     transition: background 0.2s, transform 0.1s;
     align-self: flex-start;
 }
 
 .inline-schedule-btn:hover:not(:disabled) {
-    background: #002a11;
+    background: #004d37;
     transform: scale(1.03);
 }
 
@@ -384,7 +384,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
 /* Bullet point dots green, text stays black */
 .chatbox .incoming p ul li::marker,
 .chatbox .incoming p ol li::marker {
-    color: #00401a;
+    color: #006e4f;
 }
 
 /* Thinking Animation (bouncing dots) */
@@ -398,7 +398,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
 .thinking-animation .dot {
     width: 8px;
     height: 8px;
-    background: #00401A;
+    background: #006e4f;
     border-radius: 50%;
     animation: thinking-bounce 1.4s infinite ease-in-out both;
 }
