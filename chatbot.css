@@ -242,6 +242,26 @@ body.show-chatbot .chatbot header .new-chat-btn {
     height: auto;
     /* Reset fixed height */
     padding: 15px 10px 100px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.chatbot .chatbox::-webkit-scrollbar {
+    width: 4px;
+    background-color: transparent;
+}
+
+.chatbot .chatbox::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chatbot .chatbox::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+}
+
+.chatbot .chatbox::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .chatbox .chat {
@@ -339,31 +359,31 @@ body.show-chatbot .chatbot header .new-chat-btn {
     display: flex;
     align-items: flex-end;
     background: #fff;
-    padding: 0 8px 8px 16px;
+    padding: 8px 8px 8px 16px;
     border: 1px solid #c0c0c0;
     border-radius: 18px;
     z-index: 10;
 }
 
 .chat-input textarea {
-    height: 55px;
+    height: 38px;
     width: 100%;
     border: none;
     outline: none;
     resize: none;
     max-height: 180px;
-    padding: 14px 10px 14px 0;
+    padding: 9px 10px 9px 0;
     font-size: 0.95rem;
     font-family: 'Tajawal', sans-serif;
     background: transparent;
+    line-height: 20px;
 }
 
 /* Send Button */
 .send-btn {
-    align-self: flex-end;
-    margin-bottom: 0;
     width: 34px;
     height: 34px;
+    margin-bottom: 2px;
     border-radius: 10px;
     border: 1.5px solid #ccc;
     background: #e8e8e8;

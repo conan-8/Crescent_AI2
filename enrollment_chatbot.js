@@ -203,6 +203,7 @@ const handleChat = () => {
 
     // Clear the input area and reset send button
     chatInput.value = "";
+    chatInput.style.height = "38px";
     sendChatBtn.classList.remove("active");
 
     // Enrollment banner is persistent — no cleanup generatedScheduler buttons here
@@ -221,6 +222,12 @@ const handleChat = () => {
 
 // Toggle send button active state based on textarea content
 chatInput.addEventListener("input", () => {
+    // Adjust height dynamically based on content
+    chatInput.style.height = "38px";
+    let newHeight = chatInput.scrollHeight;
+    if (newHeight > 180) newHeight = 180; // ensure max height is respected, but scroll kicks in
+    chatInput.style.height = `${newHeight}px`;
+
     if (chatInput.value.trim()) {
         sendChatBtn.classList.add("active");
     } else {
@@ -259,6 +266,7 @@ newChatBtn.addEventListener("click", () => {
     showWelcome();
     chatHistory = [];
     chatInput.value = "";
+    chatInput.style.height = "38px";
     sendChatBtn.classList.remove("active");
 });
 
