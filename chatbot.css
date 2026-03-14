@@ -234,6 +234,44 @@ body.show-chatbot .chatbot header .new-chat-btn {
     margin: 0;
 }
 
+/* Source Citation Bubble */
+.source-line {
+    margin-top: 8px;
+}
+
+.source-bubble {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.06);
+    color: #666;
+    font-size: 0.72rem;
+    padding: 3px 9px 3px 7px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-family: 'Tajawal', sans-serif;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.source-bubble:hover {
+    background: rgba(0, 110, 79, 0.08);
+    color: #006e4f;
+    border-color: rgba(0, 110, 79, 0.25);
+    text-decoration: none;
+}
+
+.source-bubble svg {
+    flex-shrink: 0;
+    opacity: 0.6;
+}
+
 /* Input Area */
 .chatbot .chat-input {
     position: absolute;
