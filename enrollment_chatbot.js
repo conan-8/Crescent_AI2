@@ -64,6 +64,18 @@ const generateResponse = async (incomingChatLi) => {
         // Update the "Thinking..." text with the real answer
         // Helper to format text: escape HTML, parse markdown, linkify URLs, handle newlines
         const formatMessage = (text) => {
+            // 0. Extract source line before processing to avoid regex conflicts
+            let sourceBubbleHtml = '';
+            const sourceMatch = text.match(/\n\nSource:\s+(https?:\/\/\S+)/);
+            if (sourceMatch) {
+                const rawUrl = sourceMatch[1];
+                const domainMatch = rawUrl.match(/https?:\/\/(?:www\.)?([^\/\s?#]+)/);
+                const displayName = domainMatch ? domainMatch[1] : 'Source';
+                const safeUrl = rawUrl.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+                sourceBubbleHtml = `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer" class="source-bubble"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2L2 10M10 2H5M10 2V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>${displayName}</a>`;
+                text = text.replace(/\n\nSource:\s+https?:\/\/\S+/, '');
+            }
+
             // 1. Escape HTML to prevent XSS (must happen first)
             let safeText = text.replace(/&/g, "&amp;")
                 .replace(/</g, "&lt;")
@@ -140,6 +152,11 @@ const generateResponse = async (incomingChatLi) => {
             safeText = safeText.replace(/<\/ol><br>/g, '</ol>');
             safeText = safeText.replace(/<ul><br>/g, '<ul>');
             safeText = safeText.replace(/<ol><br>/g, '<ol>');
+
+            // Append source bubble if present
+            if (sourceBubbleHtml) {
+                safeText += '<div class="source-line">' + sourceBubbleHtml + '</div>';
+            }
 
             return safeText;
         };
