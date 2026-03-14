@@ -9904,6 +9904,85 @@
             }
         });
     </script>
+
+    <!-- Chatbot Hint Popup -->
+    <style>
+        @keyframes chatbotHintBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        #chatbot-hint-popup {
+            position: fixed;
+            bottom: 200px;
+            right: 18px;
+            background: #006e4f;
+            color: #fff;
+            padding: 10px 32px 10px 14px;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            z-index: 10001;
+            max-width: 200px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            animation: chatbotHintBounce 2s ease-in-out infinite;
+        }
+        #chatbot-hint-popup.chatbot-hint-hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.85);
+            animation: none;
+        }
+        #chatbot-hint-close {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            opacity: 0.8;
+        }
+        #chatbot-hint-close:hover { opacity: 1; }
+        #chatbot-hint-arrow {
+            position: absolute;
+            bottom: -9px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            border-top: 9px solid #006e4f;
+        }
+    </style>
+    <div id="chatbot-hint-popup">
+        <button id="chatbot-hint-close" title="Dismiss">✕</button>
+        Try our student developed chatbot here!
+        <div id="chatbot-hint-arrow"></div>
+    </div>
+    <script>
+        (function () {
+            var popup = document.getElementById('chatbot-hint-popup');
+            var closeBtn = document.getElementById('chatbot-hint-close');
+            if (localStorage.getItem('crescentChatbotHintShown')) {
+                popup.classList.add('chatbot-hint-hidden');
+            }
+            function dismissHint() {
+                popup.classList.add('chatbot-hint-hidden');
+                localStorage.setItem('crescentChatbotHintShown', '1');
+            }
+            closeBtn.addEventListener('click', dismissHint);
+            window.addEventListener('message', function (event) {
+                if (event.data && event.data.type === 'toggle' && event.data.showing) {
+                    dismissHint();
+                }
+            });
+        })();
+    </script>
 </body>
 
 </html>
