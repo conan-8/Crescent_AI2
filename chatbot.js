@@ -8,6 +8,14 @@ const newChatBtn = document.querySelector(".new-chat-btn");
 let userMessage = null;
 let chatHistory = []; // Store conversation history
 const welcomeScreen = document.getElementById('welcome-screen');
+
+const showWelcome = () => {
+    if (!welcomeScreen) return;
+    welcomeScreen.classList.remove('hidden');
+    welcomeScreen.classList.remove('fade-in');
+    void welcomeScreen.offsetWidth; // force reflow to restart animation
+    welcomeScreen.classList.add('fade-in');
+};
 // The address of your local Python server
 const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
 
@@ -209,15 +217,17 @@ chatInput.addEventListener("keydown", (e) => {
 sendChatBtn.addEventListener("click", handleChat);
 chatbotToggler.addEventListener("click", () => {
     const isShowing = document.body.classList.toggle("show-chatbot");
-    // Notify parent window of toggle
     window.parent.postMessage({ type: "toggle", showing: isShowing }, "*");
+    if (isShowing && welcomeScreen && !welcomeScreen.classList.contains('hidden')) {
+        showWelcome();
+    }
 });
 
 // New Chat button: clear conversation and restore welcome screen
 newChatBtn.addEventListener("click", () => {
     chatbox.innerHTML = "";
     chatbox.style.display = 'none';
-    if (welcomeScreen) welcomeScreen.classList.remove('hidden');
+    showWelcome();
     chatHistory = [];
     chatInput.value = "";
     sendChatBtn.classList.remove("active");
