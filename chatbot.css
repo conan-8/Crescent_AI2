@@ -57,7 +57,6 @@ body.show-chatbot .chatbot {
     text-align: center;
     color: #1c1c1e;
     background: #ffffff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
 }
 
@@ -121,12 +120,29 @@ body.show-chatbot .chatbot header .new-chat-btn {
     display: flex;
 }
 
-.chatbot header h2 {
-    font-size: 1.1rem;
+/* Welcome Screen - large bold greeting shown before first message */
+.welcome-screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 28px;
+    text-align: center;
+}
+
+.welcome-screen .welcome-text {
     font-family: 'Tajawal', sans-serif;
-    margin: 0;
-    font-weight: 600;
+    font-size: 1.75rem;
+    font-weight: 700;
     color: #1c1c1e;
+    line-height: 1.35;
+    margin: 0;
+    max-width: 340px;
+}
+
+.welcome-screen.hidden {
+    display: none;
 }
 
 /* Chatbox */
