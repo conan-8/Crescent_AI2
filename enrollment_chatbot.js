@@ -159,10 +159,7 @@ const generateResponse = async (incomingChatLi) => {
         }
         messageElement.style.color = "#cc0000";
     } finally {
-        // Snap instantly to the top of the response so the user sees the beginning.
-        // Using "instant" prevents the browser from first rendering the bottom of a
-        // long reply and then smooth-scrolling up, which is the old jarring behavior.
-        incomingChatLi.scrollIntoView({ behavior: "instant", block: "start" });
+        // No scroll — response stays below the visible area; user scrolls manually.
     }
 }
 
@@ -186,8 +183,6 @@ const handleChat = () => {
     const incomingChatLi = createChatLi("", "incoming");
     startThinkingAnimation(incomingChatLi.querySelector("p"));
     chatbox.appendChild(incomingChatLi);
-    // Scroll so the top of the incoming message is visible
-    incomingChatLi.scrollIntoView({ behavior: "smooth", block: "start" });
 
     // Call the real API
     generateResponse(incomingChatLi);

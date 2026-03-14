@@ -331,7 +331,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
 }
 
 .chatbox .incoming.response-reveal {
-    animation: revealTopToBottom 0.7s ease-out forwards;
+    animation: revealTopToBottom 1.2s ease-out forwards;
 }
 
 /* Schedule Call Inline Message */
