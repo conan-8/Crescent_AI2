@@ -117,7 +117,7 @@ const generateResponse = async (incomingChatLi) => {
             // 4. Linkify URLs (after markdown to avoid conflicts)
             safeText = safeText.replace(
                 /(https?:\/\/[^\s<]+)/g,
-                '<a href="$1" target="_blank" style="color: #00401A; text-decoration: underline; max-width: 100%; display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; white-space: nowrap;">$1</a>'
+                '<a href="$1" target="_blank" style="color: #006e4f; text-decoration: underline; max-width: 100%; display: inline-block; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; white-space: nowrap;">$1</a>'
             );
 
             // 5. Handle newlines
