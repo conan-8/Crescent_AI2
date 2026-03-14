@@ -90,48 +90,65 @@ const generateResponse = async (incomingChatLi) => {
             // 2. Parse markdown - block level elements (headers, lists)
             const lines = safeText.split('\n');
             const processedLines = [];
-            let inUnorderedList = false;
-            let inOrderedList = false;
+            let listStack = []; // stores { type: 'ul'|'ol', indent: number }
 
             for (let i = 0; i < lines.length; i++) {
                 let line = lines[i];
 
                 // Check for headers (## text) - convert to h3 as specified
-                const headerMatch = line.match(/^(#{1,6})\s+(.+)$/);
+                const headerMatch = line.match(/^(\s*)(#{1,6})\s+(.+)$/);
                 if (headerMatch) {
-                    if (inUnorderedList) { processedLines.push('</ul>'); inUnorderedList = false; }
-                    if (inOrderedList) { processedLines.push('</ol>'); inOrderedList = false; }
-                    processedLines.push(`<h3>${headerMatch[2]}</h3>`);
+                    while (listStack.length > 0) processedLines.push(`</${listStack.pop().type}>`);
+                    processedLines.push(`<h3>${headerMatch[3]}</h3>`);
                     continue;
                 }
 
                 // Check for unordered list items (- item or * item at start of line)
-                const unorderedMatch = line.match(/^[-*]\s+(.+)$/);
-                if (unorderedMatch) {
-                    if (inOrderedList) { processedLines.push('</ol>'); inOrderedList = false; }
-                    if (!inUnorderedList) { processedLines.push('<ul>'); inUnorderedList = true; }
-                    processedLines.push(`<li>${unorderedMatch[1]}</li>`);
-                    continue;
-                }
-
+                const unorderedMatch = line.match(/^(\s*)[-*]\s+(.+)$/);
                 // Check for ordered list items (1. item, 2. item, etc.)
-                const orderedMatch = line.match(/^\d+\.\s+(.+)$/);
-                if (orderedMatch) {
-                    if (inUnorderedList) { processedLines.push('</ul>'); inUnorderedList = false; }
-                    if (!inOrderedList) { processedLines.push('<ol>'); inOrderedList = true; }
-                    processedLines.push(`<li>${orderedMatch[1]}</li>`);
+                const orderedMatch = line.match(/^(\s*)\d+\.\s+(.+)$/);
+
+                if (unorderedMatch || orderedMatch) {
+                    const isOrdered = !!orderedMatch;
+                    const match = isOrdered ? orderedMatch : unorderedMatch;
+                    const indent = match[1].length;
+                    const content = match[2];
+                    const listType = isOrdered ? 'ol' : 'ul';
+
+                    if (listStack.length === 0) {
+                        listStack.push({ type: listType, indent: indent });
+                        processedLines.push(`<${listType}>`);
+                    } else {
+                        let currentLevel = listStack[listStack.length - 1];
+                        if (indent > currentLevel.indent) {
+                            listStack.push({ type: listType, indent: indent });
+                            processedLines.push(`<${listType}>`);
+                        } else if (indent < currentLevel.indent) {
+                            while (listStack.length > 0 && indent < listStack[listStack.length - 1].indent) {
+                                processedLines.push(`</${listStack.pop().type}>`);
+                            }
+                            if (listStack.length === 0) {
+                                listStack.push({ type: listType, indent: indent });
+                                processedLines.push(`<${listType}>`);
+                            }
+                        } else if (currentLevel.type !== listType) {
+                            // Same indent but different list type
+                            processedLines.push(`</${listStack.pop().type}>`);
+                            listStack.push({ type: listType, indent: indent });
+                            processedLines.push(`<${listType}>`);
+                        }
+                    }
+                    processedLines.push(`<li>${content}</li>`);
                     continue;
                 }
 
                 // Regular line - close any open lists
-                if (inUnorderedList) { processedLines.push('</ul>'); inUnorderedList = false; }
-                if (inOrderedList) { processedLines.push('</ol>'); inOrderedList = false; }
+                while (listStack.length > 0) processedLines.push(`</${listStack.pop().type}>`);
                 processedLines.push(line);
             }
 
             // Close any remaining open lists
-            if (inUnorderedList) processedLines.push('</ul>');
-            if (inOrderedList) processedLines.push('</ol>');
+            while (listStack.length > 0) processedLines.push(`</${listStack.pop().type}>`);
 
             safeText = processedLines.join('\n');
 
@@ -201,7 +218,8 @@ const handleChat = () => {
     }
 
     // Append the user's message to the chatbox
-    chatbox.appendChild(createChatLi(userMessage, "outgoing"));
+    const outgoingChatLi = createChatLi(userMessage, "outgoing");
+    chatbox.appendChild(outgoingChatLi);
 
     // Add user message to history
     chatHistory.push({ role: "user", content: userMessage });
@@ -214,6 +232,12 @@ const handleChat = () => {
     const incomingChatLi = createChatLi("", "incoming");
     startThinkingAnimation(incomingChatLi.querySelector("p"));
     chatbox.appendChild(incomingChatLi);
+    
+    // Scroll the chatbox so the user's new message is at the top
+    chatbox.scrollTo({
+        top: outgoingChatLi.offsetTop - 15, // 15px matches the chatbox padding-top
+        behavior: 'smooth'
+    });
 
     // Call the real API
     generateResponse(incomingChatLi);

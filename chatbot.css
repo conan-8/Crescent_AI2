@@ -256,6 +256,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
 
 /* Chatbox */
 .chatbot .chatbox {
+    position: relative;
     overflow-y: auto;
     flex: 1;
     /* Take up remaining space */
@@ -579,6 +580,28 @@ body.show-chatbot .chatbot header .new-chat-btn {
     background: #78909c;
     cursor: default;
     opacity: 0.85;
+}
+
+/* List padding and margins */
+.chatbox .incoming p ul,
+.chatbox .incoming p ol {
+    padding-left: 22px; /* reduced from browser default of 40px */
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.chatbox .incoming p li {
+    margin-bottom: 3px;
+}
+
+/* Sub-lists get proper spacing */
+.chatbox .incoming p ul ul,
+.chatbox .incoming p ol ol,
+.chatbox .incoming p ul ol,
+.chatbox .incoming p ol ul {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    /* Adding padding here isn't strictly necessary since standard nesting creates multiple padding layers inherently */
 }
 
 /* Bullet point dots green, text stays black */

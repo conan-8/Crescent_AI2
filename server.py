@@ -296,7 +296,7 @@ def enrollment_chat_endpoint():
         response_text = ""
         
         if user_query.lower().strip() in greetings:
-            response_text = "Hello! I am the Crescent School Enrollment Assistant. How can I help you with admissions, tuition, or application questions?"
+            response_text = "Hello! I am the Crescent School Enrolment Assistant. How can I help you with admissions, tuition, or application questions?"
             print(f"[AI Response]: {response_text}")
         else:
             # 0. Contextualize Query
@@ -341,7 +341,7 @@ def enrollment_chat_endpoint():
                 ]
                 
                 if any(phrase in response_text.lower() for phrase in negative_phrases):
-                     response_text = "I specialize in enrollment information. Could you please rephrase your question or ask something specific about the application process?"
+                     response_text = "I specialize in enrolment information. Could you please rephrase your question or ask something specific about the application process?"
                 else:
                     # Add source link
                     if metadatas:
