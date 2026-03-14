@@ -168,6 +168,72 @@ body.show-chatbot .chatbot header .new-chat-btn {
     display: none;
 }
 
+/* Gradient Wave — visible only when welcome screen is shown */
+@keyframes waveFloat1 {
+    0%   { transform: translateX(0)    scaleY(1);    }
+    33%  { transform: translateX(-5%)  scaleY(1.04); }
+    66%  { transform: translateX(5%)   scaleY(0.96); }
+    100% { transform: translateX(0)    scaleY(1);    }
+}
+
+@keyframes waveFloat2 {
+    0%   { transform: translateX(0)    scaleY(1);    }
+    33%  { transform: translateX(4%)   scaleY(0.97); }
+    66%  { transform: translateX(-6%)  scaleY(1.05); }
+    100% { transform: translateX(0)    scaleY(1);    }
+}
+
+.gradient-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 55%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* Show gradient only when welcome screen is visible (not hidden) */
+.chatbot:has(.welcome-screen:not(.hidden)) .gradient-wave {
+    opacity: 1;
+}
+
+/* Primary wave layer — larger, slower */
+.gradient-wave::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -30%;
+    width: 160%;
+    height: 100%;
+    background: radial-gradient(
+        ellipse at 50% 105%,
+        rgba(0, 110, 79, 0.20) 0%,
+        rgba(0, 110, 79, 0.09) 38%,
+        transparent 62%
+    );
+    animation: waveFloat1 11s ease-in-out infinite;
+}
+
+/* Secondary wave layer — slightly smaller, different speed for depth */
+.gradient-wave::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -20%;
+    width: 140%;
+    height: 80%;
+    background: radial-gradient(
+        ellipse at 50% 110%,
+        rgba(0, 110, 79, 0.13) 0%,
+        rgba(0, 110, 79, 0.05) 42%,
+        transparent 65%
+    );
+    animation: waveFloat2 16s ease-in-out infinite;
+}
+
 /* Chatbox */
 .chatbot .chatbox {
     overflow-y: auto;
