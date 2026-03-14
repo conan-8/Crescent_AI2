@@ -7,7 +7,7 @@ const newChatBtn = document.querySelector(".new-chat-btn");
 
 let userMessage = null;
 let chatHistory = []; // Store conversation history
-const initialGreeting = chatbox.innerHTML; // Store initial greeting for new chat reset
+const welcomeScreen = document.getElementById('welcome-screen');
 // The address of your local Python server
 const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
 
@@ -162,6 +162,12 @@ const handleChat = () => {
     userMessage = chatInput.value.trim(); // Get user entered message
     if (!userMessage) return;
 
+    // Hide welcome screen and show chatbox on first message
+    if (welcomeScreen && !welcomeScreen.classList.contains('hidden')) {
+        welcomeScreen.classList.add('hidden');
+        chatbox.style.display = '';
+    }
+
     // Append the user's message to the chatbox
     chatbox.appendChild(createChatLi(userMessage, "outgoing"));
 
@@ -207,11 +213,14 @@ chatbotToggler.addEventListener("click", () => {
     window.parent.postMessage({ type: "toggle", showing: isShowing }, "*");
 });
 
-// New Chat button: clear conversation and show greeting
+// New Chat button: clear conversation and restore welcome screen
 newChatBtn.addEventListener("click", () => {
-    chatbox.innerHTML = initialGreeting;
+    chatbox.innerHTML = "";
+    chatbox.style.display = 'none';
+    if (welcomeScreen) welcomeScreen.classList.remove('hidden');
     chatHistory = [];
     chatInput.value = "";
+    sendChatBtn.classList.remove("active");
 });
 
 // --- Resizing Logic ---
