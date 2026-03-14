@@ -69,9 +69,9 @@ body.show-chatbot .chatbot {
     transform: translateY(-50%);
     cursor: pointer;
     display: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
     background: transparent;
     color: #3c3c43;
     font-size: 1.25rem;
@@ -99,7 +99,7 @@ body.show-chatbot .chatbot header .close-btn {
     display: none;
     width: 34px;
     height: 34px;
-    border-radius: 50%;
+    border-radius: 10px;
     background: transparent;
     color: #3c3c43;
     align-items: center;
@@ -260,7 +260,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     margin-bottom: 10px;
     width: 34px;
     height: 34px;
-    border-radius: 50%;
+    border-radius: 10px;
     border: 1.5px solid #ccc;
     background: #e8e8e8;
     cursor: pointer;
