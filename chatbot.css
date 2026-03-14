@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Rashi+Hebrew:wght@400;500;700&display=swap');
+@font-face {
+    font-family: 'Alilato Arabic Regular';
+    src: local('Alilato Arabic Regular'), local('AlilatoArabicRegular');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* Position the chat button in the bottom right corner */
 .chatbot-toggler {
@@ -123,7 +128,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
 
 .chatbot header h2 {
     font-size: 1.1rem;
-    font-family: 'Noto Rashi Hebrew', sans-serif;
+    font-family: 'Alilato Arabic Regular', sans-serif;
     margin: 0;
     font-weight: 600;
     color: #1c1c1e;
@@ -177,7 +182,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     max-width: 75%;
     padding: 12px 16px;
     font-size: 0.95rem;
-    font-family: 'Noto Rashi Hebrew', sans-serif;
+    font-family: 'Alilato Arabic Regular', sans-serif;
     margin: 0;
 }
 
@@ -194,7 +199,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     max-width: 75%;
     padding: 12px 16px;
     font-size: 0.95rem;
-    font-family: 'Noto Rashi Hebrew', sans-serif;
+    font-family: 'Alilato Arabic Regular', sans-serif;
     margin: 0;
 }
 
@@ -219,7 +224,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     max-height: 180px;
     padding: 15px 15px 15px 0;
     font-size: 0.95rem;
-    font-family: 'Noto Rashi Hebrew', sans-serif;
+    font-family: 'Alilato Arabic Regular', sans-serif;
 }
 
 /* Send Button */
@@ -260,7 +265,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
 .chatbot-toggler span {
     color: #fff;
     font-size: 24px;
-    font-family: 'Noto Rashi Hebrew', sans-serif;
+    font-family: 'Alilato Arabic Regular', sans-serif;
     font-weight: bold;
 }
 
@@ -297,7 +302,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
     border-bottom: 1px solid #a5d6a7;
     flex-shrink: 0;
-    font-family: 'Noto Rashi Hebrew', sans-serif;
+    font-family: 'Alilato Arabic Regular', sans-serif;
     font-size: 0.88rem;
     color: #1b5e20;
 }
@@ -317,7 +322,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     padding: 6px 14px;
     border-radius: 6px;
     cursor: pointer;
-    font-family: 'Noto Rashi Hebrew', sans-serif;
+    font-family: 'Alilato Arabic Regular', sans-serif;
     font-size: 0.82rem;
     font-weight: 600;
     background: #006e4f;
@@ -372,7 +377,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     border-radius: 10px 10px 10px 0;
     padding: 12px 16px;
     font-size: 0.95rem;
-    font-family: 'Noto Rashi Hebrew', sans-serif;
+    font-family: 'Alilato Arabic Regular', sans-serif;
     margin: 0;
 }
 
@@ -381,7 +386,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     padding: 8px 16px;
     border-radius: 8px;
     cursor: pointer;
-    font-family: 'Noto Rashi Hebrew', sans-serif;
+    font-family: 'Alilato Arabic Regular', sans-serif;
     font-size: 0.88rem;
     font-weight: 600;
     background: #006e4f;
