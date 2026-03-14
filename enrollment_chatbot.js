@@ -8,7 +8,6 @@ const newChatBtn = document.querySelector(".new-chat-btn");
 
 let userMessage = null;
 let chatHistory = []; // Store conversation history
-let waitingForName = false; // Flag to track if we are asking for user's name
 const initialGreeting = chatbox.innerHTML; // Store initial greeting for new chat reset
 // The address of your local Python server
 const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
@@ -27,27 +26,7 @@ const startThinkingAnimation = (messageElement) => {
     messageElement.innerHTML = '<span class="thinking-animation"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
 }
 
-const initEnrollmentBanner = () => {
-    const banner = document.getElementById("enrollment-banner");
-    const bannerBtn = document.getElementById("banner-schedule-btn");
 
-    bannerBtn.addEventListener("click", () => {
-        // If already waiting for name, don't re-trigger
-        if (waitingForName) return;
-
-        waitingForName = true;
-
-        // Bot message asking for name
-        const askLi = createChatLi("Please provide your name so we can schedule your call with enrollment.", "incoming");
-        chatbox.appendChild(askLi);
-        askLi.scrollIntoView({ behavior: "smooth", block: "start" });
-
-        // Visual feedback: temporarily disable the button
-        bannerBtn.textContent = "Awaiting Name...";
-        bannerBtn.disabled = true;
-        bannerBtn.classList.add("banner-btn-waiting");
-    });
-};
 
 const generateResponse = async (incomingChatLi) => {
     const messageElement = incomingChatLi.querySelector("p");
@@ -198,48 +177,6 @@ const handleChat = () => {
     chatInput.value = "";
     sendChatBtn.classList.remove("active");
 
-    // 1. Check if we are waiting for a name (Scheduler Flow)
-    if (waitingForName) {
-        waitingForName = false;
-        const name = userMessage;
-        const confirmMsg = `Thank you ${name}, your conversation has been saved and will be provided to enrollment before your call.`;
-
-        // Send to server
-        fetch("http://127.0.0.1:5000/schedule-call", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                name: name,
-                history: chatHistory
-            })
-        }).catch(err => console.error("Error scheduling call:", err));
-
-        // Add to history so context is preserved for future messages
-        chatHistory.push({ role: "user", content: name });
-        chatHistory.push({ role: "model", content: confirmMsg });
-
-        setTimeout(() => {
-            const confirmLi = createChatLi(confirmMsg, "incoming");
-            chatbox.appendChild(confirmLi);
-            confirmLi.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 600);
-
-        // Reset the banner button so it can be used again
-        const bannerBtn = document.getElementById("banner-schedule-btn");
-        bannerBtn.textContent = "Schedule Call";
-        bannerBtn.disabled = false;
-        bannerBtn.classList.remove("banner-btn-waiting");
-
-        // Reset the inline schedule call button so it can be used again
-        const inlineBtn = document.getElementById("inline-schedule-btn");
-        if (inlineBtn) {
-            inlineBtn.textContent = "📞 Schedule a Call";
-            inlineBtn.disabled = false;
-        }
-
-        return;
-    }
-
     // Enrollment banner is persistent — no cleanup generatedScheduler buttons here
 
     // Add user message to history
@@ -276,31 +213,6 @@ chatInput.addEventListener("keydown", (e) => {
 
 // Event Listeners
 sendChatBtn.addEventListener("click", handleChat);
-initEnrollmentBanner();
-
-// Handle inline schedule call button via event delegation (works after new-chat resets innerHTML)
-chatbox.addEventListener("click", (e) => {
-    if (!e.target.classList.contains("inline-schedule-btn")) return;
-    if (waitingForName) return;
-
-    waitingForName = true;
-
-    const askLi = createChatLi("Please provide your name so we can schedule your call with enrollment.", "incoming");
-    chatbox.appendChild(askLi);
-    chatbox.scrollTo(0, chatbox.scrollHeight);
-
-    // Disable the inline button as visual feedback
-    e.target.textContent = "📞 Awaiting Name...";
-    e.target.disabled = true;
-
-    // Keep the banner button in sync
-    const bannerBtn = document.getElementById("banner-schedule-btn");
-    if (bannerBtn) {
-        bannerBtn.textContent = "Awaiting Name...";
-        bannerBtn.disabled = true;
-        bannerBtn.classList.add("banner-btn-waiting");
-    }
-});
 chatbotToggler.addEventListener("click", () => {
     const isShowing = document.body.classList.toggle("show-chatbot");
     // Notify parent window of toggle
@@ -317,15 +229,6 @@ newChatBtn.addEventListener("click", () => {
     chatbox.innerHTML = initialGreeting;
     chatHistory = [];
     chatInput.value = "";
-    waitingForName = false;
-
-    // Reset the enrollment banner button
-    const bannerBtn = document.getElementById("banner-schedule-btn");
-    if (bannerBtn) {
-        bannerBtn.textContent = "Schedule Call";
-        bannerBtn.disabled = false;
-        bannerBtn.classList.remove("banner-btn-waiting");
-    }
 });
 
 // --- Resizing Logic ---
