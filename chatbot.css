@@ -168,6 +168,26 @@ body.show-chatbot .chatbot header .new-chat-btn {
     display: none;
 }
 
+/* Wave hand emoji animation */
+@keyframes wave-hand {
+    0%   { transform: rotate(0deg); }
+    15%  { transform: rotate(20deg); }
+    35%  { transform: rotate(-10deg); }
+    55%  { transform: rotate(18deg); }
+    75%  { transform: rotate(-6deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.wave-emoji {
+    display: inline-block;
+    transform-origin: 70% 70%;
+}
+
+.wave-emoji.waving {
+    animation: wave-hand 0.45s ease-in-out 3;
+    animation-delay: 2s;
+}
+
 /* Gradient Wave — visible only when welcome screen is shown */
 @keyframes waveFloat1 {
     0%   { transform: translateX(0)    scaleY(1);    }

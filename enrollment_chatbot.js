@@ -16,6 +16,13 @@ const showWelcome = () => {
     welcomeScreen.classList.remove('fade-in');
     void welcomeScreen.offsetWidth; // force reflow to restart animation
     welcomeScreen.classList.add('fade-in');
+
+    const waveEmoji = welcomeScreen.querySelector('.wave-emoji');
+    if (waveEmoji) {
+        waveEmoji.classList.remove('waving');
+        void waveEmoji.offsetWidth; // force reflow to restart animation
+        waveEmoji.classList.add('waving');
+    }
 };
 // The address of your local Python server
 const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
