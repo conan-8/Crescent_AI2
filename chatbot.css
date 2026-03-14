@@ -396,8 +396,6 @@ body.show-chatbot .chatbot header .new-chat-btn {
 .chatbot-toggler span {
     color: #fff;
     font-size: 24px;
-    font-family: 'Tajawal', sans-serif;
-    font-weight: bold;
 }
 
 /* Resize Handle */
