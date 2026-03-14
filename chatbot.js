@@ -154,8 +154,10 @@ const generateResponse = async (incomingChatLi) => {
         }
         messageElement.style.color = "#cc0000";
     } finally {
-        // Scroll to the top of the response so the user reads from the start
-        incomingChatLi.scrollIntoView({ behavior: "smooth", block: "start" });
+        // Snap instantly to the top of the response so the user sees the beginning.
+        // Using "instant" prevents the browser from first rendering the bottom of a
+        // long reply and then smooth-scrolling up, which is the old jarring behavior.
+        incomingChatLi.scrollIntoView({ behavior: "instant", block: "start" });
     }
 }
 
