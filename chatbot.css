@@ -175,7 +175,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     /* Take up remaining space */
     height: auto;
     /* Reset fixed height */
-    padding: 15px 10px 70px;
+    padding: 15px 10px 100px;
 }
 
 .chatbox .chat {
@@ -278,13 +278,16 @@ body.show-chatbot .chatbot header .new-chat-btn {
 /* Input Area */
 .chatbot .chat-input {
     position: absolute;
-    bottom: 0;
-    width: 100%;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
     display: flex;
-    gap: 5px;
+    align-items: flex-end;
     background: #fff;
-    padding: 3px 12px 3px 20px;
-    border-top: 1px solid #ddd;
+    padding: 0 8px 8px 16px;
+    border: 1px solid #c0c0c0;
+    border-radius: 18px;
+    z-index: 10;
 }
 
 .chat-input textarea {
@@ -294,15 +297,16 @@ body.show-chatbot .chatbot header .new-chat-btn {
     outline: none;
     resize: none;
     max-height: 180px;
-    padding: 20px 15px 10px 0;
+    padding: 14px 10px 14px 0;
     font-size: 0.95rem;
     font-family: 'Tajawal', sans-serif;
+    background: transparent;
 }
 
 /* Send Button */
 .send-btn {
     align-self: flex-end;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     width: 34px;
     height: 34px;
     border-radius: 10px;
