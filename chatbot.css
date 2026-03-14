@@ -53,6 +53,7 @@ body.show-chatbot .chatbot {
 /* Header Styles - iOS minimal */
 .chatbot header {
     padding: 14px 16px;
+    min-height: 56px;
     position: relative;
     text-align: center;
     color: #1c1c1e;
@@ -121,14 +122,30 @@ body.show-chatbot .chatbot header .new-chat-btn {
 }
 
 /* Welcome Screen - large bold greeting shown before first message */
+@keyframes welcomeFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .welcome-screen {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 32px 28px;
+    justify-content: flex-start;
+    padding: 48px 28px 20px;
     text-align: center;
+    opacity: 0;
+}
+
+.welcome-screen.fade-in {
+    animation: welcomeFadeIn 0.5s ease-out forwards;
 }
 
 .welcome-screen .welcome-text {
