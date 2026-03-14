@@ -162,7 +162,7 @@ def contextualize_query(history, latest_query):
         return latest_query
 
 @app.route('/chat', methods=['POST'])
-@limiter.limit("5 per minute")
+@limiter.limit("20 per minute")
 def chat_endpoint():
     # Safety check
     if not full_database:
@@ -267,7 +267,7 @@ def chat_endpoint():
         return jsonify({"response": "I encountered an internal error."}), 500
 
 @app.route('/enrollment-chat', methods=['POST'])
-@limiter.limit("5 per minute")
+@limiter.limit("20 per minute")
 def enrollment_chat_endpoint():
     # Safety check
     if not full_database:
