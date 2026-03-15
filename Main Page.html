@@ -9895,12 +9895,6 @@
                     iframe.style.width = '60px';
                     iframe.style.height = '180px';
                 }
-            } else if (event.data.type === 'resize') {
-                // Adjust iframe size based on internal chatbot resizing
-                const newWidth = parseInt(event.data.width) + 30;
-                const newHeight = parseInt(event.data.height) + 80;
-                iframe.style.width = newWidth + 'px';
-                iframe.style.height = newHeight + 'px';
             }
         });
     </script>

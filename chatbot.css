@@ -439,29 +439,7 @@ body.show-chatbot .chatbot header .new-chat-btn {
     font-size: 24px;
 }
 
-/* Resize Handle */
-.resize-handle {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 15px;
-    height: 15px;
-    cursor: nw-resize;
-    z-index: 10000;
-}
 
-/* Visual indicator for the handle */
-.resize-handle::before {
-    content: "";
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 8px;
-    height: 8px;
-    border-top: 2px solid rgba(0, 0, 0, 0.2);
-    border-left: 2px solid rgba(0, 0, 0, 0.2);
-    border-top-left-radius: 4px;
-}
 
 /* Enrollment Banner (persistent, below header) */
 .enrollment-banner {
