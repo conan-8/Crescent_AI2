@@ -35,7 +35,7 @@ def print_passages(passages):
 
 def get_relevant_documents(query, db):
     try:
-        result = db.query(query_texts=[query], n_results=3)
+        result = db.query(query_texts=[query], n_results=5)
         if result['documents'] and len(result['documents'][0]) > 0:
             passages = result['documents'][0]
             metadatas = result['metadatas'][0] if 'metadatas' in result else []
@@ -67,7 +67,7 @@ Critical Rules:
 1. Crescent School is a BOYS-ONLY school. If someone asks about enrolling a daughter or girl, politely inform them that Crescent only admits boys.
 2. You are fluent in multiple languages. If a user speaks to you in French (or any other language), reply seamlessly in that language, and also inform them that you do know how to speak the language if they ask for that information.
 3. You are currently in the year 2026. If asked about events, clarify that 2025 events have passed and direct them to look for upcoming 2026/2027 dates.
-4. If the answer to a question is NOT in the provided context, DO NOT guess. Instead say: "I don't have that specific information in my current files, but our Enrollment Team would love to answer this for you. Would you like to book a call with them? The button is at the top of the chatbox."
+4. If the answer to a question is NOT in the provided context, DO NOT guess. Instead say: "I don't have that specific information in my current files, but our Enrolment Team would love to answer this for you."
 
 {history_text}
 QUESTION: {query}
@@ -84,6 +84,41 @@ For your information, here are also some facts about Crescent School to be consi
 
 ANSWER:
 """
+
+def get_best_link(query, response_text, sources, client):
+    if not sources:
+        return None
+    if len(sources) == 1:
+        return sources[0]
+        
+    prompt = f"""Given the user query: "{query}"
+And the following response generated:
+"{response_text}"
+
+Which of these source links is the MOST relevant to the response?
+Links:
+{chr(10).join([f"- {s}" for s in sources])}
+
+Please output ONLY the single best URL from the list above, nothing else."""
+    
+    try:
+        completion = client.chat.completions.create(
+            model="qwen/qwen3.5-397b-a17b",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that selects the best link. Output only the URL itself."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0,
+            extra_body={"reasoning": {"enabled": False}}
+        )
+        best_link = completion.choices[0].message.content.strip()
+        for s in sources:
+            if s in best_link:
+                return s
+        return sources[0]
+    except Exception as e:
+        print(f"Error determining best link: {e}")
+        return sources[0]
 
 def main():
     db = get_chroma_db("full_database")
@@ -118,7 +153,7 @@ def main():
             continue
         
         try:
-            result = db.query(query_texts=[query], n_results=3)
+            result = db.query(query_texts=[query], n_results=5)
             print(f"Query returned {len(result['documents'][0])} results")
             
             if result['documents'][0]:
@@ -163,7 +198,9 @@ def main():
                 if metadatas:
                     sources = list(set([m.get('source') for m in metadatas if m and m.get('source')]))
                     if sources:
-                        response_text += f"\n\nSource: {sources[0]}"
+                        best_link = get_best_link(query, response_text, sources, client)
+                        if best_link:
+                            response_text += f"\n\nSource: {best_link}"
 
             print("\nAnswer:", response_text, "\n")
         except Exception as e:

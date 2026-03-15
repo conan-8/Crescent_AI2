@@ -161,6 +161,43 @@ def contextualize_query(history, latest_query):
         print(f"Error contextualizing query: {e}")
         return latest_query
 
+def get_best_link(query, response_text, sources):
+    if not sources:
+        return None
+    if len(sources) == 1:
+        return sources[0]
+        
+    prompt = f"""Given the user query: "{query}"
+And the following response generated:
+"{response_text}"
+
+Which of these source links is the MOST relevant to the response?
+Links:
+{chr(10).join([f"- {s}" for s in sources])}
+
+Please output ONLY the single best URL from the list above, nothing else."""
+    
+    try:
+        completion = client.chat.completions.create(
+            model="qwen/qwen3.5-397b-a17b",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that selects the best link. Output only the URL itself."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0,
+            extra_body={"reasoning": {"enabled": False}}
+        )
+        best_link = completion.choices[0].message.content.strip()
+        # Verify the returned link is actually in our sources
+        for s in sources:
+            if s in best_link:
+                return s
+        return sources[0] # Fallback if LLM failed
+    except Exception as e:
+        print(f"Error determining best link: {e}")
+        return sources[0]
+
+
 @app.route('/chat', methods=['POST'])
 @limiter.limit("20 per minute")
 def chat_endpoint():
@@ -236,13 +273,18 @@ def chat_endpoint():
                 if any(phrase in response_text.lower() for phrase in negative_phrases):
                     response_text = "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?"
                 else:
+                    # Remove it if the LLM auto-generated it from seeing it in history
+                    response_text = response_text.replace("Was your question answered? If not, please contact the Enrolment Office.", "").strip()
+                    
                     # Add source link if available
                     if metadatas:
                         sources = list(set([m.get('source') for m in metadatas if m and m.get('source')]))
                         if sources:
-                            response_text += f"\n\nSource: {sources[0]}"
-
-                response_text += "\n\nWas your question answered? If not, please contact the Enrolment Office."
+                            best_link = get_best_link(user_query, response_text, sources)
+                            if best_link:
+                                response_text += f"\n\nSource: {best_link}"
+                    
+                    response_text += "\n\nWas your question answered? If not, please contact the Enrolment Office."
                 print(f"[Gemini Answer]: {response_text}")
 
         # 5. Log Conversation
@@ -296,7 +338,7 @@ def enrollment_chat_endpoint():
         response_text = ""
         
         if user_query.lower().strip() in greetings:
-            response_text = "Hello! I am the Crescent School Enrolment Assistant. How can I help you with admissions, tuition, or application questions?"
+            response_text = "Hello! I am the Crescent School AI Assistant, how can I help you?"
             print(f"[AI Response]: {response_text}")
         else:
             # 0. Contextualize Query
@@ -310,7 +352,7 @@ def enrollment_chat_endpoint():
             
             # 2. Validation
             if passage == "No relevant information found.":
-                response_text = "I specialize in enrollment information. Could you please rephrase your question or ask something specific about the application process?"
+                response_text = "I specialize in information relevant to Crescent School. Do you have a question about the school that I can assist you with?"
                 print(f"[AI Response]: {response_text}")
             else:
                 # 3. Construct Prompt (Specialized for enrollment agent)
@@ -341,15 +383,20 @@ def enrollment_chat_endpoint():
                 ]
                 
                 if any(phrase in response_text.lower() for phrase in negative_phrases):
-                     response_text = "I specialize in enrolment information. Could you please rephrase your question or ask something specific about the application process?"
+                     response_text = "I specialize in information relevant to Crescent School. Do you have a question about the school that I can assist you with?"
                 else:
+                    # Remove it if the LLM auto-generated it from seeing it in history
+                    response_text = response_text.replace("Was your question answered? If not, please contact the Enrolment Office.", "").strip()
+                    
                     # Add source link
                     if metadatas:
                         sources = list(set([m.get('source') for m in metadatas if m and m.get('source')]))
                         if sources:
-                            response_text += f"\n\nSource: {sources[0]}"
+                            best_link = get_best_link(user_query, response_text, sources)
+                            if best_link:
+                                response_text += f"\n\nSource: {best_link}"
 
-                response_text += "\n\nWas your question answered? If not, please contact the Enrolment Office."
+                    response_text += "\n\nWas your question answered? If not, please contact the Enrolment Office."
                 print(f"[Enrollment Answer]: {response_text}")
 
         # 5. Log Conversation
