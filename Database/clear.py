@@ -1,7 +1,11 @@
+import os
 import chromadb
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Connect to your existing database
-chroma_client = chromadb.PersistentClient(path=r"C:\crescent_ai_source")
+chroma_client = chromadb.PersistentClient(path=os.environ.get("CHROMA_DB_PATH"))
 
 # Delete the old collection
 try:

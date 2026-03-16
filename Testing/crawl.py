@@ -1,9 +1,13 @@
+import os
 import asyncio
 from crawl4ai import *
 import chromadb
 from google import genai
+from dotenv import load_dotenv
 
-client = genai.Client(api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI")
+load_dotenv()
+
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 async def main():
     async with AsyncWebCrawler() as crawler:

@@ -1,10 +1,14 @@
+import os
 import chromadb
 from chromadb import EmbeddingFunction, Documents, Embeddings
 from google import genai
 from google.genai import types
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
-client = genai.Client(api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI")
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 
 DOCUMENT1 = """

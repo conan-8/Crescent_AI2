@@ -1,15 +1,19 @@
+import os
 import chromadb
 import chromadb.utils.embedding_functions as embedding_functions
 import time
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def verify_logs():
     try:
         google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
-            api_key="AIzaSyCaJ7me7Ans9STNva8-YrNUHf0dPBj6HfI",
+            api_key=os.environ.get("GEMINI_API_KEY"),
             model_name="gemini-embedding-001"
         )
         
-        chroma_client = chromadb.PersistentClient(path=r"C:\crescent_ai_source")
+        chroma_client = chromadb.PersistentClient(path=os.environ.get("CHROMA_DB_PATH"))
         collection = chroma_client.get_collection(name="full_database_conversations", embedding_function=google_ef)
         
         count = collection.count()
