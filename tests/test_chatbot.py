@@ -13,7 +13,7 @@ os.environ.setdefault("OPENROUTER_API_KEY", "test-key")
 os.environ.setdefault("GEMINI_API_KEY", "test-key")
 os.environ.setdefault("CHROMA_DB_PATH", "/tmp/test-chroma")
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "agent_chatbot"))
 
 import pytest
 from unittest.mock import MagicMock
