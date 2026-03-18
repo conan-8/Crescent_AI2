@@ -123,9 +123,18 @@ def main():
     print("\n--- Analysis Report ---\n")
     print(report)
     
-    with open("analysis_report.md", "w", encoding="utf-8") as f:
+    import datetime
+    current_date_str = datetime.datetime.now().strftime("%Y_%m_%d")
+    report_filename = f"{current_date_str}_analysis_report.md"
+    
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    reports_dir = os.path.join(script_dir, "analysis_reports")
+    os.makedirs(reports_dir, exist_ok=True)
+    report_path = os.path.join(reports_dir, report_filename)
+    
+    with open(report_path, "w", encoding="utf-8") as f:
         f.write(report)
-    print("\nReport saved to 'analysis_report.md'")
+    print(f"\nReport saved to '{report_path}'")
 
 if __name__ == "__main__":
     main()
