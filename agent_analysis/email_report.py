@@ -17,7 +17,7 @@ def send_daily_report():
     sender_password = os.environ.get("SENDER_PASSWORD") # Suggest using an App Password for Gmail
     recipient_email = os.environ.get("RECIPIENT_EMAIL") 
     smtp_server = os.environ.get("SMTP_SERVER", "smtp.gmail.com")
-    smtp_port = int(os.environ.get("SMTP_PORT", 587))
+    smtp_port = int(os.environ.get("SMTP_PORT", 465))
     
     if not all([sender_email, sender_password, recipient_email]):
         print("Error: Missing email configuration.")
@@ -67,8 +67,7 @@ def send_daily_report():
     # Send the email
     try:
         # Set up the SMTP server
-        server = smtplib.SMTP(smtp_server, smtp_port)
-        server.starttls()
+        server = smtplib.SMTP_SSL(smtp_server, smtp_port)
         # Login
         server.login(sender_email, sender_password)
         # Send mail
