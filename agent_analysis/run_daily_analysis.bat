@@ -4,7 +4,7 @@ echo Starting Daily Crescent AI Analysis Routine
 echo ===========================================
 
 REM Change directory to the root of the project to ensure the .env file is found
-cd /d "%~dp0\.."
+cd /d "C:\Users\kevin\OneDrive\Documents\GitHub\Crescent_AI"
 
 echo.
 echo [1/2] Generating the daily analysis report...
