@@ -123,6 +123,38 @@ body.show-chatbot .chatbot header .new-chat-btn {
     display: flex;
 }
 
+/* Language Selector Dropdown */
+.chatbot header .lang-select {
+    position: absolute;
+    right: 52px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    border: 1.5px solid #006e4f;
+    border-radius: 8px;
+    background: transparent;
+    color: #006e4f;
+    font-size: 0.78rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 600;
+    padding: 3px 6px;
+    cursor: pointer;
+    outline: none;
+    height: 28px;
+    max-width: 88px;
+    transition: background 0.22s ease, color 0.22s ease;
+}
+
+.chatbot header .lang-select:hover,
+.chatbot header .lang-select:focus {
+    background: #006e4f;
+    color: #ffffff;
+}
+
+body.show-chatbot .chatbot header .lang-select {
+    display: block;
+}
+
 /* Welcome Screen - large bold greeting shown before first message */
 @keyframes welcomeFadeIn {
     from {

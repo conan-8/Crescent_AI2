@@ -5,24 +5,42 @@ const sendChatBtn = document.querySelector("#send-btn");
 const chatbox = document.querySelector(".chatbox");
 const closeBtn = document.querySelector(".close-btn");
 const newChatBtn = document.querySelector(".new-chat-btn");
+const langSelect = document.getElementById("lang-select");
 
 let userMessage = null;
 let chatHistory = []; // Store conversation history
 const welcomeScreen = document.getElementById('welcome-screen');
 
+const welcomeTranslations = {
+    English:    { greeting: "Hi!",      intro: "I'm a Crescent student-developed chatbot.",                    question: "What is your question?" },
+    French:     { greeting: "Salut !",  intro: "Je suis un chatbot développé par des étudiants de Crescent.", question: "Quelle est votre question ?" },
+    Spanish:    { greeting: "¡Hola!",   intro: "Soy un chatbot desarrollado por estudiantes de Crescent.",    question: "¿Cuál es tu pregunta?" },
+    Arabic:     { greeting: "مرحباً!", intro: "أنا روبوت محادثة طوّره طلاب كريسنت.",                        question: "ما سؤالك؟" },
+    Chinese:    { greeting: "你好！",   intro: "我是Crescent学生开发的聊天机器人。",                            question: "您有什么问题？" },
+    Urdu:       { greeting: "ہیلو!",    intro: "میں کریسنٹ کے طلبہ کا تیار کردہ چیٹ بوٹ ہوں۔",             question: "آپ کا سوال کیا ہے؟" },
+    Portuguese: { greeting: "Olá!",     intro: "Sou um chatbot desenvolvido por estudantes de Crescent.",     question: "Qual é a sua pergunta?" },
+};
+
+const updateWelcomeText = (lang) => {
+    const welcomeTextEl = document.querySelector('.welcome-text');
+    if (!welcomeTextEl) return;
+    const t = welcomeTranslations[lang] || welcomeTranslations['English'];
+    welcomeTextEl.innerHTML = `${t.greeting} <span class="wave-emoji">👋</span><br>${t.intro}<br><span class="welcome-tagline">${t.question}</span>`;
+    const waveEmoji = welcomeTextEl.querySelector('.wave-emoji');
+    if (waveEmoji) {
+        waveEmoji.classList.remove('waving');
+        void waveEmoji.offsetWidth;
+        waveEmoji.classList.add('waving');
+    }
+};
+
 const showWelcome = () => {
     if (!welcomeScreen) return;
+    updateWelcomeText(langSelect ? langSelect.value : 'English');
     welcomeScreen.classList.remove('hidden');
     welcomeScreen.classList.remove('fade-in');
     void welcomeScreen.offsetWidth; // force reflow to restart animation
     welcomeScreen.classList.add('fade-in');
-
-    const waveEmoji = welcomeScreen.querySelector('.wave-emoji');
-    if (waveEmoji) {
-        waveEmoji.classList.remove('waving');
-        void waveEmoji.offsetWidth; // force reflow to restart animation
-        waveEmoji.classList.add('waving');
-    }
 };
 // The address of your local Python server
 const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
@@ -55,7 +73,8 @@ const generateResponse = async (incomingChatLi) => {
             },
             body: JSON.stringify({
                 message: userMessage,
-                history: chatHistory // Send history to server
+                history: chatHistory, // Send history to server
+                language: langSelect ? langSelect.value : "English"
             })
         });
 
@@ -281,3 +300,12 @@ newChatBtn.addEventListener("click", () => {
     chatInput.style.height = "38px";
     sendChatBtn.classList.remove("active");
 });
+
+// Language selector: update welcome text immediately if welcome screen is visible
+if (langSelect) {
+    langSelect.addEventListener("change", () => {
+        if (welcomeScreen && !welcomeScreen.classList.contains('hidden')) {
+            updateWelcomeText(langSelect.value);
+        }
+    });
+}
