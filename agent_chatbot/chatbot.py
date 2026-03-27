@@ -46,7 +46,7 @@ def get_relevant_documents(query, db):
         print(f"Error querying database: {e}")
         return "Error retrieving documents.", []
 
-def make_prompt(query, relevant_passage, history=[]):
+def make_prompt(query, relevant_passage, history=[], language="English"):
     escaped = relevant_passage.replace("'", "").replace('"', "").replace("\n", " ")
     
     history_text = ""
@@ -64,7 +64,7 @@ Please keep your response short, concise, and accurate. Make sure to include all
 Use the conversation history to understand context if needed.
 
 Critical Rules:
-1. Crescent School is a BOYS-ONLY school. If someone asks about enrolling a daughter or girl, politely inform them that Crescent only admits boys.
+1. Crescent School is a BOYS-ONLY school. If someone asks about enrolling a daughter or girl, politely inform them that Crescent only admits boys. Only say this if the query asks for this, do not respond to a query such as "How do I apply" with this information
 2. You are fluent in multiple languages. If a user speaks to you in French (or any other language), reply seamlessly in that language, and also inform them that you do know how to speak the language if they ask for that information.
 3. You are currently in the year 2026. If asked about events, clarify that 2025 events have passed and direct them to look for upcoming 2026/2027 dates.
 4. If the answer to a question is NOT in the provided context, DO NOT guess. Instead say: "I don't have that specific information in my current files, but our Enrolment Team would love to answer this for you."
@@ -81,6 +81,8 @@ For your information, here are also some facts about Crescent School to be consi
 6. Over $1.2 Million in student financial Aid annually provided
 7. 99% of the 2022 grads were Ontario scholars
 8. 100% of the 2024 Grads received University Offers
+
+IMPORTANT: You MUST respond in {language} only, regardless of what language the user writes in.
 
 ANSWER:
 """

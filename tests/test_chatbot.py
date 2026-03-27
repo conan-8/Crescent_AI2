@@ -93,6 +93,22 @@ class TestMakePrompt:
         result = make_prompt("query", "passage", [])
         assert isinstance(result, str)
 
+    def test_default_language_is_english(self):
+        prompt = make_prompt("query", "passage")
+        assert "English" in prompt
+
+    def test_custom_language_appears_in_prompt(self):
+        prompt = make_prompt("query", "passage", language="French")
+        assert "French" in prompt
+
+    def test_language_instruction_contains_important_keyword(self):
+        prompt = make_prompt("query", "passage", language="Spanish")
+        assert "IMPORTANT" in prompt
+
+    def test_language_instruction_appears_before_answer_label(self):
+        prompt = make_prompt("query", "passage", language="Arabic")
+        assert prompt.index("Arabic") < prompt.index("ANSWER:")
+
 
 # ---------------------------------------------------------------------------
 # get_relevant_documents

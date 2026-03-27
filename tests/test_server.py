@@ -303,4 +303,68 @@ class TestEnrollmentChatEndpoint:
         assert resp.status_code == 500
 
 
+# ---------------------------------------------------------------------------
+# Language parameter forwarding
+# ---------------------------------------------------------------------------
+
+def _setup_non_greeting(monkeypatch):
+    """Patch get_relevant_documents and the LLM call for non-greeting flow."""
+    monkeypatch.setattr(server, "get_relevant_documents", lambda q, db: ("School passage.", []))
+    mock_llm = MagicMock()
+    mock_llm.choices[0].message.content = "Test answer."
+    monkeypatch.setattr(server.client.chat.completions, "create", lambda **kw: mock_llm)
+
+
+class TestChatEndpointLanguage:
+    def test_language_defaults_to_english_when_omitted(self, client, monkeypatch):
+        _setup_non_greeting(monkeypatch)
+        captured = {}
+
+        def fake_make_prompt(query, passage, history=[], language="English"):
+            captured["language"] = language
+            return "ANSWER: "
+
+        monkeypatch.setattr(server, "make_prompt", fake_make_prompt)
+        client.post("/chat", json={"message": "What are the school hours?"})
+        assert captured.get("language") == "English"
+
+    def test_language_forwarded_to_make_prompt(self, client, monkeypatch):
+        _setup_non_greeting(monkeypatch)
+        captured = {}
+
+        def fake_make_prompt(query, passage, history=[], language="English"):
+            captured["language"] = language
+            return "ANSWER: "
+
+        monkeypatch.setattr(server, "make_prompt", fake_make_prompt)
+        client.post("/chat", json={"message": "What are the school hours?", "language": "French"})
+        assert captured.get("language") == "French"
+
+
+class TestEnrollmentChatEndpointLanguage:
+    def test_language_defaults_to_english_when_omitted(self, client, monkeypatch):
+        _setup_non_greeting(monkeypatch)
+        captured = {}
+
+        def fake_make_prompt(query, passage, history=[], language="English"):
+            captured["language"] = language
+            return "ANSWER: "
+
+        monkeypatch.setattr(server, "make_prompt", fake_make_prompt)
+        client.post("/enrollment-chat", json={"message": "What are the school hours?"})
+        assert captured.get("language") == "English"
+
+    def test_language_forwarded_to_make_prompt(self, client, monkeypatch):
+        _setup_non_greeting(monkeypatch)
+        captured = {}
+
+        def fake_make_prompt(query, passage, history=[], language="English"):
+            captured["language"] = language
+            return "ANSWER: "
+
+        monkeypatch.setattr(server, "make_prompt", fake_make_prompt)
+        client.post("/enrollment-chat", json={"message": "What are the school hours?", "language": "Spanish"})
+        assert captured.get("language") == "Spanish"
+
+
 

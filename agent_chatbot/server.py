@@ -209,6 +209,7 @@ def chat_endpoint():
     data = request.json
     user_query = data.get('message')
     history = data.get('history', []) # Get history, default to empty list
+    language = data.get('language', 'English')
 
     if not user_query:
         return jsonify({"error": "No message provided"}), 400
@@ -246,7 +247,7 @@ def chat_endpoint():
                 print(f"[AI Response]: {response_text}")
             else:
                 # 3. Construct Prompt (Pass ORIGINAL query to keep flow natural, but use passage from rewritten query)
-                prompt = make_prompt(user_query, passage, history)
+                prompt = make_prompt(user_query, passage, history, language)
 
                 # 4. Generate Answer with OpenRouter
                 completion = client.chat.completions.create(
@@ -318,7 +319,8 @@ def enrollment_chat_endpoint():
     # Get message from Frontend
     data = request.json
     user_query = data.get('message')
-    history = data.get('history', []) 
+    history = data.get('history', [])
+    language = data.get('language', 'English')
 
     if not user_query:
         return jsonify({"error": "No message provided"}), 400
@@ -356,7 +358,7 @@ def enrollment_chat_endpoint():
                 print(f"[AI Response]: {response_text}")
             else:
                 # 3. Construct Prompt (Specialized for enrollment agent)
-                prompt = make_prompt(user_query, passage, history)
+                prompt = make_prompt(user_query, passage, history, language)
                 # Maybe modify prompt slightly for enrollment context if needed, 
                 # but standard make_prompt works if passage is good.
 
