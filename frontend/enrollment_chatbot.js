@@ -12,20 +12,24 @@ let chatHistory = []; // Store conversation history
 const welcomeScreen = document.getElementById('welcome-screen');
 
 const welcomeTranslations = {
-    English:    { greeting: "Hi!",      intro: "I'm a Crescent student-developed chatbot.",                    question: "What is your question?" },
-    French:     { greeting: "Salut !",  intro: "Je suis un chatbot développé par des étudiants de Crescent.", question: "Quelle est votre question ?" },
-    Spanish:    { greeting: "¡Hola!",   intro: "Soy un chatbot desarrollado por estudiantes de Crescent.",    question: "¿Cuál es tu pregunta?" },
-    Arabic:     { greeting: "مرحباً!", intro: "أنا روبوت محادثة طوّره طلاب كريسنت.",                        question: "ما سؤالك؟" },
-    Chinese:    { greeting: "你好！",   intro: "我是Crescent学生开发的聊天机器人。",                            question: "您有什么问题？" },
-    Urdu:       { greeting: "ہیلو!",    intro: "میں کریسنٹ کے طلبہ کا تیار کردہ چیٹ بوٹ ہوں۔",             question: "آپ کا سوال کیا ہے؟" },
-    Portuguese: { greeting: "Olá!",     intro: "Sou um chatbot desenvolvido por estudantes de Crescent.",     question: "Qual é a sua pergunta?" },
+    English:    { greeting: "Hi!",      intro: "I'm a Crescent student-developed chatbot.",                    question: "What is your question?",    contactPre: "Please contact",                                    contactPost: "if your question is not answered." },
+    French:     { greeting: "Salut !",  intro: "Je suis un chatbot développé par des étudiants de Crescent.", question: "Quelle est votre question ?", contactPre: "Veuillez contacter",                                contactPost: "si votre question n'a pas de réponse." },
+    Spanish:    { greeting: "¡Hola!",   intro: "Soy un chatbot desarrollado por estudiantes de Crescent.",    question: "¿Cuál es tu pregunta?",      contactPre: "Por favor contacte",                                contactPost: "si su pregunta no ha sido respondida." },
+    Arabic:     { greeting: "مرحباً!", intro: "أنا روبوت محادثة طوّره طلاب كريسنت.",                        question: "ما سؤالك؟",                  contactPre: "يرجى التواصل مع",                                   contactPost: "إذا لم تتم الإجابة على سؤالك." },
+    Chinese:    { greeting: "你好！",   intro: "我是Crescent学生开发的聊天机器人。",                            question: "您有什么问题？",               contactPre: "如果您的问题未得到解答，请联系",                    contactPost: "。" },
+    Urdu:       { greeting: "ہیلو!",    intro: "میں کریسنٹ کے طلبہ کا تیار کردہ چیٹ بوٹ ہوں۔",             question: "آپ کا سوال کیا ہے؟",         contactPre: "اگر آپ کے سوال کا جواب نہیں ملا تو",               contactPost: "سے رابطہ کریں۔" },
+    Portuguese: { greeting: "Olá!",     intro: "Sou um chatbot desenvolvido por estudantes de Crescent.",     question: "Qual é a sua pergunta?",     contactPre: "Por favor contacte",                                contactPost: "se a sua pergunta não foi respondida." },
 };
 
 const updateWelcomeText = (lang) => {
     const welcomeTextEl = document.querySelector('.welcome-text');
+    const welcomeContactEl = document.querySelector('.welcome-contact');
     if (!welcomeTextEl) return;
     const t = welcomeTranslations[lang] || welcomeTranslations['English'];
     welcomeTextEl.innerHTML = `${t.greeting} <span class="wave-emoji">👋</span><br>${t.intro}<br><span class="welcome-tagline">${t.question}</span>`;
+    if (welcomeContactEl) {
+        welcomeContactEl.innerHTML = `${t.contactPre} <a href="mailto:apply@crescentschool.org" class="contact-email">apply@crescentschool.org</a> ${t.contactPost}`;
+    }
     const waveEmoji = welcomeTextEl.querySelector('.wave-emoji');
     if (waveEmoji) {
         waveEmoji.classList.remove('waving');

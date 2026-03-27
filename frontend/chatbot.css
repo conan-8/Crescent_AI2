@@ -200,6 +200,26 @@ body.show-chatbot .chatbot header .lang-select {
     display: none;
 }
 
+/* Contact line below the welcome greeting */
+.welcome-contact {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.82rem;
+    color: #666;
+    margin: 14px 0 0;
+    max-width: 340px;
+    line-height: 1.5;
+}
+
+.contact-email {
+    color: #006e4f;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-email:hover {
+    text-decoration: underline;
+}
+
 /* Wave hand emoji animation */
 @keyframes wave-hand {
     0%   { transform: rotate(0deg); }

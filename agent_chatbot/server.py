@@ -274,9 +274,6 @@ def chat_endpoint():
                 if any(phrase in response_text.lower() for phrase in negative_phrases):
                     response_text = "My purpose is to provide information about Crescent School. Do you have a question about the school that I can assist you with?"
                 else:
-                    # Remove it if the LLM auto-generated it from seeing it in history
-                    response_text = response_text.replace("Was your question answered? If not, please contact the Enrolment Office.", "").strip()
-                    
                     # Add source link if available
                     if metadatas:
                         sources = list(set([m.get('source') for m in metadatas if m and m.get('source')]))
@@ -284,8 +281,6 @@ def chat_endpoint():
                             best_link = get_best_link(user_query, response_text, sources)
                             if best_link:
                                 response_text += f"\n\nSource: {best_link}"
-                    
-                    response_text += "\n\nWas your question answered? If not, please contact the Enrolment Office."
                 print(f"[Gemini Answer]: {response_text}")
 
         # 5. Log Conversation
@@ -387,9 +382,6 @@ def enrollment_chat_endpoint():
                 if any(phrase in response_text.lower() for phrase in negative_phrases):
                      response_text = "I specialize in information relevant to Crescent School. Do you have a question about the school that I can assist you with?"
                 else:
-                    # Remove it if the LLM auto-generated it from seeing it in history
-                    response_text = response_text.replace("Was your question answered? If not, please contact the Enrolment Office.", "").strip()
-                    
                     # Add source link
                     if metadatas:
                         sources = list(set([m.get('source') for m in metadatas if m and m.get('source')]))
@@ -397,8 +389,6 @@ def enrollment_chat_endpoint():
                             best_link = get_best_link(user_query, response_text, sources)
                             if best_link:
                                 response_text += f"\n\nSource: {best_link}"
-
-                    response_text += "\n\nWas your question answered? If not, please contact the Enrolment Office."
                 print(f"[Enrollment Answer]: {response_text}")
 
         # 5. Log Conversation
