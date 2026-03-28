@@ -493,6 +493,63 @@ body.show-chatbot .chatbot header .lang-select {
 
 
 
+/* Dismissible contact banner — slides in after the first outgoing message */
+@keyframes contactBannerSlideDown {
+    from { max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0; }
+    to   { max-height: 70px; opacity: 1; padding-top: 8px; padding-bottom: 8px; }
+}
+
+.contact-banner {
+    display: none;
+    align-items: center;
+    padding: 8px 12px 8px 16px;
+    background: #e8f5e9;
+    border-bottom: 1px solid #a5d6a7;
+    color: #1b5e20;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.contact-banner.visible {
+    display: flex;
+    animation: contactBannerSlideDown 0.35s ease-out forwards;
+}
+
+.contact-banner .contact-banner-text {
+    flex: 1;
+}
+
+.contact-banner .contact-email {
+    color: #006e4f;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.contact-banner .contact-email:hover {
+    text-decoration: underline;
+}
+
+.contact-banner-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #2e7d32;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 2px 6px;
+    margin-left: 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: background 0.18s;
+}
+
+.contact-banner-close:hover {
+    background: rgba(0, 110, 79, 0.12);
+}
+
 /* Enrollment Banner (persistent, below header) */
 .enrollment-banner {
     display: flex;

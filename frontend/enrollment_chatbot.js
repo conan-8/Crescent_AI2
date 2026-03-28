@@ -10,6 +10,9 @@ const langSelect = document.getElementById("lang-select");
 let userMessage = null;
 let chatHistory = []; // Store conversation history
 const welcomeScreen = document.getElementById('welcome-screen');
+const contactBanner = document.getElementById('contact-banner');
+const contactBannerClose = document.getElementById('contact-banner-close');
+let contactBannerShown = false;
 
 const welcomeTranslations = {
     English:    { greeting: "Hi!",      intro: "I'm a Crescent student-developed chatbot.",                    question: "What is your question?",    contactPre: "Please contact",                                    contactPost: "if your question is not answered." },
@@ -19,6 +22,13 @@ const welcomeTranslations = {
     Chinese:    { greeting: "你好！",   intro: "我是Crescent学生开发的聊天机器人。",                            question: "您有什么问题？",               contactPre: "如果您的问题未得到解答，请联系",                    contactPost: "。" },
     Urdu:       { greeting: "ہیلو!",    intro: "میں کریسنٹ کے طلبہ کا تیار کردہ چیٹ بوٹ ہوں۔",             question: "آپ کا سوال کیا ہے؟",         contactPre: "اگر آپ کے سوال کا جواب نہیں ملا تو",               contactPost: "سے رابطہ کریں۔" },
     Portuguese: { greeting: "Olá!",     intro: "Sou um chatbot desenvolvido por estudantes de Crescent.",     question: "Qual é a sua pergunta?",     contactPre: "Por favor contacte",                                contactPost: "se a sua pergunta não foi respondida." },
+};
+
+const updateBannerText = (lang) => {
+    const bannerTextEl = document.getElementById('contact-banner-text');
+    if (!bannerTextEl) return;
+    const t = welcomeTranslations[lang] || welcomeTranslations['English'];
+    bannerTextEl.innerHTML = `${t.contactPre} <a href="mailto:apply@crescentschool.org" class="contact-email">apply@crescentschool.org</a> ${t.contactPost}`;
 };
 
 const updateWelcomeText = (lang) => {
@@ -232,6 +242,13 @@ const handleChat = () => {
     const outgoingChatLi = createChatLi(userMessage, "outgoing");
     chatbox.appendChild(outgoingChatLi);
 
+    // Show contact banner on first message (if not already dismissed this session)
+    if (!contactBannerShown && sessionStorage.getItem('contactBannerDismissed') !== 'true') {
+        updateBannerText(langSelect ? langSelect.value : 'English');
+        contactBanner.classList.add('visible');
+        contactBannerShown = true;
+    }
+
     // Add user message to history
     chatHistory.push({ role: "user", content: userMessage });
 
@@ -305,11 +322,20 @@ newChatBtn.addEventListener("click", () => {
     sendChatBtn.classList.remove("active");
 });
 
+// Dismiss contact banner for the rest of the session
+if (contactBannerClose) {
+    contactBannerClose.addEventListener('click', () => {
+        contactBanner.style.display = 'none';
+        sessionStorage.setItem('contactBannerDismissed', 'true');
+    });
+}
+
 // Language selector: update welcome text immediately if welcome screen is visible
 if (langSelect) {
     langSelect.addEventListener("change", () => {
         if (welcomeScreen && !welcomeScreen.classList.contains('hidden')) {
             updateWelcomeText(langSelect.value);
         }
+        updateBannerText(langSelect.value);
     });
 }
