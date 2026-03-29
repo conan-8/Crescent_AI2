@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pytest tests/test_snapshot_db.py -v)",
+      "Bash(pytest:*)",
+      "Bash(python -m pytest tests/test_snapshot_db.py -v)",
+      "Bash(python -m pytest tests/test_snapshot_db.py::TestParseArgs -v)"
+    ]
+  }
+}
