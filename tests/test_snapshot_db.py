@@ -367,8 +367,9 @@ class TestRollback:
 
 class TestParseArgs:
     def test_collection_is_required(self):
-        with pytest.raises(SystemExit):
+        with pytest.raises(SystemExit) as exc:
             snapshot_db.parse_args([])
+        assert exc.value.code == 2
 
     def test_collection_flag_sets_name(self):
         args = snapshot_db.parse_args(["--collection", "full_database"])
@@ -400,5 +401,6 @@ class TestParseArgs:
         assert args.snapshot is None
 
     def test_list_and_rollback_are_mutually_exclusive(self):
-        with pytest.raises(SystemExit):
+        with pytest.raises(SystemExit) as exc:
             snapshot_db.parse_args(["--collection", "full_database", "--list", "--rollback"])
+        assert exc.value.code == 2

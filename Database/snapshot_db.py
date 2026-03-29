@@ -36,7 +36,6 @@ def _collection_dir(collection_name: str) -> str:
 
 
 def _snapshot_path(collection_name: str, timestamp: str) -> str:
-    # used by create_snapshot (added in the next task)
     return os.path.join(_collection_dir(collection_name), f"{timestamp}_snap.json")
 
 
@@ -197,6 +196,8 @@ def main(argv=None):
     args = parse_args(argv)
 
     if args.list:
+        if args.snapshot is not None:
+            print("Warning: --snapshot is ignored when using --list.")
         snaps = list_snapshots(args.collection)
         if not snaps:
             print(f"No snapshots found for collection '{args.collection}'.")
