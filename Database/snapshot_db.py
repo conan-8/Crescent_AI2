@@ -17,9 +17,12 @@ Usage:
 
 import os
 import json
+import argparse
 from datetime import datetime
-from dotenv import load_dotenv
+
 import chromadb
+from dotenv import load_dotenv
+
 from database import get_chroma_db
 
 load_dotenv()
