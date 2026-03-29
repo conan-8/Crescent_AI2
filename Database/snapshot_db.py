@@ -102,7 +102,9 @@ def create_snapshot(collection, collection_name: str) -> str:
     ids = result.get("ids") or []
     documents = result.get("documents") or []
     metadatas = result.get("metadatas") or []
-    raw_embeddings = result.get("embeddings") or []
+    raw_embeddings = result.get("embeddings")
+    if raw_embeddings is None:
+        raw_embeddings = []
     embeddings = [e.tolist() if hasattr(e, "tolist") else list(e) for e in raw_embeddings]
 
     timestamp = _timestamp()

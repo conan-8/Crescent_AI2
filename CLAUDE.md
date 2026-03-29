@@ -46,21 +46,21 @@ pytest tests/test_server.py::TestChatEndpoint::test_missing_message_returns_400
 ### Request flow
 
 ```
-Browser iframe  →  enrollment_chatbot.js  →  Flask /chat or /enrollment-chat
-                                          →  get_relevant_documents (ChromaDB)
-                                          →  make_prompt (constructs system prompt)
-                                          →  Qwen via OpenRouter (generates answer)
-                                          →  logs to full_database_conversations
+Browser iframe  →  chatbot.js  →  Flask /enrollment-chat
+                               →  get_relevant_documents (ChromaDB)
+                               →  make_prompt (constructs system prompt)
+                               →  Qwen via OpenRouter (generates answer)
+                               →  logs to full_database_conversations
 ```
 
 ### Key architectural facts
 
-**Both chatbot iframes share one JS file.** `chatbot_iframe.html` and `enrollment_chatbot_iframe.html` are nearly identical HTML shells; both load `enrollment_chatbot.js`. The only server-side distinction is the endpoint (`/chat` vs `/enrollment-chat`) and the greeting response text.
+**The chatbot iframe is `chatbot_iframe.html`**, which loads `chatbot.js` and `chatbot.css`. It posts to the `/chat` endpoint.
 
 **ChromaDB collections in use by the server** (`agent_chatbot/server.py`):
 - `full_database` — the main knowledge base queried on every non-greeting request
-- `conversations` — logs `/chat` interactions
-- `full_database_conversations` — logs `/enrollment-chat` interactions; also the source for the analysis agent
+- `conversations` — legacy collection (no longer written to)
+- `full_database_conversations` — logs `/chat` interactions; also the source for the analysis agent
 
 **Chunk metadata convention:**
 - Handbook pages: `{"source": url}` — crawled with LLM extraction (Gemini Flash)
@@ -70,7 +70,7 @@ Browser iframe  →  enrollment_chatbot.js  →  Flask /chat or /enrollment-chat
 
 **`make_prompt` in `agent_chatbot/chatbot.py`** is the single function that builds the entire system prompt. It accepts `query`, `relevant_passage`, `history=[]`, and `language="English"`. The language instruction is injected just before the `ANSWER:` label so the model always responds in the user-selected language regardless of what language the user typed in.
 
-**Language selector** is in both iframe headers. The selected value is sent as `"language"` in every API request JSON body and passed through `server.py → make_prompt`. Welcome screen text translates immediately on change via `updateWelcomeText()` in `enrollment_chatbot.js`, which holds translations for all 7 supported languages.
+**Language selector** is in the iframe header. The selected value is sent as `"language"` in every API request JSON body and passed through `server.py → make_prompt`. Welcome screen text translates immediately on change via `updateWelcomeText()` in `chatbot.js`, which holds translations for all 7 supported languages.
 
 **Rate limiting + spam detection** in `server.py` runs before any LLM call:
 1. Flask-Limiter (20 req/min) keyed on a SHA-256 client fingerprint (IP + User-Agent + Accept headers)

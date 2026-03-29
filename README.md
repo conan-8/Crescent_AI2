@@ -13,8 +13,8 @@ The project has been refactored into modular directories:
   - `analysis_agent.py`: Parses logged conversations, queries an LLM to identify trends, unanswered questions, and generates insights.
   - `verify_logs.py`: Utility to verify if conversation logs have been saved properly in the database.
 - **`/frontend`**: UI files and chat widget integrations.
-  - Contains JS, CSS, and HTML for the chat iframes (`chatbot_iframe.html`, `enrollment_chatbot_iframe.html`). 
-  - `Main Page.html` / `Enrollment_Chat.html`: Demo pages showing the widget on site.
+  - `chatbot_iframe.html`: Embeddable iframe shell loading `chatbot.js` and `chatbot.css`.
+  - `Main Page.html`: Demo page showing the widget on site.
 - **`/Database`**: Scripts for scraping, embedding, and database management.
   - Contains scripts to crawl the Crescent website (`create_db.py`, `database.py`) and save embeddings into ChromaDB for both standard queries and enrollment-specific tasks.
 - **`/tests`**: Comprehensive PyTest unit tests for agents and the database.

@@ -238,10 +238,9 @@ def client():
     server.app.config["TESTING"] = True
     # Disable Flask-Limiter so rate-limit responses don't mask spam/logic tests.
     server.app.config["RATELIMIT_ENABLED"] = False
-    server.db = _mock_collection
-    server.enrollment_db = _mock_collection
+    server.full_database = _mock_collection
     server.conversations_db = _mock_collection
-    server.enrollment_conversations_db = _mock_collection
+    server.full_database_conversations = _mock_collection
     with server.app.test_client() as c:
         yield c
     server.app.config["RATELIMIT_ENABLED"] = True
@@ -266,15 +265,13 @@ class TestChatEndpoint:
         assert resp.status_code == 200
 
     def test_no_db_returns_500(self, client):
-        original = server.db
-        server.db = None
+        original = server.full_database
+        server.full_database = None
         resp = client.post("/chat", json={"message": "hello"})
-        server.db = original
+        server.full_database = original
         assert resp.status_code == 500
 
     def test_gibberish_message_returns_spam_response(self, client):
-        # Use a unique User-Agent so this request gets its own rate-limit bucket,
-        # isolated from the fingerprint accumulated by the earlier greeting tests.
         resp = client.post(
             "/chat",
             json={"message": "!@#$%^&*()_+-=[]{}!!!"},
@@ -283,24 +280,6 @@ class TestChatEndpoint:
         assert resp.status_code == 200
         data = resp.get_json()
         assert "valid question" in data["response"].lower()
-
-
-class TestEnrollmentChatEndpoint:
-    def test_missing_message_returns_400(self, client):
-        resp = client.post("/enrollment-chat", json={})
-        assert resp.status_code == 400
-
-    def test_greeting_returns_enrollment_response(self, client):
-        resp = client.post("/enrollment-chat", json={"message": "hello"})
-        assert resp.status_code == 200
-        assert "Enrollment" in resp.get_json()["response"]
-
-    def test_no_db_returns_500(self, client):
-        original = server.enrollment_db
-        server.enrollment_db = None
-        resp = client.post("/enrollment-chat", json={"message": "hello"})
-        server.enrollment_db = original
-        assert resp.status_code == 500
 
 
 # ---------------------------------------------------------------------------
@@ -339,32 +318,6 @@ class TestChatEndpointLanguage:
         monkeypatch.setattr(server, "make_prompt", fake_make_prompt)
         client.post("/chat", json={"message": "What are the school hours?", "language": "French"})
         assert captured.get("language") == "French"
-
-
-class TestEnrollmentChatEndpointLanguage:
-    def test_language_defaults_to_english_when_omitted(self, client, monkeypatch):
-        _setup_non_greeting(monkeypatch)
-        captured = {}
-
-        def fake_make_prompt(query, passage, history=[], language="English"):
-            captured["language"] = language
-            return "ANSWER: "
-
-        monkeypatch.setattr(server, "make_prompt", fake_make_prompt)
-        client.post("/enrollment-chat", json={"message": "What are the school hours?"})
-        assert captured.get("language") == "English"
-
-    def test_language_forwarded_to_make_prompt(self, client, monkeypatch):
-        _setup_non_greeting(monkeypatch)
-        captured = {}
-
-        def fake_make_prompt(query, passage, history=[], language="English"):
-            captured["language"] = language
-            return "ANSWER: "
-
-        monkeypatch.setattr(server, "make_prompt", fake_make_prompt)
-        client.post("/enrollment-chat", json={"message": "What are the school hours?", "language": "Spanish"})
-        assert captured.get("language") == "Spanish"
 
 
 

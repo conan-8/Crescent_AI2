@@ -3,28 +3,61 @@ const chatbot = document.querySelector(".chatbot");
 const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector("#send-btn");
 const chatbox = document.querySelector(".chatbox");
+const closeBtn = document.querySelector(".close-btn");
 const newChatBtn = document.querySelector(".new-chat-btn");
+const langSelect = document.getElementById("lang-select");
 
 let userMessage = null;
 let chatHistory = []; // Store conversation history
 const welcomeScreen = document.getElementById('welcome-screen');
+const contactBanner = document.getElementById('contact-banner');
+const contactBannerClose = document.getElementById('contact-banner-close');
+let contactBannerShown = false;
+
+const welcomeTranslations = {
+    English:    { greeting: "Hi!",      intro: "I'm a Crescent student-developed chatbot.",                    question: "What is your question?",    contactPre: "Please contact",                                    contactPost: "if your question is not answered." },
+    French:     { greeting: "Salut !",  intro: "Je suis un chatbot développé par des étudiants de Crescent.", question: "Quelle est votre question ?", contactPre: "Veuillez contacter",                                contactPost: "si votre question n'a pas de réponse." },
+    Spanish:    { greeting: "¡Hola!",   intro: "Soy un chatbot desarrollado por estudiantes de Crescent.",    question: "¿Cuál es tu pregunta?",      contactPre: "Por favor contacte",                                contactPost: "si su pregunta no ha sido respondida." },
+    Arabic:     { greeting: "مرحباً!", intro: "أنا روبوت محادثة طوّره طلاب كريسنت.",                        question: "ما سؤالك؟",                  contactPre: "يرجى التواصل مع",                                   contactPost: "إذا لم تتم الإجابة على سؤالك." },
+    Chinese:    { greeting: "你好！",   intro: "我是Crescent学生开发的聊天机器人。",                            question: "您有什么问题？",               contactPre: "如果您的问题未得到解答，请联系",                    contactPost: "。" },
+    Urdu:       { greeting: "ہیلو!",    intro: "میں کریسنٹ کے طلبہ کا تیار کردہ چیٹ بوٹ ہوں۔",             question: "آپ کا سوال کیا ہے؟",         contactPre: "اگر آپ کے سوال کا جواب نہیں ملا تو",               contactPost: "سے رابطہ کریں۔" },
+    Portuguese: { greeting: "Olá!",     intro: "Sou um chatbot desenvolvido por estudantes de Crescent.",     question: "Qual é a sua pergunta?",     contactPre: "Por favor contacte",                                contactPost: "se a sua pergunta não foi respondida." },
+};
+
+const updateBannerText = (lang) => {
+    const bannerTextEl = document.getElementById('contact-banner-text');
+    if (!bannerTextEl) return;
+    const t = welcomeTranslations[lang] || welcomeTranslations['English'];
+    bannerTextEl.innerHTML = `${t.contactPre} <a href="mailto:apply@crescentschool.org" class="contact-email">apply@crescentschool.org</a> ${t.contactPost}`;
+};
+
+const updateWelcomeText = (lang) => {
+    const welcomeTextEl = document.querySelector('.welcome-text');
+    const welcomeContactEl = document.querySelector('.welcome-contact');
+    if (!welcomeTextEl) return;
+    const t = welcomeTranslations[lang] || welcomeTranslations['English'];
+    welcomeTextEl.innerHTML = `${t.greeting} <span class="wave-emoji">👋</span><br>${t.intro}<br><span class="welcome-tagline">${t.question}</span>`;
+    if (welcomeContactEl) {
+        welcomeContactEl.innerHTML = `${t.contactPre} <a href="mailto:apply@crescentschool.org" class="contact-email">apply@crescentschool.org</a> ${t.contactPost}`;
+    }
+    const waveEmoji = welcomeTextEl.querySelector('.wave-emoji');
+    if (waveEmoji) {
+        waveEmoji.classList.remove('waving');
+        void waveEmoji.offsetWidth;
+        waveEmoji.classList.add('waving');
+    }
+};
 
 const showWelcome = () => {
     if (!welcomeScreen) return;
+    updateWelcomeText(langSelect ? langSelect.value : 'English');
     welcomeScreen.classList.remove('hidden');
     welcomeScreen.classList.remove('fade-in');
     void welcomeScreen.offsetWidth; // force reflow to restart animation
     welcomeScreen.classList.add('fade-in');
-
-    const waveEmoji = welcomeScreen.querySelector('.wave-emoji');
-    if (waveEmoji) {
-        waveEmoji.classList.remove('waving');
-        void waveEmoji.offsetWidth; // force reflow to restart animation
-        waveEmoji.classList.add('waving');
-    }
 };
 // The address of your local Python server
-const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/enrollment-chat";
+const API_URL = "http://127.0.0.1:5000/chat";
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
@@ -40,6 +73,8 @@ const startThinkingAnimation = (messageElement) => {
     messageElement.innerHTML = '<span class="thinking-animation"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span>';
 }
 
+
+
 const generateResponse = async (incomingChatLi) => {
     const messageElement = incomingChatLi.querySelector("p");
 
@@ -52,7 +87,8 @@ const generateResponse = async (incomingChatLi) => {
             },
             body: JSON.stringify({
                 message: userMessage,
-                history: chatHistory // Send history to server
+                history: chatHistory, // Send history to server
+                language: langSelect ? langSelect.value : "English"
             })
         });
 
@@ -90,65 +126,48 @@ const generateResponse = async (incomingChatLi) => {
             // 2. Parse markdown - block level elements (headers, lists)
             const lines = safeText.split('\n');
             const processedLines = [];
-            let listStack = []; // stores { type: 'ul'|'ol', indent: number }
+            let inUnorderedList = false;
+            let inOrderedList = false;
 
             for (let i = 0; i < lines.length; i++) {
                 let line = lines[i];
 
                 // Check for headers (## text) - convert to h3 as specified
-                const headerMatch = line.match(/^(\s*)(#{1,6})\s+(.+)$/);
+                const headerMatch = line.match(/^(#{1,6})\s+(.+)$/);
                 if (headerMatch) {
-                    while (listStack.length > 0) processedLines.push(`</${listStack.pop().type}>`);
-                    processedLines.push(`<h3>${headerMatch[3]}</h3>`);
+                    if (inUnorderedList) { processedLines.push('</ul>'); inUnorderedList = false; }
+                    if (inOrderedList) { processedLines.push('</ol>'); inOrderedList = false; }
+                    processedLines.push(`<h3>${headerMatch[2]}</h3>`);
                     continue;
                 }
 
                 // Check for unordered list items (- item or * item at start of line)
-                const unorderedMatch = line.match(/^(\s*)[-*]\s+(.+)$/);
+                const unorderedMatch = line.match(/^[-*]\s+(.+)$/);
+                if (unorderedMatch) {
+                    if (inOrderedList) { processedLines.push('</ol>'); inOrderedList = false; }
+                    if (!inUnorderedList) { processedLines.push('<ul>'); inUnorderedList = true; }
+                    processedLines.push(`<li>${unorderedMatch[1]}</li>`);
+                    continue;
+                }
+
                 // Check for ordered list items (1. item, 2. item, etc.)
-                const orderedMatch = line.match(/^(\s*)\d+\.\s+(.+)$/);
-
-                if (unorderedMatch || orderedMatch) {
-                    const isOrdered = !!orderedMatch;
-                    const match = isOrdered ? orderedMatch : unorderedMatch;
-                    const indent = match[1].length;
-                    const content = match[2];
-                    const listType = isOrdered ? 'ol' : 'ul';
-
-                    if (listStack.length === 0) {
-                        listStack.push({ type: listType, indent: indent });
-                        processedLines.push(`<${listType}>`);
-                    } else {
-                        let currentLevel = listStack[listStack.length - 1];
-                        if (indent > currentLevel.indent) {
-                            listStack.push({ type: listType, indent: indent });
-                            processedLines.push(`<${listType}>`);
-                        } else if (indent < currentLevel.indent) {
-                            while (listStack.length > 0 && indent < listStack[listStack.length - 1].indent) {
-                                processedLines.push(`</${listStack.pop().type}>`);
-                            }
-                            if (listStack.length === 0) {
-                                listStack.push({ type: listType, indent: indent });
-                                processedLines.push(`<${listType}>`);
-                            }
-                        } else if (currentLevel.type !== listType) {
-                            // Same indent but different list type
-                            processedLines.push(`</${listStack.pop().type}>`);
-                            listStack.push({ type: listType, indent: indent });
-                            processedLines.push(`<${listType}>`);
-                        }
-                    }
-                    processedLines.push(`<li>${content}</li>`);
+                const orderedMatch = line.match(/^\d+\.\s+(.+)$/);
+                if (orderedMatch) {
+                    if (inUnorderedList) { processedLines.push('</ul>'); inUnorderedList = false; }
+                    if (!inOrderedList) { processedLines.push('<ol>'); inOrderedList = true; }
+                    processedLines.push(`<li>${orderedMatch[1]}</li>`);
                     continue;
                 }
 
                 // Regular line - close any open lists
-                while (listStack.length > 0) processedLines.push(`</${listStack.pop().type}>`);
+                if (inUnorderedList) { processedLines.push('</ul>'); inUnorderedList = false; }
+                if (inOrderedList) { processedLines.push('</ol>'); inOrderedList = false; }
                 processedLines.push(line);
             }
 
             // Close any remaining open lists
-            while (listStack.length > 0) processedLines.push(`</${listStack.pop().type}>`);
+            if (inUnorderedList) processedLines.push('</ul>');
+            if (inOrderedList) processedLines.push('</ol>');
 
             safeText = processedLines.join('\n');
 
@@ -192,6 +211,8 @@ const generateResponse = async (incomingChatLi) => {
         // Add AI response to history
         chatHistory.push({ role: "model", content: data.response });
 
+        // Enrollment banner is persistent — no need to append scheduler options here
+
     } catch (error) {
         // Handle errors
         // If it's our custom rate limit error (or other server error msg), show that.
@@ -221,18 +242,26 @@ const handleChat = () => {
     const outgoingChatLi = createChatLi(userMessage, "outgoing");
     chatbox.appendChild(outgoingChatLi);
 
+    // Show contact banner on first message (if not already dismissed this session)
+    if (!contactBannerShown && sessionStorage.getItem('contactBannerDismissed') !== 'true') {
+        updateBannerText(langSelect ? langSelect.value : 'English');
+        contactBanner.classList.add('visible');
+        contactBannerShown = true;
+    }
+
     // Add user message to history
     chatHistory.push({ role: "user", content: userMessage });
 
     // Clear the input area and reset send button
     chatInput.value = "";
+    chatInput.style.height = "38px";
     sendChatBtn.classList.remove("active");
 
     // Display animated thinking indicator while we wait
     const incomingChatLi = createChatLi("", "incoming");
     startThinkingAnimation(incomingChatLi.querySelector("p"));
     chatbox.appendChild(incomingChatLi);
-    
+
     // Scroll the chatbox so the user's new message is at the top
     chatbox.scrollTo({
         top: outgoingChatLi.offsetTop - 15, // 15px matches the chatbox padding-top
@@ -245,6 +274,12 @@ const handleChat = () => {
 
 // Toggle send button active state based on textarea content
 chatInput.addEventListener("input", () => {
+    // Adjust height dynamically based on content
+    chatInput.style.height = "38px";
+    let newHeight = chatInput.scrollHeight;
+    if (newHeight > 180) newHeight = 180; // ensure max height is respected, but scroll kicks in
+    chatInput.style.height = `${newHeight}px`;
+
     if (chatInput.value.trim()) {
         sendChatBtn.classList.add("active");
     } else {
@@ -271,6 +306,11 @@ chatbotToggler.addEventListener("click", () => {
     }
 });
 
+closeBtn.addEventListener("click", () => {
+    document.body.classList.remove("show-chatbot");
+    window.parent.postMessage({ type: "toggle", showing: false }, "*");
+});
+
 // New Chat button: clear conversation and restore welcome screen
 newChatBtn.addEventListener("click", () => {
     chatbox.innerHTML = "";
@@ -278,6 +318,24 @@ newChatBtn.addEventListener("click", () => {
     showWelcome();
     chatHistory = [];
     chatInput.value = "";
+    chatInput.style.height = "38px";
     sendChatBtn.classList.remove("active");
 });
 
+// Dismiss contact banner for the rest of the session
+if (contactBannerClose) {
+    contactBannerClose.addEventListener('click', () => {
+        contactBanner.style.display = 'none';
+        sessionStorage.setItem('contactBannerDismissed', 'true');
+    });
+}
+
+// Language selector: update welcome text immediately if welcome screen is visible
+if (langSelect) {
+    langSelect.addEventListener("change", () => {
+        if (welcomeScreen && !welcomeScreen.classList.contains('hidden')) {
+            updateWelcomeText(langSelect.value);
+        }
+        updateBannerText(langSelect.value);
+    });
+}
