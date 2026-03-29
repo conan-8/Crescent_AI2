@@ -32,6 +32,10 @@ _mock_langchain = MagicMock()
 _mock_langchain.RecursiveCharacterTextSplitter.return_value = _mock_splitter
 sys.modules["langchain_text_splitters"] = _mock_langchain
 
+# Stub snapshot_db so auto-snapshot calls don't touch the filesystem.
+_mock_snapshot_db = MagicMock()
+sys.modules["snapshot_db"] = _mock_snapshot_db
+
 # Populate the database stub with what update_db actually imports.
 sys.modules["database"].get_chroma_db = MagicMock()
 sys.modules["database"].ExtractedContent = MagicMock()
@@ -317,3 +321,38 @@ class TestUpdateUrlLive:
             run_async(update_db.update_url(col, "https://a.com", "enrollment"))
 
         assert call_order == ["delete", "add"]
+
+
+# ---------------------------------------------------------------------------
+# auto-snapshot integration
+# ---------------------------------------------------------------------------
+
+class TestAutoSnapshot:
+    def test_create_snapshot_called_before_update(self):
+        """update_db.run() must call snapshot_db.create_snapshot once, before any update."""
+        col = _make_collection(
+            all_metadatas=[{"source": "https://a.com", "type": "enrollment"}],
+            chunk_ids=[],
+        )
+        args = update_db.parse_args(["https://a.com", "--collection", "full_database"])
+
+        with patch.object(update_db, "get_chroma_db", return_value=col), \
+             patch.object(update_db, "update_url", AsyncMock(return_value=(0, 0))), \
+             patch.object(update_db.snapshot_db, "create_snapshot") as mock_snap:
+            asyncio.run(update_db.run(args))
+
+        mock_snap.assert_called_once_with(col, "full_database")
+
+    def test_create_snapshot_not_called_on_dry_run(self):
+        col = _make_collection(
+            all_metadatas=[{"source": "https://a.com", "type": "enrollment"}],
+            chunk_ids=[],
+        )
+        args = update_db.parse_args(["--dry-run", "--collection", "full_database"])
+
+        with patch.object(update_db, "get_chroma_db", return_value=col), \
+             patch.object(update_db, "update_url", AsyncMock(return_value=(0, 0))), \
+             patch.object(update_db.snapshot_db, "create_snapshot") as mock_snap:
+            asyncio.run(update_db.run(args))
+
+        mock_snap.assert_not_called()

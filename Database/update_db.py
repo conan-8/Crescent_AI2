@@ -27,6 +27,7 @@ from database import get_chroma_db, ExtractedContent, EXTRACTION_INSTRUCTION
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode, LLMExtractionStrategy, LLMConfig
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from dotenv import load_dotenv
+import snapshot_db
 
 load_dotenv()
 
@@ -224,6 +225,9 @@ def parse_args(argv=None):
 
 async def run(args):
     collection = get_chroma_db(args.collection)
+
+    if not args.dry_run:
+        snapshot_db.create_snapshot(collection, args.collection)
 
     if args.urls:
         # Specific URLs supplied — look up their stored types so we use the
