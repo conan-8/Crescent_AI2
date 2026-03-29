@@ -160,3 +160,101 @@ class TestPruneSnapshots:
             count = snapshot_db.prune_snapshots("my_col", max_keep=0)
         assert count == 2
         assert os.listdir(str(col_dir)) == []
+
+
+# ---------------------------------------------------------------------------
+# create_snapshot
+# ---------------------------------------------------------------------------
+
+class TestCreateSnapshot:
+    def _make_collection(self, ids, documents, metadatas, embeddings):
+        col = MagicMock()
+        col.get.return_value = {
+            "ids": ids,
+            "documents": documents,
+            "metadatas": metadatas,
+            "embeddings": embeddings,
+        }
+        return col
+
+    def test_creates_collection_directory(self, tmp_path):
+        col = self._make_collection(["id0"], ["doc0"], [{"source": "x"}], [[0.1]])
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            snapshot_db.create_snapshot(col, "new_col")
+        assert os.path.isdir(str(tmp_path / "new_col"))
+
+    def test_writes_json_file(self, tmp_path):
+        col = self._make_collection(["id0"], ["doc0"], [{"source": "x"}], [[0.1]])
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            ts = snapshot_db.create_snapshot(col, "my_col")
+        snap_file = tmp_path / "my_col" / f"{ts}_snap.json"
+        assert snap_file.exists()
+
+    def test_snapshot_contains_correct_fields(self, tmp_path):
+        ids = ["id0", "id1"]
+        docs = ["doc0", "doc1"]
+        metas = [{"source": "https://a.com"}, {"source": "https://b.com"}]
+        embeds = [[0.1, 0.2], [0.3, 0.4]]
+        col = self._make_collection(ids, docs, metas, embeds)
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            ts = snapshot_db.create_snapshot(col, "my_col")
+        with open(str(tmp_path / "my_col" / f"{ts}_snap.json")) as f:
+            data = json.load(f)
+        assert data["collection"] == "my_col"
+        assert data["document_count"] == 2
+        assert data["ids"] == ids
+        assert data["documents"] == docs
+        assert data["metadatas"] == metas
+        assert data["embeddings"] == embeds
+
+    def test_returns_timestamp_string(self, tmp_path):
+        col = self._make_collection([], [], [], [])
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            ts = snapshot_db.create_snapshot(col, "my_col")
+        assert isinstance(ts, str)
+        assert len(ts) > 0
+
+    def test_calls_collection_get_with_correct_includes(self, tmp_path):
+        col = self._make_collection([], [], [], [])
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            snapshot_db.create_snapshot(col, "my_col")
+        col.get.assert_called_once_with(
+            include=["documents", "embeddings", "metadatas"]
+        )
+
+    def test_prunes_after_writing(self, tmp_path):
+        col_dir = tmp_path / "my_col"
+        for i in range(5):
+            _write_snap(str(col_dir), f"2026-03-28T{i:02d}-00-00")
+        col = self._make_collection(["id0"], ["doc0"], [{"source": "x"}], [[0.1]])
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            snapshot_db.create_snapshot(col, "my_col")
+        # 5 existing + 1 new = 6; prune to 5 → 1 deleted
+        remaining = [f for f in os.listdir(str(col_dir)) if f.endswith("_snap.json")]
+        assert len(remaining) == 5
+
+    def test_empty_collection_snapshot_has_zero_count(self, tmp_path):
+        col = self._make_collection([], [], [], [])
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            ts = snapshot_db.create_snapshot(col, "my_col")
+        with open(str(tmp_path / "my_col" / f"{ts}_snap.json")) as f:
+            data = json.load(f)
+        assert data["document_count"] == 0
+
+    def test_numpy_like_embeddings_serialized_as_lists(self, tmp_path):
+        """Embeddings from ChromaDB may be numpy arrays; they must be JSON-serializable."""
+        class FakeArray:
+            def __init__(self, vals):
+                self._vals = vals
+            def tolist(self):
+                return self._vals
+
+        col = self._make_collection(
+            ["id0"], ["doc0"], [{"source": "x"}],
+            [FakeArray([0.1, 0.2])]
+        )
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            ts = snapshot_db.create_snapshot(col, "my_col")
+        with open(str(tmp_path / "my_col" / f"{ts}_snap.json")) as f:
+            data = json.load(f)
+        assert data["embeddings"] == [[0.1, 0.2]]

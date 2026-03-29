@@ -84,3 +84,37 @@ def prune_snapshots(collection_name: str, max_keep: int = MAX_SNAPSHOTS) -> int:
     for fname in to_delete:
         os.remove(os.path.join(col_dir, fname))
     return len(to_delete)
+
+
+def create_snapshot(collection, collection_name: str) -> str:
+    """
+    Export all documents, embeddings, and metadata from collection to a JSON file.
+    Returns the snapshot timestamp string.
+    """
+    col_dir = _collection_dir(collection_name)
+    os.makedirs(col_dir, exist_ok=True)
+
+    result = collection.get(include=["documents", "embeddings", "metadatas"])
+    ids = result.get("ids") or []
+    documents = result.get("documents") or []
+    metadatas = result.get("metadatas") or []
+    raw_embeddings = result.get("embeddings") or []
+    embeddings = [e.tolist() if hasattr(e, "tolist") else list(e) for e in raw_embeddings]
+
+    timestamp = _timestamp()
+    snapshot = {
+        "collection": collection_name,
+        "created_at": timestamp,
+        "document_count": len(ids),
+        "ids": ids,
+        "documents": documents,
+        "metadatas": metadatas,
+        "embeddings": embeddings,
+    }
+
+    with open(_snapshot_path(collection_name, timestamp), "w") as f:
+        json.dump(snapshot, f)
+
+    pruned = prune_snapshots(collection_name)
+    print(f"Snapshot created: {timestamp} ({len(ids)} documents). {pruned} old snapshot(s) pruned.")
+    return timestamp
