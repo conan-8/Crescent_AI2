@@ -172,3 +172,42 @@ def rollback(collection_name: str, snapshot_id: str = None):
         f"Rolled back {collection_name} to snapshot {target['timestamp']} "
         f"({data['document_count']} documents restored)."
     )
+
+
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(
+        description="Snapshot and rollback ChromaDB collections."
+    )
+    parser.add_argument(
+        "--collection", required=True, metavar="NAME", help="Collection name."
+    )
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("--list", action="store_true", help="List available snapshots.")
+    group.add_argument("--rollback", action="store_true", help="Rollback to a snapshot.")
+    parser.add_argument(
+        "--snapshot",
+        metavar="TIMESTAMP",
+        default=None,
+        help="Snapshot timestamp to rollback to (use with --rollback). Defaults to most recent.",
+    )
+    return parser.parse_args(argv)
+
+
+def main(argv=None):
+    args = parse_args(argv)
+
+    if args.list:
+        snaps = list_snapshots(args.collection)
+        if not snaps:
+            print(f"No snapshots found for collection '{args.collection}'.")
+        for s in snaps:
+            print(f"{s['timestamp']}  {s['document_count']} documents")
+    elif args.rollback:
+        rollback(args.collection, snapshot_id=args.snapshot)
+    else:
+        collection = get_chroma_db(args.collection)
+        create_snapshot(collection, args.collection)
+
+
+if __name__ == "__main__":
+    main()

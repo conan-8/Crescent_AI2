@@ -359,3 +359,46 @@ class TestRollback:
             snapshot_db.rollback("my_col")
         # 250 docs → 3 batches (100, 100, 50)
         assert mock_new_col.add.call_count == 3
+
+
+# ---------------------------------------------------------------------------
+# parse_args
+# ---------------------------------------------------------------------------
+
+class TestParseArgs:
+    def test_collection_is_required(self):
+        with pytest.raises(SystemExit):
+            snapshot_db.parse_args([])
+
+    def test_collection_flag_sets_name(self):
+        args = snapshot_db.parse_args(["--collection", "full_database"])
+        assert args.collection == "full_database"
+
+    def test_default_no_list_no_rollback(self):
+        args = snapshot_db.parse_args(["--collection", "full_database"])
+        assert args.list is False
+        assert args.rollback is False
+
+    def test_list_flag(self):
+        args = snapshot_db.parse_args(["--collection", "full_database", "--list"])
+        assert args.list is True
+
+    def test_rollback_flag(self):
+        args = snapshot_db.parse_args(["--collection", "full_database", "--rollback"])
+        assert args.rollback is True
+
+    def test_snapshot_flag(self):
+        args = snapshot_db.parse_args([
+            "--collection", "full_database",
+            "--rollback",
+            "--snapshot", "2026-03-29T10-00-00",
+        ])
+        assert args.snapshot == "2026-03-29T10-00-00"
+
+    def test_snapshot_defaults_to_none(self):
+        args = snapshot_db.parse_args(["--collection", "full_database", "--rollback"])
+        assert args.snapshot is None
+
+    def test_list_and_rollback_are_mutually_exclusive(self):
+        with pytest.raises(SystemExit):
+            snapshot_db.parse_args(["--collection", "full_database", "--list", "--rollback"])
