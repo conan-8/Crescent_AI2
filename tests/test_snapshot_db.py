@@ -258,3 +258,104 @@ class TestCreateSnapshot:
         with open(str(tmp_path / "my_col" / f"{ts}_snap.json")) as f:
             data = json.load(f)
         assert data["embeddings"] == [[0.1, 0.2]]
+
+
+# ---------------------------------------------------------------------------
+# rollback
+# ---------------------------------------------------------------------------
+
+class TestRollback:
+    def test_exits_with_error_when_no_snapshots(self, tmp_path):
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            with pytest.raises(SystemExit) as exc:
+                snapshot_db.rollback("empty_col")
+        assert exc.value.code == 1
+
+    def test_exits_with_error_when_snapshot_id_not_found(self, tmp_path):
+        col_dir = tmp_path / "my_col"
+        _write_snap(str(col_dir), "2026-03-29T10-00-00")
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            with pytest.raises(SystemExit) as exc:
+                snapshot_db.rollback("my_col", snapshot_id="9999-01-01T00-00-00")
+        assert exc.value.code == 1
+
+    def test_deletes_existing_collection(self, tmp_path):
+        col_dir = tmp_path / "my_col"
+        _write_snap(str(col_dir), "2026-03-29T10-00-00", doc_count=2)
+        mock_client = MagicMock()
+        mock_new_col = MagicMock()
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)), \
+             patch.object(snapshot_db.chromadb, "PersistentClient", return_value=mock_client), \
+             patch.object(snapshot_db, "get_chroma_db", return_value=mock_new_col):
+            snapshot_db.rollback("my_col")
+        mock_client.delete_collection.assert_called_once_with("my_col")
+
+    def test_recreates_collection_via_get_chroma_db(self, tmp_path):
+        col_dir = tmp_path / "my_col"
+        _write_snap(str(col_dir), "2026-03-29T10-00-00", doc_count=2)
+        mock_client = MagicMock()
+        mock_new_col = MagicMock()
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)), \
+             patch.object(snapshot_db.chromadb, "PersistentClient", return_value=mock_client), \
+             patch.object(snapshot_db, "get_chroma_db", return_value=mock_new_col) as mock_get:
+            snapshot_db.rollback("my_col")
+        mock_get.assert_called_once_with("my_col")
+
+    def test_restores_documents_to_new_collection(self, tmp_path):
+        col_dir = tmp_path / "my_col"
+        _write_snap(str(col_dir), "2026-03-29T10-00-00", doc_count=2)
+        mock_client = MagicMock()
+        mock_new_col = MagicMock()
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)), \
+             patch.object(snapshot_db.chromadb, "PersistentClient", return_value=mock_client), \
+             patch.object(snapshot_db, "get_chroma_db", return_value=mock_new_col):
+            snapshot_db.rollback("my_col")
+        mock_new_col.add.assert_called()
+        call_kwargs = mock_new_col.add.call_args_list[0][1]
+        assert "ids" in call_kwargs
+        assert "documents" in call_kwargs
+        assert "metadatas" in call_kwargs
+        assert "embeddings" in call_kwargs
+
+    def test_uses_most_recent_snapshot_by_default(self, tmp_path):
+        col_dir = tmp_path / "my_col"
+        _write_snap(str(col_dir), "2026-03-29T09-00-00", doc_count=10)
+        _write_snap(str(col_dir), "2026-03-29T14-00-00", doc_count=20)
+        mock_client = MagicMock()
+        mock_new_col = MagicMock()
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)), \
+             patch.object(snapshot_db.chromadb, "PersistentClient", return_value=mock_client), \
+             patch.object(snapshot_db, "get_chroma_db", return_value=mock_new_col):
+            snapshot_db.rollback("my_col")
+        # The most recent snapshot has doc_count=20, so add is called with 20 ids
+        all_ids = []
+        for call in mock_new_col.add.call_args_list:
+            all_ids.extend(call[1]["ids"])
+        assert len(all_ids) == 20
+
+    def test_uses_specified_snapshot_id(self, tmp_path):
+        col_dir = tmp_path / "my_col"
+        _write_snap(str(col_dir), "2026-03-29T09-00-00", doc_count=10)
+        _write_snap(str(col_dir), "2026-03-29T14-00-00", doc_count=20)
+        mock_client = MagicMock()
+        mock_new_col = MagicMock()
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)), \
+             patch.object(snapshot_db.chromadb, "PersistentClient", return_value=mock_client), \
+             patch.object(snapshot_db, "get_chroma_db", return_value=mock_new_col):
+            snapshot_db.rollback("my_col", snapshot_id="2026-03-29T09-00-00")
+        all_ids = []
+        for call in mock_new_col.add.call_args_list:
+            all_ids.extend(call[1]["ids"])
+        assert len(all_ids) == 10
+
+    def test_add_called_in_batches_of_100(self, tmp_path):
+        col_dir = tmp_path / "my_col"
+        _write_snap(str(col_dir), "2026-03-29T10-00-00", doc_count=250)
+        mock_client = MagicMock()
+        mock_new_col = MagicMock()
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)), \
+             patch.object(snapshot_db.chromadb, "PersistentClient", return_value=mock_client), \
+             patch.object(snapshot_db, "get_chroma_db", return_value=mock_new_col):
+            snapshot_db.rollback("my_col")
+        # 250 docs → 3 batches (100, 100, 50)
+        assert mock_new_col.add.call_count == 3
