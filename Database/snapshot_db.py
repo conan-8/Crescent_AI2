@@ -31,6 +31,7 @@ def _collection_dir(collection_name: str) -> str:
 
 
 def _snapshot_path(collection_name: str, timestamp: str) -> str:
+    # used by create_snapshot (added in the next task)
     return os.path.join(_collection_dir(collection_name), f"{timestamp}_snap.json")
 
 
@@ -74,7 +75,12 @@ def prune_snapshots(collection_name: str, max_keep: int = MAX_SNAPSHOTS) -> int:
     if not os.path.isdir(col_dir):
         return 0
     files = sorted(f for f in os.listdir(col_dir) if f.endswith("_snap.json"))
-    to_delete = files[:-max_keep] if len(files) > max_keep else []
+    if max_keep <= 0:
+        to_delete = files
+    elif len(files) > max_keep:
+        to_delete = files[:-max_keep]
+    else:
+        to_delete = []
     for fname in to_delete:
         os.remove(os.path.join(col_dir, fname))
     return len(to_delete)

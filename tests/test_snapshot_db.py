@@ -151,3 +151,12 @@ class TestPruneSnapshots:
         remaining = os.listdir(str(col_dir))
         assert "2026-03-29T06-00-00_snap.json" in remaining
         assert "2026-03-29T05-00-00_snap.json" in remaining
+
+    def test_max_keep_zero_deletes_all(self, tmp_path):
+        col_dir = tmp_path / "my_col"
+        _write_snap(str(col_dir), "2026-03-29T10-00-00")
+        _write_snap(str(col_dir), "2026-03-29T11-00-00")
+        with patch.object(snapshot_db, "SNAPSHOTS_DIR", str(tmp_path)):
+            count = snapshot_db.prune_snapshots("my_col", max_keep=0)
+        assert count == 2
+        assert os.listdir(str(col_dir)) == []
