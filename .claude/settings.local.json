@@ -7,7 +7,10 @@
       "Bash(python -m pytest tests/test_snapshot_db.py::TestParseArgs -v)",
       "Bash(grep -E \"\\\\.\\(json|yaml|toml|cfg|ini|sh|bat|txt|md\\)$\")",
       "Bash(python -m pytest tests/test_server.py -v)",
-      "Bash(python Database/_diag_temp.py)"
+      "Bash(python Database/_diag_temp.py)",
+      "Bash(gh repo:*)",
+      "Bash(gh api:*)",
+      "Bash(claude plugin:*)"
     ]
   }
 }
