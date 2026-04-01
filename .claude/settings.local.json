@@ -10,7 +10,14 @@
       "Bash(python Database/_diag_temp.py)",
       "Bash(gh repo:*)",
       "Bash(gh api:*)",
-      "Bash(claude plugin:*)"
+      "Bash(claude plugin:*)",
+      "Bash(mkdir -p ~/.pua)",
+      "Read(//c/Users/kevin/.pua/**)",
+      "Bash(python agent_analysis/analysis_agent.py)",
+      "Bash(python -m pytest tests/test_update_db.py -q)",
+      "Bash(python _run_diagnostic.py)",
+      "Bash(python _cleanup.py --dry-run)",
+      "Bash(python _cleanup.py)"
     ]
   }
 }

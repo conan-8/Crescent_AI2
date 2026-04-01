@@ -23,7 +23,7 @@ from datetime import datetime
 import chromadb
 from dotenv import load_dotenv
 
-from database import get_chroma_db
+from db_utils import get_chroma_db
 
 load_dotenv()
 

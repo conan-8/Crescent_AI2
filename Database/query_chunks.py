@@ -13,7 +13,7 @@ import argparse
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from database import get_chroma_db
+from db_utils import get_chroma_db
 from dotenv import load_dotenv
 
 load_dotenv()

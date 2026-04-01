@@ -22,7 +22,7 @@ import pytest
 os.environ.setdefault("GEMINI_API_KEY", "test-key")
 os.environ.setdefault("CHROMA_DB_PATH", "/tmp/test-chroma")
 
-for _mod in ("database", "crawl4ai", "crawl4ai.extraction_strategy", "dotenv"):
+for _mod in ("database", "db_utils", "crawl4ai", "crawl4ai.extraction_strategy", "dotenv"):
     sys.modules.setdefault(_mod, MagicMock())
 
 # Provide a controlled text-splitter that returns predictable chunks.
@@ -36,8 +36,8 @@ sys.modules["langchain_text_splitters"] = _mock_langchain
 _mock_snapshot_db = MagicMock()
 sys.modules["snapshot_db"] = _mock_snapshot_db
 
-# Populate the database stub with what update_db actually imports.
-sys.modules["database"].get_chroma_db = MagicMock()
+# Populate the db_utils stub with what update_db actually imports.
+sys.modules["db_utils"].get_chroma_db = MagicMock()
 sys.modules["database"].ExtractedContent = MagicMock()
 sys.modules["database"].EXTRACTION_INSTRUCTION = "test_instruction"
 

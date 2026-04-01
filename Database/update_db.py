@@ -23,7 +23,7 @@ import json
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from database import get_chroma_db, ExtractedContent, EXTRACTION_INSTRUCTION
+from db_utils import get_chroma_db, ExtractedContent, EXTRACTION_INSTRUCTION
 from crawl4ai import AsyncWebCrawler, CrawlerRunConfig, CacheMode, LLMExtractionStrategy, LLMConfig
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from dotenv import load_dotenv
