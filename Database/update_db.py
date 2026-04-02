@@ -108,8 +108,8 @@ async def crawl_url_llm(url):
     Returns (doc_list, id_list, metadata_list).
     """
     llm_conf = LLMConfig(
-        provider="gemini/gemini-2.5-flash",
-        api_token=os.environ.get("GEMINI_API_KEY"),
+        provider="openrouter/qwen/qwen3.5-397b-a17b",
+        api_token=os.environ.get("OPENROUTER_API_KEY"),
     )
     extraction_strategy = LLMExtractionStrategy(
         llm_config=llm_conf,
@@ -171,14 +171,19 @@ async def update_url(collection, url, url_type, dry_run=False):
         collection.delete(ids=existing_ids)
         print(f"  Removed {chunks_removed} old chunk(s)")
 
-    if url_type == "enrollment":
-        doc_list, id_list, metadata_list = await crawl_url_markdown(url)
-    else:
-        doc_list, id_list, metadata_list = await crawl_url_llm(url)
+    doc_list, id_list, metadata_list = await crawl_url_llm(url)
 
     chunks_added = len(doc_list)
     if doc_list:
-        collection.add(ids=id_list, documents=doc_list, metadatas=metadata_list)
+        batch_size = 20
+        for i in range(0, len(doc_list), batch_size):
+            collection.add(
+                ids=id_list[i:i + batch_size],
+                documents=doc_list[i:i + batch_size],
+                metadatas=metadata_list[i:i + batch_size],
+            )
+            if i + batch_size < len(doc_list):
+                await asyncio.sleep(12)  # stay under 100 req/min Gemini embedding quota
         print(f"  Added {chunks_added} new chunk(s)")
     else:
         print(f"  [WARN] No chunks produced for {url}")
