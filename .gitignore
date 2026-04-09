@@ -1,6 +1,13 @@
-# Examples
-- frontend/chatbot.css
-- frontend/chatbot.js
+```
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
-# No build artifacts, dependencies, or temp files detected
-# Only source files were modified, so no additional ignores needed
+# Testing
+.pytest_cache/
+
+# Logs
+*.log
+```
