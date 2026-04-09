@@ -62,6 +62,12 @@ body.show-chatbot .chatbot {
     color: #1c1c1e;
     background: #ffffff;
     flex-shrink: 0;
+    cursor: grab;
+    user-select: none;
+}
+
+.chatbot header:active {
+    cursor: grabbing;
 }
 
 /* Close Button - minimalist dark grey, hover becomes green bubble */

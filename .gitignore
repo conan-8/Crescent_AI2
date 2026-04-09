@@ -1,8 +1,6 @@
-.env
-__pycache__/
-*.py[cod]
-*$py.class
-.venv/
-venv/
-ENV/
-env/
+# Examples
+- frontend/chatbot.css
+- frontend/chatbot.js
+
+# No build artifacts, dependencies, or temp files detected
+# Only source files were modified, so no additional ignores needed
