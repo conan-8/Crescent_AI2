@@ -156,7 +156,7 @@ class TestGetRelevantDocuments:
     def test_queries_with_correct_args(self):
         db = self._make_db(["doc1"], [{}])
         get_relevant_documents("my query", db)
-        db.query.assert_called_once_with(query_texts=["my query"], n_results=3)
+        db.query.assert_called_once_with(query_texts=["my query"], n_results=5)
 
     def test_single_document_returned_without_separator(self):
         db = self._make_db(["only doc"], [{}])
