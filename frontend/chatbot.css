@@ -691,10 +691,11 @@ body.show-chatbot .chatbot header .lang-select {
     /* Adding padding here isn't strictly necessary since standard nesting creates multiple padding layers inherently */
 }
 
-/* Bullet point dots green, text stays black */
+/* Bullet point dots green, text stays black; numbered list markers bolded */
 .chatbox .incoming p ul li::marker,
 .chatbox .incoming p ol li::marker {
     color: #006e4f;
+    font-weight: bold;
 }
 
 /* Thinking Animation (bouncing dots) */
