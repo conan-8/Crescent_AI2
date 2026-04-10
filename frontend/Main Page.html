@@ -9895,6 +9895,56 @@
                     iframe.style.width = '60px';
                     iframe.style.height = '180px';
                 }
+            } else if (event.data.type === 'chatbot-drag-start') {
+                // The iframe clips its contents, so dragging the chatbot element
+                // inside it would make it invisible past the iframe bounds.
+                // Instead we move the iframe itself so the chatbot acts like a
+                // free-floating overlay on the whole page.
+                const rect = iframe.getBoundingClientRect();
+                const iframeStartLeft = rect.left;
+                const iframeStartTop = rect.top;
+                // Mouse position relative to the parent viewport at mousedown time
+                const mouseStartX = iframeStartLeft + event.data.iframeClientX;
+                const mouseStartY = iframeStartTop + event.data.iframeClientY;
+
+                // Pin iframe by top/left so our drag writes take effect
+                iframe.style.left = iframeStartLeft + 'px';
+                iframe.style.top = iframeStartTop + 'px';
+                iframe.style.right = 'auto';
+                iframe.style.bottom = 'auto';
+                // Disable transition during drag for snappy movement
+                const prevTransition = iframe.style.transition;
+                iframe.style.transition = 'none';
+
+                // Transparent full-viewport overlay to capture mousemove/mouseup
+                // everywhere (even outside the iframe's hit area). Uses a cursor
+                // override so the grab cursor stays visible during drag.
+                const dragOverlay = document.createElement('div');
+                dragOverlay.style.cssText =
+                    'position:fixed;inset:0;z-index:100000;cursor:grabbing;background:transparent;';
+                document.body.appendChild(dragOverlay);
+
+                const onMove = (e) => {
+                    const deltaX = e.clientX - mouseStartX;
+                    const deltaY = e.clientY - mouseStartY;
+                    // Keep the iframe fully within the viewport
+                    const maxLeft = Math.max(0, window.innerWidth - iframe.offsetWidth);
+                    const maxTop = Math.max(0, window.innerHeight - iframe.offsetHeight);
+                    const newLeft = Math.min(Math.max(0, iframeStartLeft + deltaX), maxLeft);
+                    const newTop = Math.min(Math.max(0, iframeStartTop + deltaY), maxTop);
+                    iframe.style.left = newLeft + 'px';
+                    iframe.style.top = newTop + 'px';
+                };
+
+                const onUp = () => {
+                    dragOverlay.removeEventListener('mousemove', onMove);
+                    dragOverlay.removeEventListener('mouseup', onUp);
+                    dragOverlay.remove();
+                    iframe.style.transition = prevTransition;
+                };
+
+                dragOverlay.addEventListener('mousemove', onMove);
+                dragOverlay.addEventListener('mouseup', onUp);
             }
         });
     </script>
