@@ -1,13 +1,8 @@
-```
-# Python
+.env
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Testing
-.pytest_cache/
-
-# Logs
-*.log
-```
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
