@@ -340,10 +340,11 @@ if (langSelect) {
     });
 }
 
-// Draggable chatbot window - drag by header
+// Draggable chatbot window — drag by header.
+// Instead of moving the .chatbot element inside the iframe (which gets clipped
+// by the iframe's boundaries and becomes invisible), we ask the parent page to
+// move the iframe itself so the chatbot floats as an overlay anywhere on screen.
 const chatbotHeader = document.querySelector(".chatbot header");
-let isDragging = false;
-let startX, startY, initialLeft, initialTop;
 
 if (chatbotHeader) {
     chatbotHeader.addEventListener("mousedown", (e) => {
@@ -351,34 +352,11 @@ if (chatbotHeader) {
         if (e.target.closest(".close-btn") || e.target.closest(".new-chat-btn") || e.target.closest(".lang-select")) {
             return;
         }
-        
-        isDragging = true;
-        startX = e.clientX;
-        startY = e.clientY;
-        
-        const rect = chatbot.getBoundingClientRect();
-        initialLeft = rect.left;
-        initialTop = rect.top;
-        
-        chatbot.style.transition = "none";
+        e.preventDefault();
+        window.parent.postMessage({
+            type: "chatbot-drag-start",
+            iframeClientX: e.clientX,
+            iframeClientY: e.clientY
+        }, "*");
     });
 }
-
-document.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-    
-    const deltaX = e.clientX - startX;
-    const deltaY = e.clientY - startY;
-    
-    chatbot.style.left = `${initialLeft + deltaX}px`;
-    chatbot.style.top = `${initialTop + deltaY}px`;
-    chatbot.style.right = "auto";
-    chatbot.style.bottom = "auto";
-});
-
-document.addEventListener("mouseup", () => {
-    if (isDragging) {
-        isDragging = false;
-        chatbot.style.transition = "all 0.1s ease";
-    }
-});
