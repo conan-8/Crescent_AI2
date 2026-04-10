@@ -1,8 +1,13 @@
-.env
+```
+# Python
 __pycache__/
-*.py[cod]
-*$py.class
-.venv/
-venv/
-ENV/
-env/
+*.pyc
+*.pyo
+*.pyd
+
+# Testing
+.pytest_cache/
+
+# Logs
+*.log
+```
