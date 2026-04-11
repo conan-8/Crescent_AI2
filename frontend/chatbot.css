@@ -55,8 +55,8 @@ body.show-chatbot .chatbot {
 
 /* Header Styles - iOS minimal */
 .chatbot header {
-    padding: 14px 16px;
-    min-height: 56px;
+    padding: 22px 16px 14px;
+    min-height: 64px;
     position: relative;
     text-align: center;
     color: #1c1c1e;
@@ -68,6 +68,25 @@ body.show-chatbot .chatbot {
 
 .chatbot header:active {
     cursor: grabbing;
+}
+
+/* Draggable drag handle bar — small gray pill at the top of the header */
+.chatbot header::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background: #d0d0d0;
+    pointer-events: none;
+    transition: background 0.2s ease;
+}
+
+.chatbot header:hover::before {
+    background: #b0b0b0;
 }
 
 /* Close Button - minimalist dark grey, hover becomes green bubble */
