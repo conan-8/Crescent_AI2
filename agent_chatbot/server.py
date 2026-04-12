@@ -103,7 +103,17 @@ def health_check():
     return jsonify({"status": "ok"}), 200
 
 # --- END Health Check ---
-
+# --- Homepage Route ---
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        "message": "Crescent AI Server is running",
+        "endpoints": {
+            "health": "/health (GET)",
+            "chat": "/chat (POST) - requires JSON body"
+        }
+    }), 200
+    
 print("--- Crescent AI Server Starting ---")
 
 # 3. Initialize the Database
