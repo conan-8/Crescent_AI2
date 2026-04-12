@@ -97,6 +97,23 @@ limiter = Limiter(
 def ratelimit_handler(e):
     return jsonify({"response": "You have sent too many messages recently. Please wait a minute before trying again."}), 200
 
+# --- Health Check Endpoint ---
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "ok"}), 200
+
+# --- END Health Check ---
+# --- Homepage Route ---
+@app.route('/', methods=['GET'])
+def home():
+    return jsonify({
+        "message": "Crescent AI Server is running",
+        "endpoints": {
+            "health": "/health (GET)",
+            "chat": "/chat (POST) - requires JSON body"
+        }
+    }), 200
+    
 print("--- Crescent AI Server Starting ---")
 
 # 3. Initialize the Database
