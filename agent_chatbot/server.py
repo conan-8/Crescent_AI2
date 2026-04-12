@@ -1,7 +1,7 @@
 import sys
 import os
 import chromadb
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -109,13 +109,23 @@ def health_check():
 # --- Homepage Route ---
 @app.route('/', methods=['GET'])
 def home():
-    return jsonify({
-        "message": "Crescent AI Server is running",
-        "endpoints": {
-            "health": "/health (GET)",
-            "chat": "/chat (POST) - requires JSON body"
-        }
-    }), 200
+    # Get the path to the frontend directory
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    frontend_dir = os.path.join(base_dir, 'frontend')
+    html_file = os.path.join(frontend_dir, 'Main Page.html')
+
+    # Check if file exists and serve it
+    if os.path.exists(html_file):
+        return send_file(html_file)
+    else:
+        # Fallback to JSON if HTML not found
+        return jsonify({
+            "message": "Crescent AI Server is running",
+            "endpoints": {
+                "health": "/health (GET)",
+                "chat": "/chat (POST) - requires JSON body"
+            }
+        }), 200
     
 print("--- Crescent AI Server Starting ---")
 
