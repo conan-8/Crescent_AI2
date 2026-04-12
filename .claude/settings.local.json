@@ -33,7 +33,11 @@
       "Bash(curl -s \"https://crescentschool.myschoolapp.com/api/content/108120\")",
       "Bash(python Database/update_db.py \"https://www.crescentschool.org/why-crescent/our-graduates/where-our-graduates-go\")",
       "Bash(python -m pytest tests/ -v)",
-      "Bash(python -m pytest tests/ --ignore=tests/test_enrollment_db.py -v)"
+      "Bash(python -m pytest tests/ --ignore=tests/test_enrollment_db.py -v)",
+      "Bash(curl -s -m 3 http://localhost:5000/health)",
+      "Bash(curl:*)",
+      "Bash(python tests/demo_eval.py)",
+      "Bash(grep -v \"Retrieved Passages\\\\|Passage [0-9]\\\\|^---\\\\|^Searching\\\\|^$\")"
     ]
   }
 }

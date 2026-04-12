@@ -10,10 +10,13 @@ import datetime
 import hashlib
 import time
 from collections import defaultdict
+from snapshot_db import rollback, list_snapshots
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Database"))
 
 from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client
+
 
 
 # --- Client Fingerprinting ---
@@ -125,11 +128,6 @@ try:
     if count == 0:
         print("Full database is empty — attempting snapshot restore...")
         try:
-            db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Database")
-            if db_dir not in sys.path:
-                sys.path.insert(0, db_dir)
-            from snapshot_db import rollback, list_snapshots
-
             snapshots = list_snapshots("full_database")
             if snapshots:
                 rollback("full_database")

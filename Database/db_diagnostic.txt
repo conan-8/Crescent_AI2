@@ -2,16 +2,16 @@
 ChromaDB Diagnostic Report — collection: full_database
 ======================================================================
 
-Total documents (chunks): 277
+Total documents (chunks): 278
 
 ──────────────────────────────────────────
 Length Distribution (character count)
 ──────────────────────────────────────────
        <50     1  (0.4%)
     50-100     2  (0.7%)
-   100-200     6  (2.2%)
-   200-500    37  (13.4%)
-      500+   231  (83.4%)
+   100-200     7  (2.5%)
+   200-500    35  (12.6%)
+      500+   233  (83.8%)
 
 ──────────────────────────────────────────
 30 Shortest Documents
@@ -49,93 +49,93 @@ Length Distribution (character count)
      source=https://www.crescentschool.org/why-crescent/crescent-blogs
      text='Why Crescent - Our focus on character education is aligned to our mission and an integral part of how we teach, motivate'
 
-# 9  len=164  id=https://www.crescentschool.org/why-crescent/whats-for-lunch_chunk_1
+# 9  len=149  id=https://www.crescentschool.org/academics/student-services/academic-well-being_chunk_2
+     source=https://www.crescentschool.org/academics/student-services/academic-well-being
+     text='Stephen Verzyden \nSubject Head: Mathematics (Grades 712) and Learning Support Specialist\nPhoto of Julie Yocom\nJulie Yoco'
+
+#10  len=164  id=https://www.crescentschool.org/why-crescent/whats-for-lunch_chunk_1
      source=https://www.crescentschool.org/why-crescent/whats-for-lunch
      text='Click here to see our weekly menu: https://www.sagedining.com/sites/crescentschool/menu\n\nContact Information:\n2365 Bayvi'
 
-#10  len=201  id=https://www.crescentschool.org/character-in-action/other-teams-and-clubs_chunk_1
+#11  len=201  id=https://www.crescentschool.org/character-in-action/other-teams-and-clubs_chunk_1
      source=https://www.crescentschool.org/character-in-action/other-teams-and-clubs
      text='Basketball\nCross Country\nHockey\nRugby\nSoccer\nSquash\nSwimming\nTrack and Field\nUltimate Frisbee\nOur intramural sports incl'
 
-#11  len=229  id=https://www.crescentschool.org_chunk_4
+#12  len=229  id=https://www.crescentschool.org_chunk_4
      source=https://www.crescentschool.org
      text="Explore our Campus: Crescent School's modern academic, athletics and arts facilities are located on a 37–acre campus in "
 
-#12  len=241  id=https://www.crescentschool.org/character-in-action/student-leadership_chunk_1
+#13  len=241  id=https://www.crescentschool.org/character-in-action/student-leadership_chunk_1
      source=https://www.crescentschool.org/character-in-action/student-leadership
      text='One of the top independent schools for boys in Canada, Crescent School spans 37 acres in midtown Toronto. Now in our sec'
 
-#13  len=241  id=https://www.crescentschool.org/how-to-apply/admission-dates-and-events_chunk_7
+#14  len=241  id=https://www.crescentschool.org/how-to-apply/admission-dates-and-events_chunk_7
      source=https://www.crescentschool.org/how-to-apply/admission-dates-and-events
      text='January 19-30, 2026: Grades 1 & 2 Interviews\nAll interviews for applicant families of Grade 1 and 2 students will be sch'
 
-#14  len=243  id=https://www.crescentschool.org/about/governance_chunk_13
+#15  len=243  id=https://www.crescentschool.org/about/governance_chunk_13
      source=https://www.crescentschool.org/about/governance
      text="Committee including as Chair of the committee from 2012 to 2019. George's wife, Matilda Sos Mavroudis, is the 2019/2020 "
 
-#15  len=248  id=https://www.crescentschool.org/how-to-apply_chunk_0
+#16  len=248  id=https://www.crescentschool.org/how-to-apply_chunk_0
      source=https://www.crescentschool.org/how-to-apply
      text='How to Apply - Application Resources: Visit Crescent, Application Process, Admission Dates & Events, Tuition & Fees, Fin'
 
-#16  len=249  id=enrollment_https://www.crescentschool.org/News-Detail?pk=1300167_chunk_13
+#17  len=249  id=enrollment_https://www.crescentschool.org/News-Detail?pk=1300167_chunk_13
      source=https://www.crescentschool.org/News-Detail?pk=1300167
      text='* [ ![LinkedIn](https://bbk12e1-cdn.myschoolcdn.com/ftpimages/870/link/large_link1483715_104192.png) ![LinkedIn](https:/'
 
-#17  len=250  id=https://www.crescentschool.org/more-programs/crescent-camps_chunk_3
+#18  len=250  id=https://www.crescentschool.org/more-programs/crescent-camps_chunk_3
      source=https://www.crescentschool.org/more-programs/crescent-camps
      text='Early Bird Discount: Register by December 19, 2025, and use the code EarlyBird for a 5% discount.\n\nSibling Discount: Sav'
 
-#18  len=276  id=https://www.crescentschool.org/about/governance_chunk_10
+#19  len=276  id=https://www.crescentschool.org/about/governance_chunk_10
      source=https://www.crescentschool.org/about/governance
      text='A lifelong avid student of history, Bob also enjoys skiing, golf and hiking, all of which he does with his family. He an'
 
-#19  len=287  id=https://www.crescentschool.org/academics/student-services/guidance-and-university-counselling_chunk_1
+#20  len=287  id=https://www.crescentschool.org/academics/student-services/guidance-and-university-counselling_chunk_1
      source=https://www.crescentschool.org/academics/student-services/guidance-and-university-counselling
      text='Crescent School spans 37 acres in midtown Toronto and provides rich and diverse experiences and opportunities for boys i'
 
-#20  len=306  id=https://www.crescentschool.org/academics/middle-school/ms-curriculum-highlights_chunk_2
+#21  len=306  id=https://www.crescentschool.org/academics/middle-school/ms-curriculum-highlights_chunk_2
      source=https://www.crescentschool.org/academics/middle-school/ms-curriculum-highlights
      text='is an important part of a Middle School education. Students act as Parent/Teacher Interview Secretaries, deliver daily a'
 
-#21  len=306  id=https://www.crescentschool.org/about/governance_chunk_2
+#22  len=306  id=https://www.crescentschool.org/about/governance_chunk_2
      source=https://www.crescentschool.org/about/governance
      text='Originally from Ireland, Rodney is passionate about giving back through involvement with community and serves on a numbe'
 
-#22  len=315  id=https://www.crescentschool.org/academics/lower-school/ls-curriculum-highlights_chunk_0
+#23  len=315  id=https://www.crescentschool.org/academics/lower-school/ls-curriculum-highlights_chunk_0
      source=https://www.crescentschool.org/academics/lower-school/ls-curriculum-highlights
      text='LS Curriculum Highlights - Crescent School follows the overall and specific expectations of the Ontario Ministry of Educ'
 
-#23  len=327  id=https://www.crescentschool.org/character-in-action/robotics_chunk_3
+#24  len=327  id=https://www.crescentschool.org/character-in-action/robotics_chunk_3
      source=https://www.crescentschool.org/character-in-action/robotics
      text='Robotics Resources\n\nRobotics Fact Sheet available for download\n\nRecent Robotics News Highlights:\n- Team 610 Celebrates 2'
 
-#24  len=336  id=https://www.crescentschool.org/how-to-apply/financial-assistance_chunk_2
+#25  len=336  id=https://www.crescentschool.org/how-to-apply/financial-assistance_chunk_2
      source=https://www.crescentschool.org/how-to-apply/financial-assistance
      text='A small portion of our financial assistance budget is allocated towards Headmaster’s Merit Awards. All applicants are au'
 
-#25  len=350  id=https://www.crescentschool.org/support-crescent/parent-annual-giving_chunk_1
+#26  len=350  id=https://www.crescentschool.org/support-crescent/parent-annual-giving_chunk_1
      source=https://www.crescentschool.org/support-crescent/parent-annual-giving
      text='Donations to the Parent Annual Giving directly support the capital projects in our Master Campus Plan and Student Financ'
 
-#26  len=354  id=https://www.crescentschool.org/why-crescent/alumni-brotherhood_chunk_1
+#27  len=354  id=https://www.crescentschool.org/why-crescent/alumni-brotherhood_chunk_1
      source=https://www.crescentschool.org/why-crescent/alumni-brotherhood
      text='Our Alumni also give back by organizing networking events and reunions, mentoring graduates and sharing their skills and'
 
-#27  len=355  id=https://www.crescentschool.org/more-programs/summer-academics/summer-courses_chunk_0
+#28  len=355  id=https://www.crescentschool.org/more-programs/summer-academics/summer-courses_chunk_0
      source=https://www.crescentschool.org/more-programs/summer-academics/summer-courses
      text='Summer Courses - Crescent School\n\nBusiness Course: Students will analyze the role of a leader in business, with a focus '
 
-#28  len=362  id=https://www.crescentschool.org/how-to-apply/application-process_chunk_1
+#29  len=362  id=https://www.crescentschool.org/how-to-apply/application-process_chunk_1
      source=https://www.crescentschool.org/how-to-apply/application-process
      text='List of 6 items.\n\nApplying to Grades 1 & 2\nStep 1: Complete the online application form. Your application will automatic'
 
-#29  len=378  id=https://www.crescentschool.org/academics/student-services/academic-well-being_chunk_0
-     source=https://www.crescentschool.org/academics/student-services/academic-well-being
-     text='About Us\n\nOne of the top independent schools for boys in Canada, Crescent School spans 37 acres in midtown Toronto. Now '
-
-#30  len=379  id=https://www.crescentschool.org/about_chunk_0
-     source=https://www.crescentschool.org/about
-     text='About Us - One of the top independent schools for boys in Canada, Crescent School spans 37 acres in midtown Toronto. Now'
+#30  len=390  id=https://www.crescentschool.org/support-crescent/meet-the-team_chunk_1
+     source=https://www.crescentschool.org/support-crescent/meet-the-team
+     text="Since 1913, Crescent School's focus has been on character development. It is part of our DNA and involves a deep, uncomp"
 
 ──────────────────────────────────────────
 Per-Source Summary
@@ -145,7 +145,6 @@ Per-Source Summary
   https://alumni.crescentschool.org                                            1    452.0           0
   https://www.crescentschool.org                                               5    752.2           0
   https://www.crescentschool.org/News-Detail?pk=1300167                       20    749.9           2
-  https://www.crescentschool.org/about                                         1    379.0           0
   https://www.crescentschool.org/about/at-a-glance                             1    717.0           0
   https://www.crescentschool.org/about/contact-us                              1    861.0           0
   https://www.crescentschool.org/about/coyotes-den                             2    501.5           1
@@ -167,7 +166,7 @@ Per-Source Summary
   https://www.crescentschool.org/academics/middle-school/ms-character-education       1    905.0           0
   https://www.crescentschool.org/academics/middle-school/ms-curriculum-highlights       2    648.5           0
   https://www.crescentschool.org/academics/student-services                    1    807.0           0
-  https://www.crescentschool.org/academics/student-services/academic-well-being       1    378.0           0
+  https://www.crescentschool.org/academics/student-services/academic-well-being       3    580.3           0
   https://www.crescentschool.org/academics/student-services/guidance-and-university-counselling       2    595.5           0
   https://www.crescentschool.org/academics/student-services/physical-well-being       1    789.0           0
   https://www.crescentschool.org/academics/student-services/social-emotional-well-being       1    859.0           0
@@ -301,8 +300,6 @@ Re-crawl with CSS selector or fallback strategy.
 
   PRIORITY  SOURCE URL
   --------  ----------------------------------------------------------------------
-  MEDIUM    https://www.crescentschool.org/academics/student-services/academic-well-being
-  LOW       https://www.crescentschool.org/about
 
 ──────────────────────────────────────────
 REMOVAL SUMMARY
@@ -312,5 +309,5 @@ REMOVAL SUMMARY
   Category 3 — Duplicate /page/ URLs                :    0 chunks
   (overlap between categories deducted automatically at delete time)
   ──────────────────────────────────────────────────────────────────
-  Current total chunks                              :  277
-  Category 4 — Failed crawls needing re-crawl      :    2 URLs (not deleted)
+  Current total chunks                              :  278
+  Category 4 — Failed crawls needing re-crawl      :    0 URLs (not deleted)
