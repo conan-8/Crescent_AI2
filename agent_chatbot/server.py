@@ -116,7 +116,19 @@ def home():
 
     # Check if file exists and serve it
     if os.path.exists(html_file):
-        return send_file(html_file)
+        try:
+            with open(html_file, 'r', encoding='utf-8') as f:
+                html_content = f.read()
+            return html_content, 200, {'Content-Type': 'text/html'}
+        except Exception as e:
+            print(f"Error reading HTML file: {e}")
+            return jsonify({
+                "message": "Crescent AI Server is running",
+                "endpoints": {
+                    "health": "/health (GET)",
+                    "chat": "/chat (POST) - requires JSON body"
+                }
+            }), 200
     else:
         # Fallback to JSON if HTML not found
         return jsonify({
