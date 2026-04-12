@@ -104,6 +104,28 @@ try:
     full_database = get_chroma_db("full_database")
     count = full_database.count()
     print(f"Full database loaded successfully. Documents indexed: {count}")
+
+    if count == 0:
+        print("Full database is empty — attempting snapshot restore...")
+        try:
+            db_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Database")
+            if db_dir not in sys.path:
+                sys.path.insert(0, db_dir)
+            from snapshot_db import rollback, list_snapshots
+
+            snapshots = list_snapshots("full_database")
+            if snapshots:
+                rollback("full_database")
+                full_database = get_chroma_db("full_database")
+                restored_count = full_database.count()
+                print(f"Restored {restored_count} documents from snapshot.")
+            else:
+                print("No snapshots available for restore.")
+        except SystemExit:
+            print("Snapshot restore failed — no snapshots found.")
+        except Exception as restore_err:
+            print(f"Snapshot restore failed: {restore_err}")
+
 except Exception as e:
     print(f"CRITICAL ERROR loading full database: {e}")
     full_database = None

@@ -31,7 +31,9 @@
       "Bash(curl -s \"https://www.crescentschool.org/why-crescent/our-graduates/where-our-graduates-go\")",
       "Bash(curl -s \"https://crescentschool.myschoolapp.com/page/why-crescent/our-graduates/where-our-graduates-go?siteId=987&ssl=1\")",
       "Bash(curl -s \"https://crescentschool.myschoolapp.com/api/content/108120\")",
-      "Bash(python Database/update_db.py \"https://www.crescentschool.org/why-crescent/our-graduates/where-our-graduates-go\")"
+      "Bash(python Database/update_db.py \"https://www.crescentschool.org/why-crescent/our-graduates/where-our-graduates-go\")",
+      "Bash(python -m pytest tests/ -v)",
+      "Bash(python -m pytest tests/ --ignore=tests/test_enrollment_db.py -v)"
     ]
   }
 }
