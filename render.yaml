@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: crescent-ai
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn agent_chatbot.server:app --bind 0.0.0.0:$PORT
