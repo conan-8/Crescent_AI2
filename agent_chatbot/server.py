@@ -10,10 +10,8 @@ import datetime
 import hashlib
 import time
 from collections import defaultdict
-from snapshot_db import rollback, list_snapshots
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Database"))
 
 from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client
 
@@ -124,22 +122,6 @@ try:
     full_database = get_chroma_db("full_database")
     count = full_database.count()
     print(f"Full database loaded successfully. Documents indexed: {count}")
-
-    if count == 0:
-        print("Full database is empty — attempting snapshot restore...")
-        try:
-            snapshots = list_snapshots("full_database")
-            if snapshots:
-                rollback("full_database")
-                full_database = get_chroma_db("full_database")
-                restored_count = full_database.count()
-                print(f"Restored {restored_count} documents from snapshot.")
-            else:
-                print("No snapshots available for restore.")
-        except SystemExit:
-            print("Snapshot restore failed — no snapshots found.")
-        except Exception as restore_err:
-            print(f"Snapshot restore failed: {restore_err}")
 
 except Exception as e:
     print(f"CRITICAL ERROR loading full database: {e}")

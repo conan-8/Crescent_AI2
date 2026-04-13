@@ -37,7 +37,9 @@
       "Bash(curl -s -m 3 http://localhost:5000/health)",
       "Bash(curl:*)",
       "Bash(python tests/demo_eval.py)",
-      "Bash(grep -v \"Retrieved Passages\\\\|Passage [0-9]\\\\|^---\\\\|^Searching\\\\|^$\")"
+      "Bash(grep -v \"Retrieved Passages\\\\|Passage [0-9]\\\\|^---\\\\|^Searching\\\\|^$\")",
+      "Bash(netstat -ano)",
+      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 5000 -ErrorAction SilentlyContinue | Select-Object OwningProcess,State\")"
     ]
   }
 }
