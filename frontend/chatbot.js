@@ -56,8 +56,9 @@ const showWelcome = () => {
     void welcomeScreen.offsetWidth; // force reflow to restart animation
     welcomeScreen.classList.add('fade-in');
 };
-// The address of your local Python server
-const API_URL = "https://w633xqhv-5000.use.devtunnels.ms/chat";
+
+
+const API_URL = "/chat";
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
