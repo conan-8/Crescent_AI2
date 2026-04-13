@@ -151,7 +151,10 @@ def rollback(collection_name: str, snapshot_id: str = None):
     with open(target["path"]) as f:
         data = json.load(f)
 
-    chroma_client = chromadb.PersistentClient(path=os.environ.get("CHROMA_DB_PATH"))
+    # Use same default path as db_utils.py
+    chroma_path = os.environ.get("CHROMA_DB_PATH", os.path.join(os.path.dirname(os.path.abspath(__file__)), "chroma_db"))
+    print(f"[ChromaDB] Rollback using path: {chroma_path}")
+    chroma_client = chromadb.PersistentClient(path=chroma_path)
     chroma_client.delete_collection(collection_name)
     collection = get_chroma_db(collection_name)
 
