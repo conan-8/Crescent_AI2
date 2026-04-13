@@ -138,6 +138,14 @@ def serve_chatbot_js():
         return send_file(js_path)
     return "File not found", 404
 
+@app.route('/chatbot_iframe.html', methods=['GET'])
+def serve_chatbot_iframe():
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    iframe_path = os.path.join(base_dir, 'frontend', 'chatbot_iframe.html')
+    if os.path.exists(iframe_path):
+        return send_file(iframe_path)
+    return "File not found", 404
+
 # --- Homepage Route ---
 @app.route('/', methods=['GET'])
 def home():
