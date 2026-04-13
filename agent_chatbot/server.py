@@ -18,6 +18,7 @@ from snapshot_db import rollback, list_snapshots
 from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client
 
 
+
 # --- Client Fingerprinting ---
 def get_client_fingerprint():
     """Generate a unique fingerprint for a client based on request headers."""
@@ -105,6 +106,7 @@ def health_check():
     return jsonify({"status": "ok"}), 200
 
 # --- END Health Check ---
+
 # --- Static Files Route for Main Page assets ---
 @app.route('/Main Page_files/<path:filename>', methods=['GET'])
 def serve_main_page_files(filename):
@@ -135,7 +137,7 @@ def serve_chatbot_js():
     if os.path.exists(js_path):
         return send_file(js_path)
     return "File not found", 404
-# --- Homepage Route ---
+
 # --- Homepage Route ---
 @app.route('/', methods=['GET'])
 def home():
@@ -147,15 +149,6 @@ def home():
     # Use send_from_directory which properly handles MIME types
     if os.path.exists(os.path.join(frontend_dir, html_file)):
         return send_from_directory(frontend_dir, html_file)
-    else:
-        # Fallback to JSON if HTML not found
-        return jsonify({
-            "message": "Crescent AI Server is running",
-            "endpoints": {
-                "health": "/health (GET)",
-                "chat": "/chat (POST) - requires JSON body"
-            }
-        }), 200
     else:
         # Fallback to JSON if HTML not found
         return jsonify({
