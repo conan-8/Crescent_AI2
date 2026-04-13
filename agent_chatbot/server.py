@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 import chromadb
 from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS
@@ -14,8 +15,8 @@ from collections import defaultdict
 # Add Database folder to path BEFORE importing modules from it
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Database"))
 
-from snapshot_db import rollback, list_snapshots
-from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client
+from snapshot_db import list_snapshots
+from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client, _chroma_client
 
 
 
@@ -188,13 +189,41 @@ try:
     count = full_database.count()
     print(f"Full database loaded successfully. Documents indexed: {count}")
     
-    # Auto-rollback if database is empty
+    # Auto-rollback if database is empty — inline so we reuse the shared _chroma_client
+    # instead of letting snapshot_db.rollback() spin up another PersistentClient.
     if count == 0:
         print("WARNING: Database is empty! Attempting to rollback from snapshot...")
         try:
-            rollback("full_database")
-            # Reload the database after rollback
+            snapshots = list_snapshots("full_database")
+            if not snapshots:
+                raise RuntimeError("No snapshots available for full_database")
+
+            latest = snapshots[0]
+            with open(latest["path"]) as f:
+                snapshot_data = json.load(f)
+
+            try:
+                _chroma_client.delete_collection("full_database")
+                print("[ChromaDB] Deleted existing empty collection: full_database")
+            except Exception as delete_error:
+                print(f"[ChromaDB] Could not delete collection (may not exist): {delete_error}")
+
             full_database = get_chroma_db("full_database")
+
+            ids = snapshot_data["ids"]
+            documents = snapshot_data["documents"]
+            metadatas = snapshot_data["metadatas"]
+            embeddings = snapshot_data["embeddings"]
+
+            batch_size = 100
+            for i in range(0, len(ids), batch_size):
+                full_database.add(
+                    ids=ids[i:i + batch_size],
+                    documents=documents[i:i + batch_size],
+                    metadatas=metadatas[i:i + batch_size],
+                    embeddings=embeddings[i:i + batch_size],
+                )
+
             count = full_database.count()
             print(f"Rollback complete. Documents restored: {count}")
         except Exception as rollback_error:
@@ -204,14 +233,6 @@ try:
 except Exception as e:
     print(f"CRITICAL ERROR loading full database: {e}")
     full_database = None
-
-# Initialize Conversations Database
-try:
-    conversations_db = get_chroma_db("conversations")
-    print("Conversations database loaded successfully.")
-except Exception as e:
-    print(f"Error loading conversations database: {e}")
-    conversations_db = None
 
 # Initialize Full Database Conversations Database
 try:

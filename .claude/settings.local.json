@@ -43,7 +43,8 @@
       "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(x['name'], x['type']\\) for x in d]\")",
       "Bash(gh release:*)",
       "Bash(cp -r /tmp/khazix-skills/hv-analysis ~/.claude/skills/)",
-      "Bash(cp -r /tmp/khazix-skills/khazix-writer ~/.claude/skills/)"
+      "Bash(cp -r /tmp/khazix-skills/khazix-writer ~/.claude/skills/)",
+      "Bash(python -m py_compile agent_chatbot/chatbot.py agent_chatbot/server.py)"
     ]
   }
 }

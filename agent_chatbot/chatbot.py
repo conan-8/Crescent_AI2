@@ -2,8 +2,6 @@ import os
 import chromadb
 import chromadb.utils.embedding_functions as embedding_functions
 from openai import OpenAI
-from google import genai
-from google.genai import types
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -14,19 +12,21 @@ client = OpenAI(
     api_key=os.environ.get("OPENROUTER_API_KEY"),
 )
 
+# Shared ChromaDB singletons — one PersistentClient + one embedding function per process.
+# Creating these per-call on Render's 512MB free tier exhausted memory and triggered 502s.
+_chroma_path = os.environ.get(
+    "CHROMA_DB_PATH",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Database", "chroma_db"),
+)
+_google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
+    api_key=os.environ.get("GEMINI_API_KEY"),
+    model_name="gemini-embedding-001",
+)
+_chroma_client = chromadb.PersistentClient(path=_chroma_path)
+
+
 def get_chroma_db(name):
-    google_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
-        api_key=os.environ.get("GEMINI_API_KEY"),
-        model_name="gemini-embedding-001",
-    )
-    # Use environment variable or default to ./chroma_db in Database directory
-    chroma_path = os.environ.get("CHROMA_DB_PATH", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Database", "chroma_db"))
-    chroma_client = chromadb.PersistentClient(path=chroma_path)
-    collection = chroma_client.get_or_create_collection(
-        name=name, 
-        embedding_function=google_ef
-    )
-    return collection
+    return _chroma_client.get_or_create_collection(name=name, embedding_function=_google_ef)
 
 def print_passages(passages):
     print("\n--- Retrieved Passages ---")
