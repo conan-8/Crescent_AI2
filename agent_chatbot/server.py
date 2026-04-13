@@ -1,7 +1,7 @@
 import sys
 import os
 import chromadb
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -11,8 +11,10 @@ import hashlib
 import time
 from collections import defaultdict
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+# Add Database folder to path BEFORE importing modules from it
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Database"))
 
+from snapshot_db import rollback, list_snapshots
 from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client
 
 
@@ -104,16 +106,66 @@ def health_check():
     return jsonify({"status": "ok"}), 200
 
 # --- END Health Check ---
+
+# --- Static Files Route for Main Page assets ---
+@app.route('/Main Page_files/<path:filename>', methods=['GET'])
+def serve_main_page_files(filename):
+    """Serve static files from Main Page_files folder."""
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    frontend_dir = os.path.join(base_dir, 'frontend')
+    files_dir = os.path.join(frontend_dir, 'Main Page_files')
+    file_path = os.path.join(files_dir, filename)
+
+    if os.path.exists(file_path):
+        return send_file(file_path)
+    else:
+        return "File not found", 404
+
+# --- Also serve chatbot widget files ---
+@app.route('/chatbot.css', methods=['GET'])
+def serve_chatbot_css():
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    css_path = os.path.join(base_dir, 'frontend', 'chatbot.css')
+    if os.path.exists(css_path):
+        return send_file(css_path)
+    return "File not found", 404
+
+@app.route('/chatbot.js', methods=['GET'])
+def serve_chatbot_js():
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    js_path = os.path.join(base_dir, 'frontend', 'chatbot.js')
+    if os.path.exists(js_path):
+        return send_file(js_path)
+    return "File not found", 404
+
+@app.route('/chatbot_iframe.html', methods=['GET'])
+def serve_chatbot_iframe():
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    iframe_path = os.path.join(base_dir, 'frontend', 'chatbot_iframe.html')
+    if os.path.exists(iframe_path):
+        return send_file(iframe_path)
+    return "File not found", 404
+
 # --- Homepage Route ---
 @app.route('/', methods=['GET'])
 def home():
-    return jsonify({
-        "message": "Crescent AI Server is running",
-        "endpoints": {
-            "health": "/health (GET)",
-            "chat": "/chat (POST) - requires JSON body"
-        }
-    }), 200
+    # Get the path to the frontend directory
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    frontend_dir = os.path.join(base_dir, 'frontend')
+    html_file = 'Main Page.html'
+
+    # Use send_from_directory which properly handles MIME types
+    if os.path.exists(os.path.join(frontend_dir, html_file)):
+        return send_from_directory(frontend_dir, html_file)
+    else:
+        # Fallback to JSON if HTML not found
+        return jsonify({
+            "message": "Crescent AI Server is running",
+            "endpoints": {
+                "health": "/health (GET)",
+                "chat": "/chat (POST) - requires JSON body"
+            }
+        }), 200
     
 print("--- Crescent AI Server Starting ---")
 
