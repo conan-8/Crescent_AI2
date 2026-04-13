@@ -85,6 +85,7 @@ SPAM_RESPONSES = {
     'gibberish': "Please enter a valid question about Crescent School."
 }
 
+
 app = Flask(__name__)
 CORS(app) # Allow your HTML website to talk to this Python script
 
@@ -96,6 +97,7 @@ limiter = Limiter(
     storage_uri="memory://",
 )
 
+
 @app.errorhandler(429)
 def ratelimit_handler(e):
     return jsonify({"response": "You have sent too many messages recently. Please wait a minute before trying again."}), 200
@@ -103,7 +105,18 @@ def ratelimit_handler(e):
 # --- Health Check Endpoint ---
 @app.route('/health', methods=['GET'])
 def health_check():
-    return jsonify({"status": "ok"}), 200
+    db_status = "loaded" if full_database else "not loaded"
+    db_count = 0
+    if full_database:
+        try:
+            db_count = full_database.count()
+        except:
+            db_count = "error"
+    return jsonify({
+        "status": "ok",
+        "database": db_status,
+        "document_count": db_count
+    }), 200
 
 # --- END Health Check ---
 
@@ -174,6 +187,17 @@ try:
     full_database = get_chroma_db("full_database")
     count = full_database.count()
     print(f"Full database loaded successfully. Documents indexed: {count}")
+    
+    # Auto-rollback if database is empty
+    if count == 0:
+        print("WARNING: Database is empty! Attempting to rollback from snapshot...")
+        try:
+            rollback("full_database")
+            count = full_database.count()
+            print(f"Rollback complete. Documents restored: {count}")
+        except Exception as rollback_error:
+            print(f"Rollback failed: {rollback_error}")
+            print("Please run 'python Database/snapshot_db.py --rollback --collection full_database' manually")
 
 except Exception as e:
     print(f"CRITICAL ERROR loading full database: {e}")
@@ -274,7 +298,8 @@ Please output ONLY the single best URL from the list above, nothing else."""
 def chat_endpoint():
     # Safety check
     if not full_database:
-        return jsonify({"response": "Error: Enrollment database connection failed. Check server console."}), 500
+        print("[ERROR] full_database is None - database not loaded")
+        return jsonify({"response": "Error: Database not initialized. Please try again in a moment or contact the administrator."}), 503
 
     # Get message from Frontend
     data = request.json
@@ -346,6 +371,7 @@ def chat_endpoint():
                 
                 if any(phrase in response_text.lower() for phrase in negative_phrases):
                      response_text = "I specialize in information relevant to Crescent School. Do you have a question about the school that I can assist you with?"
+
                 else:
                     # Add source link
                     if metadatas:
@@ -367,6 +393,7 @@ def chat_endpoint():
                     metadatas=[{"role": "interaction", "timestamp": timestamp}],
                     ids=[interaction_id]
                 )
+
             except Exception as log_error:
                 print(f"Error logging enrollment conversation: {log_error}")
 
@@ -375,7 +402,9 @@ def chat_endpoint():
 
     except Exception as e:
         print(f"Error processing enrollment request: {e}")
-        return jsonify({"response": "I encountered an internal error."}), 500
+        import traceback
+        traceback.print_exc()
+        return jsonify({"response": f"Internal error: {str(e)[:100]}"}), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))

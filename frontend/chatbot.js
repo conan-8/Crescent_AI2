@@ -101,7 +101,7 @@ const generateResponse = async (incomingChatLi) => {
             throw new Error("You have sent too many messages recently. Please wait a minute before trying again.");
         }
 
-        if (!response.ok) throw new Error(data.error || "Server Error");
+        if (!response.ok) throw new Error(data.response || data.error || `Server Error (${response.status})`);
 
         // Update the "Thinking..." text with the real answer
         // Helper to format text: escape HTML, parse markdown, linkify URLs, handle newlines
