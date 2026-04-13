@@ -39,7 +39,11 @@
       "Bash(python tests/demo_eval.py)",
       "Bash(grep -v \"Retrieved Passages\\\\|Passage [0-9]\\\\|^---\\\\|^Searching\\\\|^$\")",
       "Bash(netstat -ano)",
-      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 5000 -ErrorAction SilentlyContinue | Select-Object OwningProcess,State\")"
+      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 5000 -ErrorAction SilentlyContinue | Select-Object OwningProcess,State\")",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); [print\\(x['name'], x['type']\\) for x in d]\")",
+      "Bash(gh release:*)",
+      "Bash(cp -r /tmp/khazix-skills/hv-analysis ~/.claude/skills/)",
+      "Bash(cp -r /tmp/khazix-skills/khazix-writer ~/.claude/skills/)"
     ]
   }
 }
