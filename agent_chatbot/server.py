@@ -193,6 +193,8 @@ try:
         print("WARNING: Database is empty! Attempting to rollback from snapshot...")
         try:
             rollback("full_database")
+            # Reload the database after rollback
+            full_database = get_chroma_db("full_database")
             count = full_database.count()
             print(f"Rollback complete. Documents restored: {count}")
         except Exception as rollback_error:
