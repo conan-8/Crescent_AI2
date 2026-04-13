@@ -59,7 +59,7 @@ const showWelcome = () => {
 
 
 // after
-const API_URL = "https://crescent-ai-backend.onrender.com/chat";
+const API_URL = "/chat";
 
 const createChatLi = (message, className) => {
     // Create a chat <li> element with passed message and className
