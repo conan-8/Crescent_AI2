@@ -62,6 +62,9 @@ def get_chroma_db(name):
         api_key=os.environ.get("GEMINI_API_KEY"),
         model_name="gemini-embedding-001",
     )
-    chroma_client = chromadb.PersistentClient(path=os.environ.get("CHROMA_DB_PATH"))
+    # Use environment variable or default to ./chroma_db in Database directory
+    chroma_path = os.environ.get("CHROMA_DB_PATH", os.path.join(os.path.dirname(os.path.abspath(__file__)), "chroma_db"))
+    print(f"[ChromaDB] Using database path: {chroma_path}")
+    chroma_client = chromadb.PersistentClient(path=chroma_path)
     collection = chroma_client.get_or_create_collection(name=name, embedding_function=google_ef)
     return collection
