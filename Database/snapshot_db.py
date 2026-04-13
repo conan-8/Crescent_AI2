@@ -155,7 +155,15 @@ def rollback(collection_name: str, snapshot_id: str = None):
     chroma_path = os.environ.get("CHROMA_DB_PATH", os.path.join(os.path.dirname(os.path.abspath(__file__)), "chroma_db"))
     print(f"[ChromaDB] Rollback using path: {chroma_path}")
     chroma_client = chromadb.PersistentClient(path=chroma_path)
-    chroma_client.delete_collection(collection_name)
+
+    # Delete existing collection if it exists (ignore error if it doesn't)
+    try:
+        chroma_client.delete_collection(collection_name)
+        print(f"[ChromaDB] Deleted existing collection: {collection_name}")
+    except Exception as e:
+        print(f"[ChromaDB] Collection {collection_name} doesn't exist or couldn't delete: {e}")
+        print("[ChromaDB] Will create new collection from snapshot")
+
     collection = get_chroma_db(collection_name)
 
     ids = data["ids"]
@@ -188,12 +196,13 @@ def parse_args(argv=None):
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--list", action="store_true", help="List available snapshots.")
     group.add_argument("--rollback", action="store_true", help="Rollback to a snapshot.")
-    parser.add_argument(
+    group.add_argument(
         "--snapshot",
         metavar="TIMESTAMP",
         default=None,
         help="Snapshot timestamp to rollback to (use with --rollback). Defaults to most recent.",
     )
+
     return parser.parse_args(argv)
 
 
