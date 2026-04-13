@@ -10,13 +10,12 @@ import datetime
 import hashlib
 import time
 from collections import defaultdict
+
+# Add Database folder to path BEFORE importing modules from it
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Database"))
+
 from snapshot_db import rollback, list_snapshots
-
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Database"))
-
 from chatbot import get_chroma_db, get_relevant_documents, make_prompt, client
-
 
 
 # --- Client Fingerprinting ---
